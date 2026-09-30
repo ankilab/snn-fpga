@@ -1,0 +1,638 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version      : Vivado v.2026.1 (lin64) Build 6511674 Tue Jun 16 11:01:26 MDT 2026
+| Date              : Wed Sep 23 18:35:05 2026
+| Host              : user running 64-bit Ubuntu 24.04.4 LTS
+| Command           : report_timing -from [get_clocks io_clk_pcie_user_00] -to [get_clocks dma_ip_axi_aclk_1] -max_paths 10 -file /historical-workspace/u50-reference-20260922T204913Z/build/timing-review/hh/pcie_clock_paths.rpt
+| Design            : level0_wrapper
+| Device            : xcu50-fsvh2104
+| Speed File        : -2  PRODUCTION 1.30 05-01-2022
+| Design State      : Routed
+| Temperature Grade : E
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Timing Report
+
+Slack (MET) :             0.119ns  (required time - arrival time)
+  Source:                 level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/arststages_ff_reg[1]/C
+                            (rising edge-triggered cell FDCE clocked by io_clk_pcie_user_00  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/ltssm_trace_cnt_reg[5]/CLR
+                            (recovery check against rising-edge clock dma_ip_axi_aclk_1  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Path Group:             **async_default**
+  Path Type:              Recovery (Max at Slow Process Corner)
+  Requirement:            2.000ns  (dma_ip_axi_aclk_1 rise@12.000ns - io_clk_pcie_user_00 rise@10.000ns)
+  Data Path Delay:        1.268ns  (logic 0.149ns (11.748%)  route 1.119ns (88.252%))
+  Logic Levels:           1  (LUT2=1)
+  Clock Path Skew:        -0.500ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.619ns = ( 13.619 - 12.000 ) 
+    Source Clock Delay      (SCD):    2.119ns = ( 12.119 - 10.000 ) 
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.046ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.060ns
+    Phase Error              (PE):    0.000ns
+  Clock Net Delay (Source):      1.520ns (routing 0.456ns, distribution 1.064ns)
+  Clock Net Delay (Destination): 1.427ns (routing 0.194ns, distribution 1.233ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Partition      PBlock               Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------------------------------------------
+                         (clock io_clk_pcie_user_00 rise edge)
+                                                     10.000    10.000 r                 <hidden>             
+    GTYE4_COMMON_X1Y1                                 0.000    10.000 r  static                              io_clk_pcie_00_clk_p
+                         net (fo=0)                   0.000    10.000    static                              level0_i/blp/blp_i/ss_hif/inst/pcie_refclk_ibuf/U0/IBUF_DS_P[0]
+    GTYE4_COMMON_X1Y1    IBUFDS_GTE4 (Prop_IBUFDS0_GTYE4_GTYE4_COMMON_I_ODIV2)
+                                                      0.383    10.383 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie_refclk_ibuf/U0/USE_IBUFDS_GTE4.GEN_IBUFDS_GTE4[0].IBUFDS_GTE4_I/ODIV2
+                         net (fo=2, routed)           0.086    10.469    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_clk
+    BUFG_GT_X1Y37        BUFG_GT (Prop_BUFG_GT_I_O)
+                                                      0.130    10.599 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bufg_gt_sysclk/O
+    X6Y1 (CLOCK_ROOT)    net (fo=8337, routed)        1.520    12.119    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/dest_clk
+    SLICE_X207Y108       FDCE                                         r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/arststages_ff_reg[1]/C
+  -------------------------------------------------------------------    -------------------------------------------------------
+    SLICE_X207Y108       FDCE (Prop_EFF2_SLICEL_C_Q)
+                                                      0.081    12.200 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/arststages_ff_reg[1]/Q
+                         net (fo=10, routed)          0.483    12.683    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/dest_arst
+    SLICE_X220Y107       LUT2 (Prop_C5LUT_SLICEM_I1_O)
+                                                      0.068    12.751 f  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst_i_1/O
+                         net (fo=31, routed)          0.636    13.387    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/sys_rst
+    SLICE_X224Y106       FDCE                                         f  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/ltssm_trace_cnt_reg[5]/CLR
+  -------------------------------------------------------------------    -------------------------------------------------------
+
+                         (clock dma_ip_axi_aclk_1 rise edge)
+                                                     12.000    12.000 r                 <hidden>             
+    GTYE4_CHANNEL_X1Y15  GTYE4_CHANNEL                0.000    12.000 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bd_39ab_pcie_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/bd_39ab_pcie_0_gt_i/inst/gen_gtwizard_gtye4_top.bd_39ab_pcie_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[27].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/gtye4_channel_gen.gen_gtye4_channel_inst[3].GTYE4_CHANNEL_PRIM_INST/TXOUTCLK
+                         net (fo=7, routed)           0.078    12.078    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bd_39ab_pcie_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/phy_clk_i/DBG_TXOUTCLK[0]
+    BUFG_GT_X1Y90        BUFG_GT (Prop_BUFG_GT_I_O)
+                                                      0.114    12.192 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bd_39ab_pcie_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/phy_clk_i/bufg_gt_userclk/O
+    X7Y3 (CLOCK_ROOT)    net (fo=124071, routed)      1.427    13.619    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/user_clk
+    SLICE_X224Y106       FDCE                                         r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/ltssm_trace_cnt_reg[5]/C
+                         clock pessimism              0.000    13.619                                            <hidden>
+                         clock uncertainty           -0.046    13.572                                            <hidden>
+    SLICE_X224Y106       FDCE (Recov_AFF_SLICEL_C_CLR)
+                                                     -0.066    13.506    static           pblock_level0_blp      level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/ltssm_trace_cnt_reg[5]
+  -------------------------------------------------------------------
+                         required time                         13.506                                            <hidden>
+                         arrival time                         -13.387                                            <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.119                                            <hidden>
+
+Slack (MET) :             0.119ns  (required time - arrival time)
+  Source:                 level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/arststages_ff_reg[1]/C
+                            (rising edge-triggered cell FDCE clocked by io_clk_pcie_user_00  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/ltssm_trace_cnt_reg[6]/CLR
+                            (recovery check against rising-edge clock dma_ip_axi_aclk_1  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Path Group:             **async_default**
+  Path Type:              Recovery (Max at Slow Process Corner)
+  Requirement:            2.000ns  (dma_ip_axi_aclk_1 rise@12.000ns - io_clk_pcie_user_00 rise@10.000ns)
+  Data Path Delay:        1.268ns  (logic 0.149ns (11.748%)  route 1.119ns (88.252%))
+  Logic Levels:           1  (LUT2=1)
+  Clock Path Skew:        -0.500ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.619ns = ( 13.619 - 12.000 ) 
+    Source Clock Delay      (SCD):    2.119ns = ( 12.119 - 10.000 ) 
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.046ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.060ns
+    Phase Error              (PE):    0.000ns
+  Clock Net Delay (Source):      1.520ns (routing 0.456ns, distribution 1.064ns)
+  Clock Net Delay (Destination): 1.427ns (routing 0.194ns, distribution 1.233ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Partition      PBlock               Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------------------------------------------
+                         (clock io_clk_pcie_user_00 rise edge)
+                                                     10.000    10.000 r                 <hidden>             
+    GTYE4_COMMON_X1Y1                                 0.000    10.000 r  static                              io_clk_pcie_00_clk_p
+                         net (fo=0)                   0.000    10.000    static                              level0_i/blp/blp_i/ss_hif/inst/pcie_refclk_ibuf/U0/IBUF_DS_P[0]
+    GTYE4_COMMON_X1Y1    IBUFDS_GTE4 (Prop_IBUFDS0_GTYE4_GTYE4_COMMON_I_ODIV2)
+                                                      0.383    10.383 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie_refclk_ibuf/U0/USE_IBUFDS_GTE4.GEN_IBUFDS_GTE4[0].IBUFDS_GTE4_I/ODIV2
+                         net (fo=2, routed)           0.086    10.469    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_clk
+    BUFG_GT_X1Y37        BUFG_GT (Prop_BUFG_GT_I_O)
+                                                      0.130    10.599 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bufg_gt_sysclk/O
+    X6Y1 (CLOCK_ROOT)    net (fo=8337, routed)        1.520    12.119    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/dest_clk
+    SLICE_X207Y108       FDCE                                         r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/arststages_ff_reg[1]/C
+  -------------------------------------------------------------------    -------------------------------------------------------
+    SLICE_X207Y108       FDCE (Prop_EFF2_SLICEL_C_Q)
+                                                      0.081    12.200 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/arststages_ff_reg[1]/Q
+                         net (fo=10, routed)          0.483    12.683    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/dest_arst
+    SLICE_X220Y107       LUT2 (Prop_C5LUT_SLICEM_I1_O)
+                                                      0.068    12.751 f  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst_i_1/O
+                         net (fo=31, routed)          0.636    13.387    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/sys_rst
+    SLICE_X224Y106       FDCE                                         f  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/ltssm_trace_cnt_reg[6]/CLR
+  -------------------------------------------------------------------    -------------------------------------------------------
+
+                         (clock dma_ip_axi_aclk_1 rise edge)
+                                                     12.000    12.000 r                 <hidden>             
+    GTYE4_CHANNEL_X1Y15  GTYE4_CHANNEL                0.000    12.000 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bd_39ab_pcie_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/bd_39ab_pcie_0_gt_i/inst/gen_gtwizard_gtye4_top.bd_39ab_pcie_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[27].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/gtye4_channel_gen.gen_gtye4_channel_inst[3].GTYE4_CHANNEL_PRIM_INST/TXOUTCLK
+                         net (fo=7, routed)           0.078    12.078    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bd_39ab_pcie_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/phy_clk_i/DBG_TXOUTCLK[0]
+    BUFG_GT_X1Y90        BUFG_GT (Prop_BUFG_GT_I_O)
+                                                      0.114    12.192 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bd_39ab_pcie_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/phy_clk_i/bufg_gt_userclk/O
+    X7Y3 (CLOCK_ROOT)    net (fo=124071, routed)      1.427    13.619    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/user_clk
+    SLICE_X224Y106       FDCE                                         r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/ltssm_trace_cnt_reg[6]/C
+                         clock pessimism              0.000    13.619                                            <hidden>
+                         clock uncertainty           -0.046    13.572                                            <hidden>
+    SLICE_X224Y106       FDCE (Recov_CFF_SLICEL_C_CLR)
+                                                     -0.066    13.506    static           pblock_level0_blp      level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/ltssm_trace_cnt_reg[6]
+  -------------------------------------------------------------------
+                         required time                         13.506                                            <hidden>
+                         arrival time                         -13.387                                            <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.119                                            <hidden>
+
+Slack (MET) :             0.119ns  (required time - arrival time)
+  Source:                 level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/arststages_ff_reg[1]/C
+                            (rising edge-triggered cell FDCE clocked by io_clk_pcie_user_00  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/ltssm_trace_cnt_reg[7]/CLR
+                            (recovery check against rising-edge clock dma_ip_axi_aclk_1  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Path Group:             **async_default**
+  Path Type:              Recovery (Max at Slow Process Corner)
+  Requirement:            2.000ns  (dma_ip_axi_aclk_1 rise@12.000ns - io_clk_pcie_user_00 rise@10.000ns)
+  Data Path Delay:        1.268ns  (logic 0.149ns (11.748%)  route 1.119ns (88.252%))
+  Logic Levels:           1  (LUT2=1)
+  Clock Path Skew:        -0.500ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.619ns = ( 13.619 - 12.000 ) 
+    Source Clock Delay      (SCD):    2.119ns = ( 12.119 - 10.000 ) 
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.046ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.060ns
+    Phase Error              (PE):    0.000ns
+  Clock Net Delay (Source):      1.520ns (routing 0.456ns, distribution 1.064ns)
+  Clock Net Delay (Destination): 1.427ns (routing 0.194ns, distribution 1.233ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Partition      PBlock               Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------------------------------------------
+                         (clock io_clk_pcie_user_00 rise edge)
+                                                     10.000    10.000 r                 <hidden>             
+    GTYE4_COMMON_X1Y1                                 0.000    10.000 r  static                              io_clk_pcie_00_clk_p
+                         net (fo=0)                   0.000    10.000    static                              level0_i/blp/blp_i/ss_hif/inst/pcie_refclk_ibuf/U0/IBUF_DS_P[0]
+    GTYE4_COMMON_X1Y1    IBUFDS_GTE4 (Prop_IBUFDS0_GTYE4_GTYE4_COMMON_I_ODIV2)
+                                                      0.383    10.383 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie_refclk_ibuf/U0/USE_IBUFDS_GTE4.GEN_IBUFDS_GTE4[0].IBUFDS_GTE4_I/ODIV2
+                         net (fo=2, routed)           0.086    10.469    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_clk
+    BUFG_GT_X1Y37        BUFG_GT (Prop_BUFG_GT_I_O)
+                                                      0.130    10.599 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bufg_gt_sysclk/O
+    X6Y1 (CLOCK_ROOT)    net (fo=8337, routed)        1.520    12.119    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/dest_clk
+    SLICE_X207Y108       FDCE                                         r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/arststages_ff_reg[1]/C
+  -------------------------------------------------------------------    -------------------------------------------------------
+    SLICE_X207Y108       FDCE (Prop_EFF2_SLICEL_C_Q)
+                                                      0.081    12.200 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/arststages_ff_reg[1]/Q
+                         net (fo=10, routed)          0.483    12.683    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/dest_arst
+    SLICE_X220Y107       LUT2 (Prop_C5LUT_SLICEM_I1_O)
+                                                      0.068    12.751 f  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst_i_1/O
+                         net (fo=31, routed)          0.636    13.387    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/sys_rst
+    SLICE_X224Y106       FDCE                                         f  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/ltssm_trace_cnt_reg[7]/CLR
+  -------------------------------------------------------------------    -------------------------------------------------------
+
+                         (clock dma_ip_axi_aclk_1 rise edge)
+                                                     12.000    12.000 r                 <hidden>             
+    GTYE4_CHANNEL_X1Y15  GTYE4_CHANNEL                0.000    12.000 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bd_39ab_pcie_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/bd_39ab_pcie_0_gt_i/inst/gen_gtwizard_gtye4_top.bd_39ab_pcie_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[27].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/gtye4_channel_gen.gen_gtye4_channel_inst[3].GTYE4_CHANNEL_PRIM_INST/TXOUTCLK
+                         net (fo=7, routed)           0.078    12.078    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bd_39ab_pcie_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/phy_clk_i/DBG_TXOUTCLK[0]
+    BUFG_GT_X1Y90        BUFG_GT (Prop_BUFG_GT_I_O)
+                                                      0.114    12.192 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bd_39ab_pcie_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/phy_clk_i/bufg_gt_userclk/O
+    X7Y3 (CLOCK_ROOT)    net (fo=124071, routed)      1.427    13.619    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/user_clk
+    SLICE_X224Y106       FDCE                                         r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/ltssm_trace_cnt_reg[7]/C
+                         clock pessimism              0.000    13.619                                            <hidden>
+                         clock uncertainty           -0.046    13.572                                            <hidden>
+    SLICE_X224Y106       FDCE (Recov_CFF2_SLICEL_C_CLR)
+                                                     -0.066    13.506    static           pblock_level0_blp      level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/ltssm_trace_cnt_reg[7]
+  -------------------------------------------------------------------
+                         required time                         13.506                                            <hidden>
+                         arrival time                         -13.387                                            <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.119                                            <hidden>
+
+Slack (MET) :             0.188ns  (required time - arrival time)
+  Source:                 level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/arststages_ff_reg[1]/C
+                            (rising edge-triggered cell FDCE clocked by io_clk_pcie_user_00  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/ltssm_trace_cnt_reg[0]/CLR
+                            (recovery check against rising-edge clock dma_ip_axi_aclk_1  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Path Group:             **async_default**
+  Path Type:              Recovery (Max at Slow Process Corner)
+  Requirement:            2.000ns  (dma_ip_axi_aclk_1 rise@12.000ns - io_clk_pcie_user_00 rise@10.000ns)
+  Data Path Delay:        1.255ns  (logic 0.149ns (11.869%)  route 1.106ns (88.131%))
+  Logic Levels:           1  (LUT2=1)
+  Clock Path Skew:        -0.445ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.675ns = ( 13.675 - 12.000 ) 
+    Source Clock Delay      (SCD):    2.119ns = ( 12.119 - 10.000 ) 
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.046ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.060ns
+    Phase Error              (PE):    0.000ns
+  Clock Net Delay (Source):      1.520ns (routing 0.456ns, distribution 1.064ns)
+  Clock Net Delay (Destination): 1.483ns (routing 0.194ns, distribution 1.289ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Partition      PBlock               Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------------------------------------------
+                         (clock io_clk_pcie_user_00 rise edge)
+                                                     10.000    10.000 r                 <hidden>             
+    GTYE4_COMMON_X1Y1                                 0.000    10.000 r  static                              io_clk_pcie_00_clk_p
+                         net (fo=0)                   0.000    10.000    static                              level0_i/blp/blp_i/ss_hif/inst/pcie_refclk_ibuf/U0/IBUF_DS_P[0]
+    GTYE4_COMMON_X1Y1    IBUFDS_GTE4 (Prop_IBUFDS0_GTYE4_GTYE4_COMMON_I_ODIV2)
+                                                      0.383    10.383 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie_refclk_ibuf/U0/USE_IBUFDS_GTE4.GEN_IBUFDS_GTE4[0].IBUFDS_GTE4_I/ODIV2
+                         net (fo=2, routed)           0.086    10.469    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_clk
+    BUFG_GT_X1Y37        BUFG_GT (Prop_BUFG_GT_I_O)
+                                                      0.130    10.599 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bufg_gt_sysclk/O
+    X6Y1 (CLOCK_ROOT)    net (fo=8337, routed)        1.520    12.119    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/dest_clk
+    SLICE_X207Y108       FDCE                                         r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/arststages_ff_reg[1]/C
+  -------------------------------------------------------------------    -------------------------------------------------------
+    SLICE_X207Y108       FDCE (Prop_EFF2_SLICEL_C_Q)
+                                                      0.081    12.200 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/arststages_ff_reg[1]/Q
+                         net (fo=10, routed)          0.483    12.683    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/dest_arst
+    SLICE_X220Y107       LUT2 (Prop_C5LUT_SLICEM_I1_O)
+                                                      0.068    12.751 f  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst_i_1/O
+                         net (fo=31, routed)          0.623    13.375    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/sys_rst
+    SLICE_X211Y107       FDCE                                         f  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/ltssm_trace_cnt_reg[0]/CLR
+  -------------------------------------------------------------------    -------------------------------------------------------
+
+                         (clock dma_ip_axi_aclk_1 rise edge)
+                                                     12.000    12.000 r                 <hidden>             
+    GTYE4_CHANNEL_X1Y15  GTYE4_CHANNEL                0.000    12.000 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bd_39ab_pcie_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/bd_39ab_pcie_0_gt_i/inst/gen_gtwizard_gtye4_top.bd_39ab_pcie_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[27].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/gtye4_channel_gen.gen_gtye4_channel_inst[3].GTYE4_CHANNEL_PRIM_INST/TXOUTCLK
+                         net (fo=7, routed)           0.078    12.078    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bd_39ab_pcie_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/phy_clk_i/DBG_TXOUTCLK[0]
+    BUFG_GT_X1Y90        BUFG_GT (Prop_BUFG_GT_I_O)
+                                                      0.114    12.192 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bd_39ab_pcie_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/phy_clk_i/bufg_gt_userclk/O
+    X7Y3 (CLOCK_ROOT)    net (fo=124071, routed)      1.483    13.675    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/user_clk
+    SLICE_X211Y107       FDCE                                         r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/ltssm_trace_cnt_reg[0]/C
+                         clock pessimism              0.000    13.675                                            <hidden>
+                         clock uncertainty           -0.046    13.628                                            <hidden>
+    SLICE_X211Y107       FDCE (Recov_EFF2_SLICEL_C_CLR)
+                                                     -0.066    13.562    static           pblock_level0_blp      level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/ltssm_trace_cnt_reg[0]
+  -------------------------------------------------------------------
+                         required time                         13.562                                            <hidden>
+                         arrival time                         -13.375                                            <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.188                                            <hidden>
+
+Slack (MET) :             0.198ns  (required time - arrival time)
+  Source:                 level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/arststages_ff_reg[1]/C
+                            (rising edge-triggered cell FDCE clocked by io_clk_pcie_user_00  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/ltssm_trace_cnt_reg[1]/CLR
+                            (recovery check against rising-edge clock dma_ip_axi_aclk_1  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Path Group:             **async_default**
+  Path Type:              Recovery (Max at Slow Process Corner)
+  Requirement:            2.000ns  (dma_ip_axi_aclk_1 rise@12.000ns - io_clk_pcie_user_00 rise@10.000ns)
+  Data Path Delay:        1.199ns  (logic 0.149ns (12.428%)  route 1.050ns (87.572%))
+  Logic Levels:           1  (LUT2=1)
+  Clock Path Skew:        -0.490ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.629ns = ( 13.629 - 12.000 ) 
+    Source Clock Delay      (SCD):    2.119ns = ( 12.119 - 10.000 ) 
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.046ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.060ns
+    Phase Error              (PE):    0.000ns
+  Clock Net Delay (Source):      1.520ns (routing 0.456ns, distribution 1.064ns)
+  Clock Net Delay (Destination): 1.437ns (routing 0.194ns, distribution 1.243ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Partition      PBlock               Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------------------------------------------
+                         (clock io_clk_pcie_user_00 rise edge)
+                                                     10.000    10.000 r                 <hidden>             
+    GTYE4_COMMON_X1Y1                                 0.000    10.000 r  static                              io_clk_pcie_00_clk_p
+                         net (fo=0)                   0.000    10.000    static                              level0_i/blp/blp_i/ss_hif/inst/pcie_refclk_ibuf/U0/IBUF_DS_P[0]
+    GTYE4_COMMON_X1Y1    IBUFDS_GTE4 (Prop_IBUFDS0_GTYE4_GTYE4_COMMON_I_ODIV2)
+                                                      0.383    10.383 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie_refclk_ibuf/U0/USE_IBUFDS_GTE4.GEN_IBUFDS_GTE4[0].IBUFDS_GTE4_I/ODIV2
+                         net (fo=2, routed)           0.086    10.469    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_clk
+    BUFG_GT_X1Y37        BUFG_GT (Prop_BUFG_GT_I_O)
+                                                      0.130    10.599 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bufg_gt_sysclk/O
+    X6Y1 (CLOCK_ROOT)    net (fo=8337, routed)        1.520    12.119    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/dest_clk
+    SLICE_X207Y108       FDCE                                         r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/arststages_ff_reg[1]/C
+  -------------------------------------------------------------------    -------------------------------------------------------
+    SLICE_X207Y108       FDCE (Prop_EFF2_SLICEL_C_Q)
+                                                      0.081    12.200 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/arststages_ff_reg[1]/Q
+                         net (fo=10, routed)          0.483    12.683    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/dest_arst
+    SLICE_X220Y107       LUT2 (Prop_C5LUT_SLICEM_I1_O)
+                                                      0.068    12.751 f  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst_i_1/O
+                         net (fo=31, routed)          0.567    13.318    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/sys_rst
+    SLICE_X223Y106       FDCE                                         f  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/ltssm_trace_cnt_reg[1]/CLR
+  -------------------------------------------------------------------    -------------------------------------------------------
+
+                         (clock dma_ip_axi_aclk_1 rise edge)
+                                                     12.000    12.000 r                 <hidden>             
+    GTYE4_CHANNEL_X1Y15  GTYE4_CHANNEL                0.000    12.000 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bd_39ab_pcie_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/bd_39ab_pcie_0_gt_i/inst/gen_gtwizard_gtye4_top.bd_39ab_pcie_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[27].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/gtye4_channel_gen.gen_gtye4_channel_inst[3].GTYE4_CHANNEL_PRIM_INST/TXOUTCLK
+                         net (fo=7, routed)           0.078    12.078    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bd_39ab_pcie_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/phy_clk_i/DBG_TXOUTCLK[0]
+    BUFG_GT_X1Y90        BUFG_GT (Prop_BUFG_GT_I_O)
+                                                      0.114    12.192 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bd_39ab_pcie_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/phy_clk_i/bufg_gt_userclk/O
+    X7Y3 (CLOCK_ROOT)    net (fo=124071, routed)      1.437    13.629    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/user_clk
+    SLICE_X223Y106       FDCE                                         r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/ltssm_trace_cnt_reg[1]/C
+                         clock pessimism              0.000    13.629                                            <hidden>
+                         clock uncertainty           -0.046    13.582                                            <hidden>
+    SLICE_X223Y106       FDCE (Recov_HFF_SLICEL_C_CLR)
+                                                     -0.066    13.516    static           pblock_level0_blp      level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/ltssm_trace_cnt_reg[1]
+  -------------------------------------------------------------------
+                         required time                         13.516                                            <hidden>
+                         arrival time                         -13.318                                            <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.198                                            <hidden>
+
+Slack (MET) :             0.198ns  (required time - arrival time)
+  Source:                 level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/arststages_ff_reg[1]/C
+                            (rising edge-triggered cell FDCE clocked by io_clk_pcie_user_00  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/ltssm_trace_cnt_reg[2]/CLR
+                            (recovery check against rising-edge clock dma_ip_axi_aclk_1  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Path Group:             **async_default**
+  Path Type:              Recovery (Max at Slow Process Corner)
+  Requirement:            2.000ns  (dma_ip_axi_aclk_1 rise@12.000ns - io_clk_pcie_user_00 rise@10.000ns)
+  Data Path Delay:        1.199ns  (logic 0.149ns (12.428%)  route 1.050ns (87.572%))
+  Logic Levels:           1  (LUT2=1)
+  Clock Path Skew:        -0.490ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.629ns = ( 13.629 - 12.000 ) 
+    Source Clock Delay      (SCD):    2.119ns = ( 12.119 - 10.000 ) 
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.046ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.060ns
+    Phase Error              (PE):    0.000ns
+  Clock Net Delay (Source):      1.520ns (routing 0.456ns, distribution 1.064ns)
+  Clock Net Delay (Destination): 1.437ns (routing 0.194ns, distribution 1.243ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Partition      PBlock               Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------------------------------------------
+                         (clock io_clk_pcie_user_00 rise edge)
+                                                     10.000    10.000 r                 <hidden>             
+    GTYE4_COMMON_X1Y1                                 0.000    10.000 r  static                              io_clk_pcie_00_clk_p
+                         net (fo=0)                   0.000    10.000    static                              level0_i/blp/blp_i/ss_hif/inst/pcie_refclk_ibuf/U0/IBUF_DS_P[0]
+    GTYE4_COMMON_X1Y1    IBUFDS_GTE4 (Prop_IBUFDS0_GTYE4_GTYE4_COMMON_I_ODIV2)
+                                                      0.383    10.383 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie_refclk_ibuf/U0/USE_IBUFDS_GTE4.GEN_IBUFDS_GTE4[0].IBUFDS_GTE4_I/ODIV2
+                         net (fo=2, routed)           0.086    10.469    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_clk
+    BUFG_GT_X1Y37        BUFG_GT (Prop_BUFG_GT_I_O)
+                                                      0.130    10.599 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bufg_gt_sysclk/O
+    X6Y1 (CLOCK_ROOT)    net (fo=8337, routed)        1.520    12.119    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/dest_clk
+    SLICE_X207Y108       FDCE                                         r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/arststages_ff_reg[1]/C
+  -------------------------------------------------------------------    -------------------------------------------------------
+    SLICE_X207Y108       FDCE (Prop_EFF2_SLICEL_C_Q)
+                                                      0.081    12.200 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/arststages_ff_reg[1]/Q
+                         net (fo=10, routed)          0.483    12.683    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/dest_arst
+    SLICE_X220Y107       LUT2 (Prop_C5LUT_SLICEM_I1_O)
+                                                      0.068    12.751 f  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst_i_1/O
+                         net (fo=31, routed)          0.567    13.318    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/sys_rst
+    SLICE_X223Y106       FDCE                                         f  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/ltssm_trace_cnt_reg[2]/CLR
+  -------------------------------------------------------------------    -------------------------------------------------------
+
+                         (clock dma_ip_axi_aclk_1 rise edge)
+                                                     12.000    12.000 r                 <hidden>             
+    GTYE4_CHANNEL_X1Y15  GTYE4_CHANNEL                0.000    12.000 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bd_39ab_pcie_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/bd_39ab_pcie_0_gt_i/inst/gen_gtwizard_gtye4_top.bd_39ab_pcie_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[27].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/gtye4_channel_gen.gen_gtye4_channel_inst[3].GTYE4_CHANNEL_PRIM_INST/TXOUTCLK
+                         net (fo=7, routed)           0.078    12.078    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bd_39ab_pcie_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/phy_clk_i/DBG_TXOUTCLK[0]
+    BUFG_GT_X1Y90        BUFG_GT (Prop_BUFG_GT_I_O)
+                                                      0.114    12.192 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bd_39ab_pcie_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/phy_clk_i/bufg_gt_userclk/O
+    X7Y3 (CLOCK_ROOT)    net (fo=124071, routed)      1.437    13.629    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/user_clk
+    SLICE_X223Y106       FDCE                                         r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/ltssm_trace_cnt_reg[2]/C
+                         clock pessimism              0.000    13.629                                            <hidden>
+                         clock uncertainty           -0.046    13.582                                            <hidden>
+    SLICE_X223Y106       FDCE (Recov_HFF2_SLICEL_C_CLR)
+                                                     -0.066    13.516    static           pblock_level0_blp      level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/ltssm_trace_cnt_reg[2]
+  -------------------------------------------------------------------
+                         required time                         13.516                                            <hidden>
+                         arrival time                         -13.318                                            <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.198                                            <hidden>
+
+Slack (MET) :             0.198ns  (required time - arrival time)
+  Source:                 level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/arststages_ff_reg[1]/C
+                            (rising edge-triggered cell FDCE clocked by io_clk_pcie_user_00  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/ltssm_trace_cnt_reg[3]/CLR
+                            (recovery check against rising-edge clock dma_ip_axi_aclk_1  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Path Group:             **async_default**
+  Path Type:              Recovery (Max at Slow Process Corner)
+  Requirement:            2.000ns  (dma_ip_axi_aclk_1 rise@12.000ns - io_clk_pcie_user_00 rise@10.000ns)
+  Data Path Delay:        1.199ns  (logic 0.149ns (12.428%)  route 1.050ns (87.572%))
+  Logic Levels:           1  (LUT2=1)
+  Clock Path Skew:        -0.490ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.629ns = ( 13.629 - 12.000 ) 
+    Source Clock Delay      (SCD):    2.119ns = ( 12.119 - 10.000 ) 
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.046ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.060ns
+    Phase Error              (PE):    0.000ns
+  Clock Net Delay (Source):      1.520ns (routing 0.456ns, distribution 1.064ns)
+  Clock Net Delay (Destination): 1.437ns (routing 0.194ns, distribution 1.243ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Partition      PBlock               Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------------------------------------------
+                         (clock io_clk_pcie_user_00 rise edge)
+                                                     10.000    10.000 r                 <hidden>             
+    GTYE4_COMMON_X1Y1                                 0.000    10.000 r  static                              io_clk_pcie_00_clk_p
+                         net (fo=0)                   0.000    10.000    static                              level0_i/blp/blp_i/ss_hif/inst/pcie_refclk_ibuf/U0/IBUF_DS_P[0]
+    GTYE4_COMMON_X1Y1    IBUFDS_GTE4 (Prop_IBUFDS0_GTYE4_GTYE4_COMMON_I_ODIV2)
+                                                      0.383    10.383 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie_refclk_ibuf/U0/USE_IBUFDS_GTE4.GEN_IBUFDS_GTE4[0].IBUFDS_GTE4_I/ODIV2
+                         net (fo=2, routed)           0.086    10.469    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_clk
+    BUFG_GT_X1Y37        BUFG_GT (Prop_BUFG_GT_I_O)
+                                                      0.130    10.599 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bufg_gt_sysclk/O
+    X6Y1 (CLOCK_ROOT)    net (fo=8337, routed)        1.520    12.119    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/dest_clk
+    SLICE_X207Y108       FDCE                                         r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/arststages_ff_reg[1]/C
+  -------------------------------------------------------------------    -------------------------------------------------------
+    SLICE_X207Y108       FDCE (Prop_EFF2_SLICEL_C_Q)
+                                                      0.081    12.200 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/arststages_ff_reg[1]/Q
+                         net (fo=10, routed)          0.483    12.683    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/dest_arst
+    SLICE_X220Y107       LUT2 (Prop_C5LUT_SLICEM_I1_O)
+                                                      0.068    12.751 f  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst_i_1/O
+                         net (fo=31, routed)          0.567    13.318    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/sys_rst
+    SLICE_X223Y106       FDCE                                         f  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/ltssm_trace_cnt_reg[3]/CLR
+  -------------------------------------------------------------------    -------------------------------------------------------
+
+                         (clock dma_ip_axi_aclk_1 rise edge)
+                                                     12.000    12.000 r                 <hidden>             
+    GTYE4_CHANNEL_X1Y15  GTYE4_CHANNEL                0.000    12.000 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bd_39ab_pcie_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/bd_39ab_pcie_0_gt_i/inst/gen_gtwizard_gtye4_top.bd_39ab_pcie_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[27].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/gtye4_channel_gen.gen_gtye4_channel_inst[3].GTYE4_CHANNEL_PRIM_INST/TXOUTCLK
+                         net (fo=7, routed)           0.078    12.078    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bd_39ab_pcie_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/phy_clk_i/DBG_TXOUTCLK[0]
+    BUFG_GT_X1Y90        BUFG_GT (Prop_BUFG_GT_I_O)
+                                                      0.114    12.192 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bd_39ab_pcie_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/phy_clk_i/bufg_gt_userclk/O
+    X7Y3 (CLOCK_ROOT)    net (fo=124071, routed)      1.437    13.629    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/user_clk
+    SLICE_X223Y106       FDCE                                         r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/ltssm_trace_cnt_reg[3]/C
+                         clock pessimism              0.000    13.629                                            <hidden>
+                         clock uncertainty           -0.046    13.582                                            <hidden>
+    SLICE_X223Y106       FDCE (Recov_GFF_SLICEL_C_CLR)
+                                                     -0.066    13.516    static           pblock_level0_blp      level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/ltssm_trace_cnt_reg[3]
+  -------------------------------------------------------------------
+                         required time                         13.516                                            <hidden>
+                         arrival time                         -13.318                                            <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.198                                            <hidden>
+
+Slack (MET) :             0.198ns  (required time - arrival time)
+  Source:                 level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/arststages_ff_reg[1]/C
+                            (rising edge-triggered cell FDCE clocked by io_clk_pcie_user_00  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/ltssm_trace_cnt_reg[4]/CLR
+                            (recovery check against rising-edge clock dma_ip_axi_aclk_1  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Path Group:             **async_default**
+  Path Type:              Recovery (Max at Slow Process Corner)
+  Requirement:            2.000ns  (dma_ip_axi_aclk_1 rise@12.000ns - io_clk_pcie_user_00 rise@10.000ns)
+  Data Path Delay:        1.199ns  (logic 0.149ns (12.428%)  route 1.050ns (87.572%))
+  Logic Levels:           1  (LUT2=1)
+  Clock Path Skew:        -0.490ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.629ns = ( 13.629 - 12.000 ) 
+    Source Clock Delay      (SCD):    2.119ns = ( 12.119 - 10.000 ) 
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.046ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.060ns
+    Phase Error              (PE):    0.000ns
+  Clock Net Delay (Source):      1.520ns (routing 0.456ns, distribution 1.064ns)
+  Clock Net Delay (Destination): 1.437ns (routing 0.194ns, distribution 1.243ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Partition      PBlock               Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------------------------------------------
+                         (clock io_clk_pcie_user_00 rise edge)
+                                                     10.000    10.000 r                 <hidden>             
+    GTYE4_COMMON_X1Y1                                 0.000    10.000 r  static                              io_clk_pcie_00_clk_p
+                         net (fo=0)                   0.000    10.000    static                              level0_i/blp/blp_i/ss_hif/inst/pcie_refclk_ibuf/U0/IBUF_DS_P[0]
+    GTYE4_COMMON_X1Y1    IBUFDS_GTE4 (Prop_IBUFDS0_GTYE4_GTYE4_COMMON_I_ODIV2)
+                                                      0.383    10.383 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie_refclk_ibuf/U0/USE_IBUFDS_GTE4.GEN_IBUFDS_GTE4[0].IBUFDS_GTE4_I/ODIV2
+                         net (fo=2, routed)           0.086    10.469    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_clk
+    BUFG_GT_X1Y37        BUFG_GT (Prop_BUFG_GT_I_O)
+                                                      0.130    10.599 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bufg_gt_sysclk/O
+    X6Y1 (CLOCK_ROOT)    net (fo=8337, routed)        1.520    12.119    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/dest_clk
+    SLICE_X207Y108       FDCE                                         r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/arststages_ff_reg[1]/C
+  -------------------------------------------------------------------    -------------------------------------------------------
+    SLICE_X207Y108       FDCE (Prop_EFF2_SLICEL_C_Q)
+                                                      0.081    12.200 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/arststages_ff_reg[1]/Q
+                         net (fo=10, routed)          0.483    12.683    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/dest_arst
+    SLICE_X220Y107       LUT2 (Prop_C5LUT_SLICEM_I1_O)
+                                                      0.068    12.751 f  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst_i_1/O
+                         net (fo=31, routed)          0.567    13.318    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/sys_rst
+    SLICE_X223Y106       FDCE                                         f  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/ltssm_trace_cnt_reg[4]/CLR
+  -------------------------------------------------------------------    -------------------------------------------------------
+
+                         (clock dma_ip_axi_aclk_1 rise edge)
+                                                     12.000    12.000 r                 <hidden>             
+    GTYE4_CHANNEL_X1Y15  GTYE4_CHANNEL                0.000    12.000 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bd_39ab_pcie_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/bd_39ab_pcie_0_gt_i/inst/gen_gtwizard_gtye4_top.bd_39ab_pcie_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[27].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/gtye4_channel_gen.gen_gtye4_channel_inst[3].GTYE4_CHANNEL_PRIM_INST/TXOUTCLK
+                         net (fo=7, routed)           0.078    12.078    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bd_39ab_pcie_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/phy_clk_i/DBG_TXOUTCLK[0]
+    BUFG_GT_X1Y90        BUFG_GT (Prop_BUFG_GT_I_O)
+                                                      0.114    12.192 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bd_39ab_pcie_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/phy_clk_i/bufg_gt_userclk/O
+    X7Y3 (CLOCK_ROOT)    net (fo=124071, routed)      1.437    13.629    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/user_clk
+    SLICE_X223Y106       FDCE                                         r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/ltssm_trace_cnt_reg[4]/C
+                         clock pessimism              0.000    13.629                                            <hidden>
+                         clock uncertainty           -0.046    13.582                                            <hidden>
+    SLICE_X223Y106       FDCE (Recov_GFF2_SLICEL_C_CLR)
+                                                     -0.066    13.516    static           pblock_level0_blp      level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/ltssm_trace_cnt_reg[4]
+  -------------------------------------------------------------------
+                         required time                         13.516                                            <hidden>
+                         arrival time                         -13.318                                            <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.198                                            <hidden>
+
+Slack (MET) :             0.201ns  (required time - arrival time)
+  Source:                 level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/arststages_ff_reg[1]/C
+                            (rising edge-triggered cell FDCE clocked by io_clk_pcie_user_00  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/pre_ltssm_st_reg[2]/CLR
+                            (recovery check against rising-edge clock dma_ip_axi_aclk_1  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Path Group:             **async_default**
+  Path Type:              Recovery (Max at Slow Process Corner)
+  Requirement:            2.000ns  (dma_ip_axi_aclk_1 rise@12.000ns - io_clk_pcie_user_00 rise@10.000ns)
+  Data Path Delay:        1.199ns  (logic 0.149ns (12.427%)  route 1.050ns (87.573%))
+  Logic Levels:           1  (LUT2=1)
+  Clock Path Skew:        -0.487ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.632ns = ( 13.632 - 12.000 ) 
+    Source Clock Delay      (SCD):    2.119ns = ( 12.119 - 10.000 ) 
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.046ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.060ns
+    Phase Error              (PE):    0.000ns
+  Clock Net Delay (Source):      1.520ns (routing 0.456ns, distribution 1.064ns)
+  Clock Net Delay (Destination): 1.440ns (routing 0.194ns, distribution 1.246ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Partition      PBlock               Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------------------------------------------
+                         (clock io_clk_pcie_user_00 rise edge)
+                                                     10.000    10.000 r                 <hidden>             
+    GTYE4_COMMON_X1Y1                                 0.000    10.000 r  static                              io_clk_pcie_00_clk_p
+                         net (fo=0)                   0.000    10.000    static                              level0_i/blp/blp_i/ss_hif/inst/pcie_refclk_ibuf/U0/IBUF_DS_P[0]
+    GTYE4_COMMON_X1Y1    IBUFDS_GTE4 (Prop_IBUFDS0_GTYE4_GTYE4_COMMON_I_ODIV2)
+                                                      0.383    10.383 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie_refclk_ibuf/U0/USE_IBUFDS_GTE4.GEN_IBUFDS_GTE4[0].IBUFDS_GTE4_I/ODIV2
+                         net (fo=2, routed)           0.086    10.469    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_clk
+    BUFG_GT_X1Y37        BUFG_GT (Prop_BUFG_GT_I_O)
+                                                      0.130    10.599 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bufg_gt_sysclk/O
+    X6Y1 (CLOCK_ROOT)    net (fo=8337, routed)        1.520    12.119    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/dest_clk
+    SLICE_X207Y108       FDCE                                         r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/arststages_ff_reg[1]/C
+  -------------------------------------------------------------------    -------------------------------------------------------
+    SLICE_X207Y108       FDCE (Prop_EFF2_SLICEL_C_Q)
+                                                      0.081    12.200 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/arststages_ff_reg[1]/Q
+                         net (fo=10, routed)          0.483    12.683    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/dest_arst
+    SLICE_X220Y107       LUT2 (Prop_C5LUT_SLICEM_I1_O)
+                                                      0.068    12.751 f  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst_i_1/O
+                         net (fo=31, routed)          0.567    13.318    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/sys_rst
+    SLICE_X222Y105       FDCE                                         f  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/pre_ltssm_st_reg[2]/CLR
+  -------------------------------------------------------------------    -------------------------------------------------------
+
+                         (clock dma_ip_axi_aclk_1 rise edge)
+                                                     12.000    12.000 r                 <hidden>             
+    GTYE4_CHANNEL_X1Y15  GTYE4_CHANNEL                0.000    12.000 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bd_39ab_pcie_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/bd_39ab_pcie_0_gt_i/inst/gen_gtwizard_gtye4_top.bd_39ab_pcie_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[27].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/gtye4_channel_gen.gen_gtye4_channel_inst[3].GTYE4_CHANNEL_PRIM_INST/TXOUTCLK
+                         net (fo=7, routed)           0.078    12.078    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bd_39ab_pcie_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/phy_clk_i/DBG_TXOUTCLK[0]
+    BUFG_GT_X1Y90        BUFG_GT (Prop_BUFG_GT_I_O)
+                                                      0.114    12.192 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bd_39ab_pcie_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/phy_clk_i/bufg_gt_userclk/O
+    X7Y3 (CLOCK_ROOT)    net (fo=124071, routed)      1.440    13.632    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/user_clk
+    SLICE_X222Y105       FDCE                                         r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/pre_ltssm_st_reg[2]/C
+                         clock pessimism              0.000    13.632                                            <hidden>
+                         clock uncertainty           -0.046    13.585                                            <hidden>
+    SLICE_X222Y105       FDCE (Recov_FFF_SLICEM_C_CLR)
+                                                     -0.066    13.519    static           pblock_level0_blp      level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/pre_ltssm_st_reg[2]
+  -------------------------------------------------------------------
+                         required time                         13.519                                            <hidden>
+                         arrival time                         -13.318                                            <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.201                                            <hidden>
+
+Slack (MET) :             0.201ns  (required time - arrival time)
+  Source:                 level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/arststages_ff_reg[1]/C
+                            (rising edge-triggered cell FDCE clocked by io_clk_pcie_user_00  {rise@0.000ns fall@5.000ns period=10.000ns})
+  Destination:            level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/pre_ltssm_st_reg[3]/CLR
+                            (recovery check against rising-edge clock dma_ip_axi_aclk_1  {rise@0.000ns fall@2.000ns period=4.000ns})
+  Path Group:             **async_default**
+  Path Type:              Recovery (Max at Slow Process Corner)
+  Requirement:            2.000ns  (dma_ip_axi_aclk_1 rise@12.000ns - io_clk_pcie_user_00 rise@10.000ns)
+  Data Path Delay:        1.199ns  (logic 0.149ns (12.427%)  route 1.050ns (87.573%))
+  Logic Levels:           1  (LUT2=1)
+  Clock Path Skew:        -0.487ns (DCD - SCD + CPR)
+    Destination Clock Delay (DCD):    1.632ns = ( 13.632 - 12.000 ) 
+    Source Clock Delay      (SCD):    2.119ns = ( 12.119 - 10.000 ) 
+    Clock Pessimism Removal (CPR):    0.000ns
+  Clock Uncertainty:      0.046ns  ((TSJ^2 + DJ^2)^1/2) / 2 + PE
+    Total System Jitter     (TSJ):    0.071ns
+    Discrete Jitter          (DJ):    0.060ns
+    Phase Error              (PE):    0.000ns
+  Clock Net Delay (Source):      1.520ns (routing 0.456ns, distribution 1.064ns)
+  Clock Net Delay (Destination): 1.440ns (routing 0.194ns, distribution 1.246ns)
+
+    Location             Delay type                Incr(ns)  Path(ns)    Partition      PBlock               Netlist Resource(s)
+  -------------------------------------------------------------------    -------------------------------------------------------
+                         (clock io_clk_pcie_user_00 rise edge)
+                                                     10.000    10.000 r                 <hidden>             
+    GTYE4_COMMON_X1Y1                                 0.000    10.000 r  static                              io_clk_pcie_00_clk_p
+                         net (fo=0)                   0.000    10.000    static                              level0_i/blp/blp_i/ss_hif/inst/pcie_refclk_ibuf/U0/IBUF_DS_P[0]
+    GTYE4_COMMON_X1Y1    IBUFDS_GTE4 (Prop_IBUFDS0_GTYE4_GTYE4_COMMON_I_ODIV2)
+                                                      0.383    10.383 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie_refclk_ibuf/U0/USE_IBUFDS_GTE4.GEN_IBUFDS_GTE4[0].IBUFDS_GTE4_I/ODIV2
+                         net (fo=2, routed)           0.086    10.469    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_clk
+    BUFG_GT_X1Y37        BUFG_GT (Prop_BUFG_GT_I_O)
+                                                      0.130    10.599 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bufg_gt_sysclk/O
+    X6Y1 (CLOCK_ROOT)    net (fo=8337, routed)        1.520    12.119    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/dest_clk
+    SLICE_X207Y108       FDCE                                         r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/arststages_ff_reg[1]/C
+  -------------------------------------------------------------------    -------------------------------------------------------
+    SLICE_X207Y108       FDCE (Prop_EFF2_SLICEL_C_Q)
+                                                      0.081    12.200 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/sys_reset_in_async_rst_inst/arststages_ff_reg[1]/Q
+                         net (fo=10, routed)          0.483    12.683    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/dest_arst
+    SLICE_X220Y107       LUT2 (Prop_C5LUT_SLICEM_I1_O)
+                                                      0.068    12.751 f  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst_i_1/O
+                         net (fo=31, routed)          0.567    13.318    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/sys_rst
+    SLICE_X222Y105       FDCE                                         f  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/pre_ltssm_st_reg[3]/CLR
+  -------------------------------------------------------------------    -------------------------------------------------------
+
+                         (clock dma_ip_axi_aclk_1 rise edge)
+                                                     12.000    12.000 r                 <hidden>             
+    GTYE4_CHANNEL_X1Y15  GTYE4_CHANNEL                0.000    12.000 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bd_39ab_pcie_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/gt_wizard.gtwizard_top_i/bd_39ab_pcie_0_gt_i/inst/gen_gtwizard_gtye4_top.bd_39ab_pcie_0_gt_gtwizard_gtye4_inst/gen_gtwizard_gtye4.gen_channel_container[27].gen_enabled_channel.gtye4_channel_wrapper_inst/channel_inst/gtye4_channel_gen.gen_gtye4_channel_inst[3].GTYE4_CHANNEL_PRIM_INST/TXOUTCLK
+                         net (fo=7, routed)           0.078    12.078    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bd_39ab_pcie_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/phy_clk_i/DBG_TXOUTCLK[0]
+    BUFG_GT_X1Y90        BUFG_GT (Prop_BUFG_GT_I_O)
+                                                      0.114    12.192 r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bd_39ab_pcie_0_gt_top_i/diablo_gt.diablo_gt_phy_wrapper/phy_clk_i/bufg_gt_userclk/O
+    X7Y3 (CLOCK_ROOT)    net (fo=124071, routed)      1.440    13.632    static                              level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/user_clk
+    SLICE_X222Y105       FDCE                                         r  static         pblock_level0_blp    level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/pre_ltssm_st_reg[3]/C
+                         clock pessimism              0.000    13.632                                            <hidden>
+                         clock uncertainty           -0.046    13.585                                            <hidden>
+    SLICE_X222Y105       FDCE (Recov_FFF2_SLICEM_C_CLR)
+                                                     -0.066    13.519    static           pblock_level0_blp      level0_i/blp/blp_i/ss_hif/inst/pcie/inst/debug_wrapper_U/debug_probes_inst/pre_ltssm_st_reg[3]
+  -------------------------------------------------------------------
+                         required time                         13.519                                            <hidden>
+                         arrival time                         -13.318                                            <hidden>
+  -------------------------------------------------------------------
+                         slack                                  0.201                                            <hidden>
+
+
+
+

@@ -1,0 +1,169 @@
+Copyright 1986-2022 Xilinx, Inc. All Rights Reserved. Copyright 2022-2026 Advanced Micro Devices, Inc. All Rights Reserved.
+---------------------------------------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2026.1 (lin64) Build 6511674 Tue Jun 16 11:01:26 MDT 2026
+| Date         : Wed Sep 23 18:29:27 2026
+| Host         : user running 64-bit Ubuntu 24.04.4 LTS
+| Command      : report_drc -file /historical-workspace/u50-reference-20260922T204913Z/build/timing-review/izh/drc.rpt
+| Design       : level0_wrapper
+| Device       : xcu50-fsvh2104-2-e
+| Speed File   : -2
+| Design State : Fully Routed
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+Report DRC
+
+Table of Contents
+-----------------
+1. REPORT SUMMARY
+2. REPORT DETAILS
+
+1. REPORT SUMMARY
+-----------------
+            Netlist: netlist
+          Floorplan: checkpoint_level0_wrapper_routed
+      Design limits: <entire design considered>
+           Ruledeck: default
+             Max checks: <unlimited>
+             Checks found: 88
++-----------+----------+--------------------------------------------------------------------------+--------+
+| Rule      | Severity | Description                                                              | Checks |
++-----------+----------+--------------------------------------------------------------------------+--------+
+| DPIP-2    | Warning  | Input pipelining                                                         | 8      |
+| DPOP-3    | Warning  | PREG Output pipelining                                                   | 4      |
+| DPOP-4    | Warning  | MREG Output pipelining                                                   | 4      |
+| FLBO-1    | Warning  | Pblock overlap                                                           | 4      |
+| LOCE-1    | Warning  | Pblock ranges contradict LOC constraints on logic assigned to the Pblock | 1      |
+| PDCN-1569 | Warning  | LUT equation term check                                                  | 27     |
+| REQP-1774 | Warning  | RAMB36E2_WRITE_WIDTH_A_18_doesnt_use_WEA32                               | 2      |
+| REQP-1776 | Warning  | RAMB36E2_WRITE_WIDTH_B_18_doesnt_use_WEB72                               | 2      |
+| REQP-1858 | Warning  | RAMB36E2_writefirst_collision_advisory                                   | 22     |
+| RTSTAT-10 | Warning  | No routable loads                                                        | 1      |
+| UTLZ-3    | Warning  | Resource utilization                                                     | 1      |
+| HDPRA-51  | Advisory | Narrow Edge with Location Constraints                                    | 1      |
+| HDPRA-53  | Advisory | Edge with Location Constraints                                           | 1      |
+| HDPRA-55  | Advisory | Narrow Gap with Location Constraints                                     | 6      |
+| HDPRA-57  | Advisory | Gap with Location Constraints                                            | 4      |
++-----------+----------+--------------------------------------------------------------------------+--------+
+
+2. REPORT DETAILS
+-----------------
+
+SELECTED DETAILS: first instance per rule, all critical warnings, and kernel LUTAR-1 instances. Full originals archived locally.
+
+DPIP-2#1 Warning
+Input pipelining  
+DSP level0_i/ulp/snn_accelerator_1/inst/u_snn_top/layer0/u_neuron_array/gen_izh_serial.u_shared_izhikevich/value0 input level0_i/ulp/snn_accelerator_1/inst/u_snn_top/layer0/u_neuron_array/gen_izh_serial.u_shared_izhikevich/value0/A[29:0] is not pipelined. Pipelining DSP48 input will improve performance.
+Related violations: <none>
+
+DPOP-3#1 Warning
+PREG Output pipelining  
+DSP level0_i/ulp/snn_accelerator_1/inst/u_snn_top/layer0/u_neuron_array/gen_izh_serial.u_shared_izhikevich/value0 output level0_i/ulp/snn_accelerator_1/inst/u_snn_top/layer0/u_neuron_array/gen_izh_serial.u_shared_izhikevich/value0/P[47:0] is not pipelined (PREG=0). Pipelining the DSP48 output will improve performance and often saves power so it is suggested whenever possible to fully pipeline this function.  If this DSP48 function was inferred, it is suggested to describe an additional register stage after this function.  If the DSP48 was instantiated in the design, it is suggested to set the PREG attribute to 1.
+Related violations: <none>
+
+DPOP-4#1 Warning
+MREG Output pipelining  
+DSP level0_i/ulp/snn_accelerator_1/inst/u_snn_top/layer0/u_neuron_array/gen_izh_serial.u_shared_izhikevich/value0 multiplier stage level0_i/ulp/snn_accelerator_1/inst/u_snn_top/layer0/u_neuron_array/gen_izh_serial.u_shared_izhikevich/value0/P[47:0] is not pipelined (MREG=0). Pipelining the multiplier function will improve performance and will save significant power so it is suggested whenever possible to fully pipeline this function.  If this multiplier was inferred, it is suggested to describe an additional register stage after this function.  If there is no registered adder/accumulator following the multiply function, two pipeline stages are suggested to allow both the MREG and PREG registers to be used.  If the DSP48 was instantiated in the design, it is suggested to set both the MREG and PREG attributes to 1 when performing multiply functions.
+Related violations: <none>
+
+FLBO-1#1 Warning
+Pblock overlap  - PBlock:pblock_dynamic_SLR0
+pblock_dynamic_SLR0 overlaps with pblock_level0_blp: 0.06%.
+Related violations: <none>
+
+LOCE-1#1 Warning
+Pblock ranges contradict LOC constraints on logic assigned to the Pblock  - PBlock:pblock_level0_blp
+Pblock pblock_level0_blp's ranges fail to contain LOC constraints on assigned instance level0_i/blp/blp_i/PLP/ss_dma/inst/addr_remap_c2h/inst/ar_reg_stall/m_vector_i[1071]_i_1,
+level0_i/blp/blp_i/PLP/ss_dma/inst/addr_remap_c2h/inst/ar_reg_stall/m_vector_i[1076]_i_1,
+level0_i/blp/blp_i/PLP/ss_dma/inst/addr_remap_c2h/inst/ar_reg_stall/m_vector_i[1079]_i_1,
+level0_i/blp/blp_i/PLP/ss_dma/inst/addr_remap_c2h/inst/ar_reg_stall/m_vector_i[1085]_i_1,
+level0_i/blp/blp_i/PLP/ss_dma/inst/addr_remap_c2h/inst/ar_reg_stall/m_vector_i[1111]_i_1,
+level0_i/blp/blp_i/PLP/ss_dma/inst/addr_remap_c2h/inst/ar_reg_stall/m_vector_i[1114]_i_1,
+level0_i/blp/blp_i/PLP/ss_dma/inst/addr_remap_c2h/inst/ar_reg_stall/m_vector_i[1144]_i_1,
+level0_i/blp/blp_i/PLP/ss_dma/inst/addr_remap_c2h/inst/ar_reg_stall/m_vector_i_reg[1071],
+level0_i/blp/blp_i/PLP/ss_dma/inst/addr_remap_c2h/inst/ar_reg_stall/m_vector_i_reg[1076],
+level0_i/blp/blp_i/PLP/ss_dma/inst/addr_remap_c2h/inst/ar_reg_stall/m_vector_i_reg[1079],
+level0_i/blp/blp_i/PLP/ss_dma/inst/addr_remap_c2h/inst/ar_reg_stall/m_vector_i_reg[1085],
+level0_i/blp/blp_i/PLP/ss_dma/inst/addr_remap_c2h/inst/ar_reg_stall/m_vector_i_reg[1111],
+level0_i/blp/blp_i/PLP/ss_dma/inst/addr_remap_c2h/inst/ar_reg_stall/m_vector_i_reg[1114],
+level0_i/blp/blp_i/PLP/ss_dma/inst/addr_remap_c2h/inst/ar_reg_stall/skid_buffer[1144]_i_1,
+level0_i/blp/blp_i/PLP/ss_dma/inst/addr_remap_c2h/inst/ar_reg_stall/skid_buffer_reg[1071]
+ (the first 15 of 1934 listed)
+Related violations: <none>
+
+PDCN-1569#1 Warning
+LUT equation term check  
+Used physical LUT pin 'A1' of cell level0_i/blp/blp_i/PLP/plp_axi/axi_ic_data_p2p/m01_couplers/auto_ds/inst/gen_downsizer.gen_simple_downsizer.axi_downsizer_inst/USE_READ.read_addr_inst/cmd_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/gpregsm1.user_valid_i_1 (pin level0_i/blp/blp_i/PLP/plp_axi/axi_ic_data_p2p/m01_couplers/auto_ds/inst/gen_downsizer.gen_simple_downsizer.axi_downsizer_inst/USE_READ.read_addr_inst/cmd_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/gpregsm1.user_valid_i_1/I1) in site SLICE_X206Y174 is not included in the LUT equation: 'O5=(A3)+((~A3)*(~A5)*A2)'. If this cell is a user instantiated LUT in the design, please remove connectivity to the pin or change the equation and/or INIT string of the LUT to prevent this issue. If the cell is inferred or IP created LUT, please regenerate the IP and/or resynthesize the design to attempt to correct the issue.
+Related violations: <none>
+
+REQP-1774#1 Warning
+RAMB36E2_WRITE_WIDTH_A_18_doesnt_use_WEA32  
+The RAMB36E2 cell level0_i/blp/blp_i/ss_cmc/inst/reg_map_bram/U0/inst_blk_mem_gen/gnbram.gnative_mem_map_bmg.native_mem_map_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_8SERIES.WITH_BMM_INFO.TRUE_DP.SIMPLE_PRIM36.SERIES8_TDP_SP36_NO_ECC_ATTR.ram has WRITE_WIDTH_A set to 18. The WEA[3:2] pins should not be connected to active signal.
+Related violations: <none>
+
+REQP-1776#1 Warning
+RAMB36E2_WRITE_WIDTH_B_18_doesnt_use_WEB72  
+The RAMB36E2 cell level0_i/blp/blp_i/ss_cmc/inst/reg_map_bram/U0/inst_blk_mem_gen/gnbram.gnative_mem_map_bmg.native_mem_map_blk_mem_gen/valid.cstr/ramloop[0].ram.r/prim_noinit.ram/DEVICE_8SERIES.WITH_BMM_INFO.TRUE_DP.SIMPLE_PRIM36.SERIES8_TDP_SP36_NO_ECC_ATTR.ram has WRITE_WIDTH_B set to 18. The WEBWE[7:2] pins should not be connected to active signal.
+Related violations: <none>
+
+REQP-1858#1 Warning
+RAMB36E2_writefirst_collision_advisory  
+Synchronous clocking is detected for BRAM (level0_i/blp/blp_i/ss_hif/inst/pcie/inst/bd_39ab_pcie_0_pcie_4_0_pipe_inst/pcie_4_0_bram_inst/RAM32K.bram_comp_inst/bram_16k_0_int/ECC_RAM.RAMB36E2[0].ramb36e2_inst) in SDP mode with WRITE_FIRST write-mode. It is strongly suggested to change this mode to NO_CHANGE for best power characteristics. However, both WRITE_FIRST and NO_CHANGE may exhibit address collisions if the same address appears on both read and write ports resulting in unknown or corrupted read data. It is suggested to confirm via simulation that an address collision never occurs and if so it is suggested to try and avoid this situation. If address collisions cannot be avoided, the write-mode may be set to READ_FIRST which guarantees that the read data is the prior contents of the memory at the cost of additional power in the design. See the FPGA Memory Resources User Guide for additional information.
+Related violations: <none>
+
+RTSTAT-10#1 Warning
+No routable loads  
+9792 net(s) have no routable loads. The problem bus(es) and/or net(s) are level0_i/blp/blp_i/PLP/plp_axi/axi_ic_data_p2p/m01_couplers/auto_ds/inst/gen_downsizer.gen_simple_downsizer.axi_downsizer_inst/USE_READ.read_addr_inst/cmd_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/aempty_fwft_i,
+level0_i/blp/blp_i/PLP/plp_axi/axi_ic_data_p2p/m01_couplers/auto_ds/inst/gen_downsizer.gen_simple_downsizer.axi_downsizer_inst/USE_READ.read_addr_inst/cmd_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/user_valid,
+level0_i/blp/blp_i/PLP/plp_axi/axi_ic_data_p2p/m01_couplers/auto_ds/inst/gen_downsizer.gen_simple_downsizer.axi_downsizer_inst/USE_READ.read_addr_inst/cmd_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_i,
+level0_i/blp/blp_i/PLP/plp_axi/axi_ic_data_p2p/m01_couplers/auto_ds/inst/gen_downsizer.gen_simple_downsizer.axi_downsizer_inst/USE_READ.read_addr_inst/cmd_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_fb,
+level0_i/blp/blp_i/PLP/plp_axi/axi_ic_data_p2p/m01_couplers/auto_ds/inst/gen_downsizer.gen_simple_downsizer.axi_downsizer_inst/USE_READ.read_addr_inst/cmd_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_i,
+level0_i/blp/blp_i/PLP/plp_axi/axi_ic_data_p2p/m01_couplers/auto_ds/inst/gen_downsizer.gen_simple_downsizer.axi_downsizer_inst/USE_READ.read_addr_inst/cmd_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/rd_rst_reg[2:0],
+level0_i/blp/blp_i/PLP/plp_axi/axi_ic_data_p2p/m01_couplers/auto_ds/inst/gen_downsizer.gen_simple_downsizer.axi_downsizer_inst/USE_READ.read_addr_inst/cmd_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/wr_rst_reg[2:0],
+level0_i/blp/blp_i/PLP/plp_axi/axi_ic_data_p2p/m01_couplers/auto_ds/inst/gen_downsizer.gen_simple_downsizer.axi_downsizer_inst/USE_WRITE.write_addr_inst/USE_B_CHANNEL.cmd_b_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/aempty_fwft_i,
+level0_i/blp/blp_i/PLP/plp_axi/axi_ic_data_p2p/m01_couplers/auto_ds/inst/gen_downsizer.gen_simple_downsizer.axi_downsizer_inst/USE_WRITE.write_addr_inst/USE_B_CHANNEL.cmd_b_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/user_valid,
+level0_i/blp/blp_i/PLP/plp_axi/axi_ic_data_p2p/m01_couplers/auto_ds/inst/gen_downsizer.gen_simple_downsizer.axi_downsizer_inst/USE_WRITE.write_addr_inst/USE_B_CHANNEL.cmd_b_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/grss.rsts/ram_empty_i,
+level0_i/blp/blp_i/PLP/plp_axi/axi_ic_data_p2p/m01_couplers/auto_ds/inst/gen_downsizer.gen_simple_downsizer.axi_downsizer_inst/USE_WRITE.write_addr_inst/USE_B_CHANNEL.cmd_b_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_fb,
+level0_i/blp/blp_i/PLP/plp_axi/axi_ic_data_p2p/m01_couplers/auto_ds/inst/gen_downsizer.gen_simple_downsizer.axi_downsizer_inst/USE_WRITE.write_addr_inst/USE_B_CHANNEL.cmd_b_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.wr/gwss.wsts/ram_afull_i,
+level0_i/blp/blp_i/PLP/plp_axi/axi_ic_data_p2p/m01_couplers/auto_ds/inst/gen_downsizer.gen_simple_downsizer.axi_downsizer_inst/USE_WRITE.write_addr_inst/USE_B_CHANNEL.cmd_b_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/rd_rst_reg[2:0],
+level0_i/blp/blp_i/PLP/plp_axi/axi_ic_data_p2p/m01_couplers/auto_ds/inst/gen_downsizer.gen_simple_downsizer.axi_downsizer_inst/USE_WRITE.write_addr_inst/USE_B_CHANNEL.cmd_b_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/rstblk/wr_rst_reg[2:0],
+level0_i/blp/blp_i/PLP/plp_axi/axi_ic_data_p2p/m01_couplers/auto_ds/inst/gen_downsizer.gen_simple_downsizer.axi_downsizer_inst/USE_WRITE.write_addr_inst/cmd_queue/inst/fifo_gen_inst/inst_fifo_gen/gconvfifo.rf/grf.rf/gntv_or_sync_fifo.gl0.rd/gr1.gr1_int.rfwft/aempty_fwft_i
+ (the first 15 of 9699 listed).
+Related violations: <none>
+
+UTLZ-3#1 Warning
+Resource utilization  - PBlock:pblock_level0_blp
+Slice over-utilized in Pblock pblock_level0_blp (This design requires more Slice cells than are available in Pblock 'pblock_level0_blp'. This design requires 19859 of such cell types but only 19758 compatible sites are available in Pblock 'pblock_level0_blp'. Please consider increasing the span of Pblock 'pblock_level0_blp' or removing cells from it.)
+Related violations: <none>
+
+HDPRA-51#1 Advisory
+Narrow Edge with Location Constraints  
+Static Logic contains narrow edges with location constraints that may impact implementation results.  It is best to PROHIBIT the CLBs inside the gap to avoid congestion.  Or, create an EXCLUDE_PLACEMENT static pblock to cover the edge which prevents unnecessary logic from getting placed in narrow gap.  TAG='51_RE_S_RP1'.  Sites on edge: SLICE_X232Y15, SLICE_X232Y16, SLICE_X232Y17, SLICE_X232Y18, SLICE_X232Y19,
+SLICE_X232Y20, SLICE_X232Y21, SLICE_X232Y22, SLICE_X232Y23, SLICE_X232Y24,
+SLICE_X232Y25, SLICE_X232Y26, SLICE_X232Y27, SLICE_X232Y28, SLICE_X232Y29
+ (the first 15 of 30 listed)
+Related violations: <none>
+
+HDPRA-53#1 Advisory
+Edge with Location Constraints  
+Static Logic contains edges with location constraints that may impact implementation results.  It is best to create an EXCLUDE_PLACEMENT static pblock to cover the edge which prevents unnecessary logic from getting placed in narrow gap.  TAG='53_RE_S_RP1'.  Sites on edge: SLICE_X222Y359, SLICE_X223Y359, SLICE_X224Y359, SLICE_X225Y359,
+SLICE_X226Y359, SLICE_X227Y359, SLICE_X228Y359, SLICE_X229Y358,
+SLICE_X229Y359, SLICE_X230Y358, SLICE_X230Y359, SLICE_X231Y358,
+SLICE_X231Y359, SLICE_X232Y358, SLICE_X232Y359
+ (the first 15 of 720 listed)
+Related violations: <none>
+
+HDPRA-55#1 Advisory
+Narrow Gap with Location Constraints  
+RP pblock 'pblock_dynamic_region' contains a narrow gap with location constraints that may impact implementation results.  If possible, it is best to avoid gaps within a RP. If that cannot be done, it is best to PROHIBIT the CLBs inside the gap to avoid congestion.  If additional logic is needed nearby, instead add a static EXCLUDE_PLACEMENT pblock that covers the gap and add only essential logic to this pblock.  TAG='55_G129_RP1_S'.   Sites in gap: DSP48E2_X27Y124, DSP48E2_X27Y125, SLICE_X191Y325, SLICE_X191Y326,
+SLICE_X191Y327, SLICE_X191Y328, SLICE_X191Y329
+Related violations: <none>
+
+HDPRA-57#1 Advisory
+Gap with Location Constraints  
+RP pblock 'pblock_dynamic_region' contains a gap with location constraints that likely will impact implementation results.  If possible, it is best to avoid gaps within an RP. If that cannot be done, nested pblock may be required in the pblock to minimize crossings. Also, you may need to add a static EXCLUDE_PLACEMENT pblock that covers the gap and add contains only essential logic to this pblock.  TAG='57_G119_RP1_S'.   Sites in gap: SLICE_X178Y359, SLICE_X179Y359, SLICE_X180Y359, SLICE_X181Y359,
+SLICE_X182Y359, SLICE_X183Y359, SLICE_X184Y359, SLICE_X185Y359,
+SLICE_X186Y359, SLICE_X187Y359, SLICE_X188Y359, SLICE_X189Y359,
+SLICE_X190Y359, SLICE_X191Y359, SLICE_X192Y359
+ (the first 15 of 2510 listed)
+Related violations: <none>
+

@@ -1,0 +1,186 @@
+{
+  "lif": {
+    "model_directory": "results/full-encoding-50epoch-2026-09-11/models/lif__deterministic-rate__scale1__s14",
+    "model_files": [
+      {
+        "path": "results/full-encoding-50epoch-2026-09-11/models/lif__deterministic-rate__scale1__s14/manifest.json",
+        "sha256": "f99651cb0bcc2d1ead00057eea44c5a2ee6c070934583551b85d2c5bc9abf5f1",
+        "bytes": 182947
+      },
+      {
+        "path": "results/full-encoding-50epoch-2026-09-11/models/lif__deterministic-rate__scale1__s14/weights_l0.bin",
+        "sha256": "c633893de562cb4689c938556484f9eca1e1698f2c6bdd10cb22181fd3d0a3e3",
+        "bytes": 200704
+      },
+      {
+        "path": "results/full-encoding-50epoch-2026-09-11/models/lif__deterministic-rate__scale1__s14/weights_l1.bin",
+        "sha256": "7fef42876fb2b54b0a0a763473fd3a8c93973ffc605a46a509200cba44de09cb",
+        "bytes": 2560
+      }
+    ],
+    "model_id": "lif__deterministic-rate__scale1__s14",
+    "encoding": {
+      "count_formula": "min(timesteps, round_half_up(rate_scale * pixel * timesteps / 255))",
+      "event_order": "timestamp-then-neuron-id",
+      "events_per_image": null,
+      "maximum_events_per_image": 6272,
+      "pixel_range": [
+        0,
+        255
+      ],
+      "rate_scale": 1.0,
+      "temporal_distribution": "centered-equal-partitions-v1",
+      "timesteps": 8,
+      "type": "deterministic-rate-v1"
+    },
+    "build": {
+      "part": "xcu50-fsvh2104-2-e",
+      "kernel": "snn",
+      "input_neurons": 784,
+      "hidden_neurons": 256,
+      "output_neurons": 10,
+      "num_events": 12544,
+      "hidden_executor_count": 1,
+      "output_executor_count": 1,
+      "interface_minor": 6,
+      "clock_mhz": 100,
+      "historical_development_platform": "xilinx_u50_gen3x16_xdma_5_202210_1",
+      "historical_tools": "Vivado/Vitis 2026.1",
+      "historical_xrt": "2.23.244",
+      "hidden_neuron_model": 0,
+      "output_neuron_model": 0
+    },
+    "validation_accuracy": 0.978,
+    "test_accuracy_reported": 0.9738,
+    "status": "Fresh XCLBIN build, automatic routing/setup/hold checks, synthetic cases, 10-image prediction gate and 10000-image U50 MNIST test passed on 2026-09-23; kernel reset and platform timing/CDC findings remain open; see docs/timing_review.md",
+    "hardware_evidence": {
+      "summary": "evidence/u50-reference-2026-09-23/summary.json",
+      "variant": "lif",
+      "xclbin_sha256": "011b4370fed0a2b88ee9ea73c8126ce22c5e651a38eeafbdc34dcd59a4d00185",
+      "timing_review": "evidence/timing-review-2026-09-23/summary.json"
+    }
+  },
+  "izh": {
+    "model_directory": "results/full-encoding-50epoch-2026-09-11/models/izh__rate__scale1__s14",
+    "model_files": [
+      {
+        "path": "results/full-encoding-50epoch-2026-09-11/models/izh__rate__scale1__s14/manifest.json",
+        "sha256": "1aa149421f28e42099ea1acbd10b19177a0e5f0b9eb80af41e60e15cbfcf9672",
+        "bytes": 181500
+      },
+      {
+        "path": "results/full-encoding-50epoch-2026-09-11/models/izh__rate__scale1__s14/weights_l0.bin",
+        "sha256": "73235b8b57159637b8a803f7f1f85d8a2edb169185b766601061fe85b1fba49d",
+        "bytes": 200704
+      },
+      {
+        "path": "results/full-encoding-50epoch-2026-09-11/models/izh__rate__scale1__s14/weights_l1.bin",
+        "sha256": "9d18e8be81b4f3fe8f2e9fec25b9cd7f3268bf820fb3d0593a639e94da068db2",
+        "bytes": 2560
+      }
+    ],
+    "model_id": "izh__rate__scale1__s14",
+    "encoding": {
+      "event_order": "timestamp-then-neuron-id",
+      "events_per_image": null,
+      "maximum_events_per_image": 6272,
+      "pixel_range": [
+        0,
+        255
+      ],
+      "probability_formula": "min(1, rate_scale * pixel / 255)",
+      "rate_scale": 1.0,
+      "seed": 1,
+      "seed_policy": "counter-based-sample-index-v1",
+      "timesteps": 8,
+      "type": "bernoulli-rate-v1"
+    },
+    "build": {
+      "part": "xcu50-fsvh2104-2-e",
+      "kernel": "snn",
+      "input_neurons": 784,
+      "hidden_neurons": 256,
+      "output_neurons": 10,
+      "num_events": 12544,
+      "hidden_executor_count": 1,
+      "output_executor_count": 1,
+      "interface_minor": 6,
+      "clock_mhz": 100,
+      "historical_development_platform": "xilinx_u50_gen3x16_xdma_5_202210_1",
+      "historical_tools": "Vivado/Vitis 2026.1",
+      "historical_xrt": "2.23.244",
+      "hidden_neuron_model": 1,
+      "output_neuron_model": 1
+    },
+    "validation_accuracy": 0.983,
+    "test_accuracy_reported": 0.9768,
+    "status": "Fresh XCLBIN build, automatic routing/setup/hold checks, synthetic cases, 10-image prediction gate and 10000-image U50 MNIST test passed on 2026-09-23; kernel reset and platform timing/CDC findings remain open; see docs/timing_review.md",
+    "hardware_evidence": {
+      "summary": "evidence/u50-reference-2026-09-23/summary.json",
+      "variant": "izh",
+      "xclbin_sha256": "cf25cc3fdcbaa85566c4bc44de9948fffd2e309a4469747b15bb2809ac015339",
+      "timing_review": "evidence/timing-review-2026-09-23/summary.json"
+    }
+  },
+  "hh": {
+    "model_directory": "results/full-encoding-50epoch-2026-09-11/models/hh__deterministic-rate__scale0p25__s14",
+    "model_files": [
+      {
+        "path": "results/full-encoding-50epoch-2026-09-11/models/hh__deterministic-rate__scale0p25__s14/manifest.json",
+        "sha256": "4601982f4d233e78e8392ae3cf8e80169475ab2542314d40966ecb3602d0e227",
+        "bytes": 197058
+      },
+      {
+        "path": "results/full-encoding-50epoch-2026-09-11/models/hh__deterministic-rate__scale0p25__s14/weights_l0.bin",
+        "sha256": "b6d4d6e4fe020ec2df1f738f31168a8a0627c10136980b2f2b8e94f0e20d480d",
+        "bytes": 200704
+      },
+      {
+        "path": "results/full-encoding-50epoch-2026-09-11/models/hh__deterministic-rate__scale0p25__s14/weights_l1.bin",
+        "sha256": "4a96e07eef81faef9b8ae46687ad7b1836b7b8e52ff5f7a47eef4171088907c9",
+        "bytes": 2560
+      }
+    ],
+    "model_id": "hh__deterministic-rate__scale0p25__s14",
+    "encoding": {
+      "count_formula": "min(timesteps, round_half_up(rate_scale * pixel * timesteps / 255))",
+      "event_order": "timestamp-then-neuron-id",
+      "events_per_image": null,
+      "maximum_events_per_image": 1568,
+      "pixel_range": [
+        0,
+        255
+      ],
+      "rate_scale": 0.25,
+      "temporal_distribution": "centered-equal-partitions-v1",
+      "timesteps": 8,
+      "type": "deterministic-rate-v1"
+    },
+    "build": {
+      "part": "xcu50-fsvh2104-2-e",
+      "kernel": "snn",
+      "input_neurons": 784,
+      "hidden_neurons": 256,
+      "output_neurons": 10,
+      "num_events": 12544,
+      "hidden_executor_count": 1,
+      "output_executor_count": 1,
+      "interface_minor": 6,
+      "clock_mhz": 100,
+      "historical_development_platform": "xilinx_u50_gen3x16_xdma_5_202210_1",
+      "historical_tools": "Vivado/Vitis 2026.1",
+      "historical_xrt": "2.23.244",
+      "hidden_neuron_model": 2,
+      "output_neuron_model": 2
+    },
+    "validation_accuracy": 0.8638,
+    "test_accuracy_reported": 0.84,
+    "status": "Fresh XCLBIN build, automatic routing/setup/hold checks, synthetic cases, 10-image prediction gate and 10000-image U50 MNIST test passed on 2026-09-23; kernel reset and platform timing/CDC findings remain open; see docs/timing_review.md",
+    "hardware_evidence": {
+      "summary": "evidence/u50-reference-2026-09-23/summary.json",
+      "variant": "hh",
+      "xclbin_sha256": "2f7492e237671b0e71d3426bd1b2b66200d196ed67ed0da7dc25628e45b18113",
+      "timing_review": "evidence/timing-review-2026-09-23/summary.json"
+    }
+  }
+}

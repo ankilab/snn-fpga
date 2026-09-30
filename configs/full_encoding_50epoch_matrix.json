@@ -1,0 +1,1038 @@
+{
+  "schema": "snn-training-observability-campaign-v1",
+  "training_seeds": [
+    14
+  ],
+  "validation_samples": 5000,
+  "rate_seed": 1,
+  "timesteps": 8,
+  "hidden_neurons": 256,
+  "cooldown_seconds": 60,
+  "maximum_start_temperature_c": 70,
+  "job_timeout_seconds": 43200,
+  "selection": "Run every variant for exactly 50 epochs; select checkpoint by validation accuracy; final test only after selection; no candidate screening or early stopping",
+  "candidates": [
+    {
+      "id": "hh__deterministic-rate__scale0p25",
+      "dynamics": "hodgkin_huxley",
+      "encoding": "deterministic-rate",
+      "parameters": {
+        "rate_scale": 0.25
+      },
+      "epochs": 50,
+      "batch_size": 512,
+      "learning_rate": 0.01,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 3,
+      "hh_backend": "compiled"
+    },
+    {
+      "id": "hh__latency__default",
+      "dynamics": "hodgkin_huxley",
+      "encoding": "latency",
+      "parameters": {},
+      "epochs": 50,
+      "batch_size": 512,
+      "learning_rate": 0.01,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 3,
+      "hh_backend": "compiled"
+    },
+    {
+      "id": "hh__rate__scale1",
+      "dynamics": "hodgkin_huxley",
+      "encoding": "rate",
+      "parameters": {
+        "rate_scale": 1.0
+      },
+      "epochs": 50,
+      "batch_size": 512,
+      "learning_rate": 0.01,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 3,
+      "hh_backend": "compiled"
+    },
+    {
+      "id": "hh__sparse-latency__threshold0",
+      "dynamics": "hodgkin_huxley",
+      "encoding": "sparse-latency",
+      "parameters": {
+        "encoding_threshold": 0
+      },
+      "epochs": 50,
+      "batch_size": 512,
+      "learning_rate": 0.01,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 3,
+      "hh_backend": "compiled"
+    },
+    {
+      "id": "hh__sparse-latency__threshold16",
+      "dynamics": "hodgkin_huxley",
+      "encoding": "sparse-latency",
+      "parameters": {
+        "encoding_threshold": 16
+      },
+      "epochs": 50,
+      "batch_size": 512,
+      "learning_rate": 0.01,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 3,
+      "hh_backend": "compiled"
+    },
+    {
+      "id": "hh__sparse-latency__threshold32",
+      "dynamics": "hodgkin_huxley",
+      "encoding": "sparse-latency",
+      "parameters": {
+        "encoding_threshold": 32
+      },
+      "epochs": 50,
+      "batch_size": 512,
+      "learning_rate": 0.01,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 3,
+      "hh_backend": "compiled"
+    },
+    {
+      "id": "hh__sparse-latency__threshold64",
+      "dynamics": "hodgkin_huxley",
+      "encoding": "sparse-latency",
+      "parameters": {
+        "encoding_threshold": 64
+      },
+      "epochs": 50,
+      "batch_size": 512,
+      "learning_rate": 0.01,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 3,
+      "hh_backend": "compiled"
+    },
+    {
+      "id": "hh__nonlinear-latency__gamma0p5",
+      "dynamics": "hodgkin_huxley",
+      "encoding": "nonlinear-latency",
+      "parameters": {
+        "latency_gamma": 0.5
+      },
+      "epochs": 50,
+      "batch_size": 512,
+      "learning_rate": 0.01,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 3,
+      "hh_backend": "compiled"
+    },
+    {
+      "id": "hh__nonlinear-latency__gamma1",
+      "dynamics": "hodgkin_huxley",
+      "encoding": "nonlinear-latency",
+      "parameters": {
+        "latency_gamma": 1.0
+      },
+      "epochs": 50,
+      "batch_size": 512,
+      "learning_rate": 0.01,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 3,
+      "hh_backend": "compiled"
+    },
+    {
+      "id": "hh__nonlinear-latency__gamma2",
+      "dynamics": "hodgkin_huxley",
+      "encoding": "nonlinear-latency",
+      "parameters": {
+        "latency_gamma": 2.0
+      },
+      "epochs": 50,
+      "batch_size": 512,
+      "learning_rate": 0.01,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 3,
+      "hh_backend": "compiled"
+    },
+    {
+      "id": "hh__nonlinear-latency__gamma4",
+      "dynamics": "hodgkin_huxley",
+      "encoding": "nonlinear-latency",
+      "parameters": {
+        "latency_gamma": 4.0
+      },
+      "epochs": 50,
+      "batch_size": 512,
+      "learning_rate": 0.01,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 3,
+      "hh_backend": "compiled"
+    },
+    {
+      "id": "hh__deterministic-rate__scale0p5",
+      "dynamics": "hodgkin_huxley",
+      "encoding": "deterministic-rate",
+      "parameters": {
+        "rate_scale": 0.5
+      },
+      "epochs": 50,
+      "batch_size": 512,
+      "learning_rate": 0.01,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 3,
+      "hh_backend": "compiled"
+    },
+    {
+      "id": "hh__deterministic-rate__scale0p75",
+      "dynamics": "hodgkin_huxley",
+      "encoding": "deterministic-rate",
+      "parameters": {
+        "rate_scale": 0.75
+      },
+      "epochs": 50,
+      "batch_size": 512,
+      "learning_rate": 0.01,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 3,
+      "hh_backend": "compiled"
+    },
+    {
+      "id": "hh__deterministic-rate__scale1",
+      "dynamics": "hodgkin_huxley",
+      "encoding": "deterministic-rate",
+      "parameters": {
+        "rate_scale": 1.0
+      },
+      "epochs": 50,
+      "batch_size": 512,
+      "learning_rate": 0.01,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 3,
+      "hh_backend": "compiled"
+    },
+    {
+      "id": "hh__top-k-rank-order__k32",
+      "dynamics": "hodgkin_huxley",
+      "encoding": "top-k-rank-order",
+      "parameters": {
+        "top_k": 32,
+        "encoding_threshold": 0
+      },
+      "epochs": 50,
+      "batch_size": 512,
+      "learning_rate": 0.01,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 3,
+      "hh_backend": "compiled"
+    },
+    {
+      "id": "hh__top-k-rank-order__k64",
+      "dynamics": "hodgkin_huxley",
+      "encoding": "top-k-rank-order",
+      "parameters": {
+        "top_k": 64,
+        "encoding_threshold": 0
+      },
+      "epochs": 50,
+      "batch_size": 512,
+      "learning_rate": 0.01,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 3,
+      "hh_backend": "compiled"
+    },
+    {
+      "id": "hh__top-k-rank-order__k128",
+      "dynamics": "hodgkin_huxley",
+      "encoding": "top-k-rank-order",
+      "parameters": {
+        "top_k": 128,
+        "encoding_threshold": 0
+      },
+      "epochs": 50,
+      "batch_size": 512,
+      "learning_rate": 0.01,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 3,
+      "hh_backend": "compiled"
+    },
+    {
+      "id": "hh__top-k-rank-order__k256",
+      "dynamics": "hodgkin_huxley",
+      "encoding": "top-k-rank-order",
+      "parameters": {
+        "top_k": 256,
+        "encoding_threshold": 0
+      },
+      "epochs": 50,
+      "batch_size": 512,
+      "learning_rate": 0.01,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 3,
+      "hh_backend": "compiled"
+    },
+    {
+      "id": "hh__burst__b2_i1",
+      "dynamics": "hodgkin_huxley",
+      "encoding": "burst",
+      "parameters": {
+        "burst_max_spikes": 2,
+        "burst_interval": 1,
+        "encoding_threshold": 0
+      },
+      "epochs": 50,
+      "batch_size": 512,
+      "learning_rate": 0.01,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 3,
+      "hh_backend": "compiled"
+    },
+    {
+      "id": "hh__burst__b4_i1",
+      "dynamics": "hodgkin_huxley",
+      "encoding": "burst",
+      "parameters": {
+        "burst_max_spikes": 4,
+        "burst_interval": 1,
+        "encoding_threshold": 0
+      },
+      "epochs": 50,
+      "batch_size": 512,
+      "learning_rate": 0.01,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 3,
+      "hh_backend": "compiled"
+    },
+    {
+      "id": "hh__burst__b4_i2",
+      "dynamics": "hodgkin_huxley",
+      "encoding": "burst",
+      "parameters": {
+        "burst_max_spikes": 4,
+        "burst_interval": 2,
+        "encoding_threshold": 0
+      },
+      "epochs": 50,
+      "batch_size": 512,
+      "learning_rate": 0.01,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 3,
+      "hh_backend": "compiled"
+    },
+    {
+      "id": "hh__burst__b8_i1",
+      "dynamics": "hodgkin_huxley",
+      "encoding": "burst",
+      "parameters": {
+        "burst_max_spikes": 8,
+        "burst_interval": 1,
+        "encoding_threshold": 0
+      },
+      "epochs": 50,
+      "batch_size": 512,
+      "learning_rate": 0.01,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 3,
+      "hh_backend": "compiled"
+    },
+    {
+      "id": "lif__deterministic-rate__scale0p25",
+      "dynamics": "lif",
+      "encoding": "deterministic-rate",
+      "parameters": {
+        "rate_scale": 0.25
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 0,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 2,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "lif__latency__default",
+      "dynamics": "lif",
+      "encoding": "latency",
+      "parameters": {},
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 0,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 2,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "lif__rate__scale1",
+      "dynamics": "lif",
+      "encoding": "rate",
+      "parameters": {
+        "rate_scale": 1.0
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 0,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 2,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "lif__sparse-latency__threshold0",
+      "dynamics": "lif",
+      "encoding": "sparse-latency",
+      "parameters": {
+        "encoding_threshold": 0
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 0,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 2,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "lif__sparse-latency__threshold16",
+      "dynamics": "lif",
+      "encoding": "sparse-latency",
+      "parameters": {
+        "encoding_threshold": 16
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 0,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 2,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "lif__sparse-latency__threshold32",
+      "dynamics": "lif",
+      "encoding": "sparse-latency",
+      "parameters": {
+        "encoding_threshold": 32
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 0,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 2,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "lif__sparse-latency__threshold64",
+      "dynamics": "lif",
+      "encoding": "sparse-latency",
+      "parameters": {
+        "encoding_threshold": 64
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 0,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 2,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "lif__nonlinear-latency__gamma0p5",
+      "dynamics": "lif",
+      "encoding": "nonlinear-latency",
+      "parameters": {
+        "latency_gamma": 0.5
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 0,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 2,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "lif__nonlinear-latency__gamma1",
+      "dynamics": "lif",
+      "encoding": "nonlinear-latency",
+      "parameters": {
+        "latency_gamma": 1.0
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 0,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 2,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "lif__nonlinear-latency__gamma2",
+      "dynamics": "lif",
+      "encoding": "nonlinear-latency",
+      "parameters": {
+        "latency_gamma": 2.0
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 0,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 2,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "lif__nonlinear-latency__gamma4",
+      "dynamics": "lif",
+      "encoding": "nonlinear-latency",
+      "parameters": {
+        "latency_gamma": 4.0
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 0,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 2,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "lif__deterministic-rate__scale0p5",
+      "dynamics": "lif",
+      "encoding": "deterministic-rate",
+      "parameters": {
+        "rate_scale": 0.5
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 0,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 2,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "lif__deterministic-rate__scale0p75",
+      "dynamics": "lif",
+      "encoding": "deterministic-rate",
+      "parameters": {
+        "rate_scale": 0.75
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 0,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 2,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "lif__deterministic-rate__scale1",
+      "dynamics": "lif",
+      "encoding": "deterministic-rate",
+      "parameters": {
+        "rate_scale": 1.0
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 0,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 2,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "lif__top-k-rank-order__k32",
+      "dynamics": "lif",
+      "encoding": "top-k-rank-order",
+      "parameters": {
+        "top_k": 32,
+        "encoding_threshold": 0
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 0,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 2,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "lif__top-k-rank-order__k64",
+      "dynamics": "lif",
+      "encoding": "top-k-rank-order",
+      "parameters": {
+        "top_k": 64,
+        "encoding_threshold": 0
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 0,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 2,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "lif__top-k-rank-order__k128",
+      "dynamics": "lif",
+      "encoding": "top-k-rank-order",
+      "parameters": {
+        "top_k": 128,
+        "encoding_threshold": 0
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 0,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 2,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "lif__top-k-rank-order__k256",
+      "dynamics": "lif",
+      "encoding": "top-k-rank-order",
+      "parameters": {
+        "top_k": 256,
+        "encoding_threshold": 0
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 0,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 2,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "lif__burst__b2_i1",
+      "dynamics": "lif",
+      "encoding": "burst",
+      "parameters": {
+        "burst_max_spikes": 2,
+        "burst_interval": 1,
+        "encoding_threshold": 0
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 0,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 2,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "lif__burst__b4_i1",
+      "dynamics": "lif",
+      "encoding": "burst",
+      "parameters": {
+        "burst_max_spikes": 4,
+        "burst_interval": 1,
+        "encoding_threshold": 0
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 0,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 2,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "lif__burst__b4_i2",
+      "dynamics": "lif",
+      "encoding": "burst",
+      "parameters": {
+        "burst_max_spikes": 4,
+        "burst_interval": 2,
+        "encoding_threshold": 0
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 0,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 2,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "lif__burst__b8_i1",
+      "dynamics": "lif",
+      "encoding": "burst",
+      "parameters": {
+        "burst_max_spikes": 8,
+        "burst_interval": 1,
+        "encoding_threshold": 0
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 0,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 2,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "izh__deterministic-rate__scale0p25",
+      "dynamics": "izhikevich",
+      "encoding": "deterministic-rate",
+      "parameters": {
+        "rate_scale": 0.25
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 1,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "izh__latency__default",
+      "dynamics": "izhikevich",
+      "encoding": "latency",
+      "parameters": {},
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 1,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "izh__rate__scale1",
+      "dynamics": "izhikevich",
+      "encoding": "rate",
+      "parameters": {
+        "rate_scale": 1.0
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 1,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "izh__sparse-latency__threshold0",
+      "dynamics": "izhikevich",
+      "encoding": "sparse-latency",
+      "parameters": {
+        "encoding_threshold": 0
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 1,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "izh__sparse-latency__threshold16",
+      "dynamics": "izhikevich",
+      "encoding": "sparse-latency",
+      "parameters": {
+        "encoding_threshold": 16
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 1,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "izh__sparse-latency__threshold32",
+      "dynamics": "izhikevich",
+      "encoding": "sparse-latency",
+      "parameters": {
+        "encoding_threshold": 32
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 1,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "izh__sparse-latency__threshold64",
+      "dynamics": "izhikevich",
+      "encoding": "sparse-latency",
+      "parameters": {
+        "encoding_threshold": 64
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 1,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "izh__nonlinear-latency__gamma0p5",
+      "dynamics": "izhikevich",
+      "encoding": "nonlinear-latency",
+      "parameters": {
+        "latency_gamma": 0.5
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 1,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "izh__nonlinear-latency__gamma1",
+      "dynamics": "izhikevich",
+      "encoding": "nonlinear-latency",
+      "parameters": {
+        "latency_gamma": 1.0
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 1,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "izh__nonlinear-latency__gamma2",
+      "dynamics": "izhikevich",
+      "encoding": "nonlinear-latency",
+      "parameters": {
+        "latency_gamma": 2.0
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 1,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "izh__nonlinear-latency__gamma4",
+      "dynamics": "izhikevich",
+      "encoding": "nonlinear-latency",
+      "parameters": {
+        "latency_gamma": 4.0
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 1,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "izh__deterministic-rate__scale0p5",
+      "dynamics": "izhikevich",
+      "encoding": "deterministic-rate",
+      "parameters": {
+        "rate_scale": 0.5
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 1,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "izh__deterministic-rate__scale0p75",
+      "dynamics": "izhikevich",
+      "encoding": "deterministic-rate",
+      "parameters": {
+        "rate_scale": 0.75
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 1,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "izh__deterministic-rate__scale1",
+      "dynamics": "izhikevich",
+      "encoding": "deterministic-rate",
+      "parameters": {
+        "rate_scale": 1.0
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 1,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "izh__top-k-rank-order__k32",
+      "dynamics": "izhikevich",
+      "encoding": "top-k-rank-order",
+      "parameters": {
+        "top_k": 32,
+        "encoding_threshold": 0
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 1,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "izh__top-k-rank-order__k64",
+      "dynamics": "izhikevich",
+      "encoding": "top-k-rank-order",
+      "parameters": {
+        "top_k": 64,
+        "encoding_threshold": 0
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 1,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "izh__top-k-rank-order__k128",
+      "dynamics": "izhikevich",
+      "encoding": "top-k-rank-order",
+      "parameters": {
+        "top_k": 128,
+        "encoding_threshold": 0
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 1,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "izh__top-k-rank-order__k256",
+      "dynamics": "izhikevich",
+      "encoding": "top-k-rank-order",
+      "parameters": {
+        "top_k": 256,
+        "encoding_threshold": 0
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 1,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "izh__burst__b2_i1",
+      "dynamics": "izhikevich",
+      "encoding": "burst",
+      "parameters": {
+        "burst_max_spikes": 2,
+        "burst_interval": 1,
+        "encoding_threshold": 0
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 1,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "izh__burst__b4_i1",
+      "dynamics": "izhikevich",
+      "encoding": "burst",
+      "parameters": {
+        "burst_max_spikes": 4,
+        "burst_interval": 1,
+        "encoding_threshold": 0
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 1,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "izh__burst__b4_i2",
+      "dynamics": "izhikevich",
+      "encoding": "burst",
+      "parameters": {
+        "burst_max_spikes": 4,
+        "burst_interval": 2,
+        "encoding_threshold": 0
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 1,
+      "hh_backend": "eager"
+    },
+    {
+      "id": "izh__burst__b8_i1",
+      "dynamics": "izhikevich",
+      "encoding": "burst",
+      "parameters": {
+        "burst_max_spikes": 8,
+        "burst_interval": 1,
+        "encoding_threshold": 0
+      },
+      "epochs": 50,
+      "batch_size": 128,
+      "learning_rate": 0.05,
+      "bptt_window": 1,
+      "early_stopping_patience": 0,
+      "lr_reduce_patience": 1,
+      "hh_backend": "eager"
+    }
+  ],
+  "require_full_epochs": true,
+  "minimum_free_disk_gb": 20
+}

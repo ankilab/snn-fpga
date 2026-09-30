@@ -1,0 +1,16 @@
+flowchart LR
+    IN["Spike event"] --> WC
+    subgraph LAYER["snn_layer"]
+        WC["weight_controller"]
+        BRAM[("synapse_bram")]
+        ACC["synapse_accumulator"]
+        ARR["neuron_array"]
+        FSM["Layer FSM<br/>Logic in snn_layer"]
+        WC -->|Read addresses| BRAM
+        BRAM -->|Weight| ACC
+        WC -.->|weight_valid / target| ACC
+        ACC -->|Neuron currents| ARR
+        FSM -.->|Start update| ARR
+        FSM -.->|Clear currents| ACC
+    end
+    ARR -->|Spike vector| NEXT["Encoder or decoder"]

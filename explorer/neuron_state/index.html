@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MNIST spike activity explorer</title>
+<style>
+[hidden]{display:none!important}
+:root{color-scheme:light dark;--bg:#f7f7f4;--fg:#171717;--muted:#666;--panel:#fff;--grid:#d4d4d0;--spike:#1769aa;--hot:#d1495b;--ok:#25855a} @media(prefers-color-scheme:dark){:root{--bg:#151515;--fg:#eee;--muted:#aaa;--panel:#202020;--grid:#444;--spike:#65a9e8;--hot:#ff7888;--ok:#62c892}}
+*{box-sizing:border-box}body{margin:0;padding:24px;background:var(--bg);color:var(--fg);font:14px/1.45 system-ui,sans-serif}main{max-width:1200px;margin:auto}h1{font-size:22px;margin:0 0 16px}h2{font-size:16px;margin:0 0 10px}.controls{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:10px}.controls label{display:grid;gap:4px;color:var(--muted)}select,input{font:inherit;padding:7px 9px;color:var(--fg);background:var(--panel);border:1px solid var(--grid);border-radius:6px}.summary{margin:0 0 16px;color:var(--muted)}.metrics{margin:0 0 20px}.table-wrap{overflow-x:auto}.metrics table{width:100%;border-collapse:collapse;background:var(--panel);border:1px solid var(--grid)}.metrics th,.metrics td{text-align:right;padding:8px 10px;border-bottom:1px solid var(--grid);white-space:nowrap}.metrics th:first-child,.metrics td:first-child,.metrics th:nth-child(2),.metrics td:nth-child(2){text-align:left}.metrics th{color:var(--muted);font-weight:500}.metrics-note{color:var(--muted);margin:6px 0 0}.missing{color:var(--muted)}.layout{display:grid;grid-template-columns:240px minmax(0,1fr);gap:20px}.panel{background:var(--panel);border:1px solid var(--grid);border-radius:8px;padding:14px}.image-wrap{display:grid;grid-template-columns:1fr 1fr;gap:12px}.image-wrap canvas{width:100%;image-rendering:pixelated;border:1px solid var(--grid)}.caption{color:var(--muted);margin-top:5px}.raster{width:100%;height:auto;display:block}.rasters{display:grid;gap:14px}.comparison{margin-top:20px}.comparison-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}.mini{background:var(--panel);border:1px solid var(--grid);border-radius:8px;padding:10px}.mini canvas{width:56px;height:56px;image-rendering:pixelated;float:left;margin-right:8px}.mini svg{width:100%;height:54px}.correct{color:var(--ok)}.wrong{color:var(--hot)}@media(max-width:700px){body{padding:14px}.layout{grid-template-columns:1fr}.image-wrap{max-width:420px}.metrics th,.metrics td{padding:7px}}
+button{font:inherit;padding:8px 12px;border:1px solid var(--grid);border-radius:6px;background:var(--panel);color:var(--fg);cursor:pointer}button:disabled{opacity:.5;cursor:default}.activity-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) 90px;gap:18px}.activity-grid svg{width:100%;height:auto;max-height:320px;display:block}.activity-grid h3{font-size:14px;margin:0 0 8px}.activity-panel{margin-bottom:20px}.toolbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap}.activity-grid .caption{min-height:22px}@media(max-width:700px){.activity-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.activity-grid .output-grid{max-width:90px}}
+.toolbar h2{margin:0}.controls.toolbar{align-items:end}.controls.toolbar label{grid-template-rows:auto auto}.controls.toolbar input[type=range]{margin:0;height:34px}.controls.toolbar .caption{align-self:center}
+
+.frequency-grid{grid-template-columns:repeat(3,minmax(0,1fr)) 90px}.frequency-grid svg{max-height:320px}.frequency-legend-toolbar{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:18px}#frequency-legend{flex:1 1 260px;max-width:585px;min-width:0}.frequency-legend-toolbar button{flex:0 0 auto}#frequency-legend svg{display:block;width:100%}@media(max-width:700px){.frequency-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.frequency-grid .output-grid{grid-column:auto}}
+</style></head><body><main><h1>MNIST spike activity explorer</h1>
+<div class="controls"><label>Encoding family<select id="family"></select></label><label>Parameter variant<select id="variant"></select></label><label>Neuron model<select id="model"><option value="LIF">LIF</option><option value="IZH">IZH</option><option value="HH">HH</option></select></label><label>Sample<select id="sample"></select></label></div>
+<div class="controls toolbar"><button id="play" type="button" aria-pressed="false">Play</button><label>Timestep <input id="time" type="range" min="0" value="0"></label><label><span>Speed · <output id="speed-label">2 steps/s</output></span><input id="speed" type="range" min="0.5" max="8" step="0.5" value="2"></label><span class="caption">Loops automatically</span></div>
+<p class="summary" id="summary" aria-live="polite"></p><p id="export-status" role="status"></p>
+<section class="metrics" id="metrics"><h2>LIF, IZH and HH · 50-epoch campaign</h2><div class="table-wrap"><table><thead><tr><th>Dynamics / strategy</th><th>Layer neurons</th><th>Test accuracy</th><th>Validation accuracy</th><th>Input events/image</th><th>Hidden spikes/image</th><th>Output spikes/image</th><th>Test ties</th><th>No prediction</th></tr></thead><tbody id="metrics-body"></tbody></table></div><p class="metrics-note" id="metrics-note"></p></section>
+<section class="panel activity-panel"><div class="toolbar"><h2>Input image · Layer activity</h2><button id="export-activity" type="button">Export activity PNG</button><button id="export-gif" type="button">Export activity GIF</button></div><p id="activity-context" class="caption"></p><div class="activity-grid"><div><h3>Original image</h3><div id="activity-original"></div></div><div><h3>Input · 28 × 28</h3><div id="activity-input"></div><p id="input-count" class="caption"></p></div><div><h3>Hidden · 16 × 16</h3><div id="activity-hidden"></div><p id="hidden-count" class="caption"></p></div><div class="output-grid"><h3>Output</h3><div id="activity-output"></div><p id="output-count" class="caption"></p></div></div><p id="activity-note" class="caption">Colored cells indicate spikes in the selected timestep. Hidden neuron IDs run row by row; output rows are classes 0–9.</p></section>
+<section class="panel activity-panel" id="frequency-panel"><div class="toolbar"><h2>Spike frequency &middot; Entire inference</h2><button id="export-frequency" type="button">Export frequency PNG</button></div><p id="frequency-context" class="caption"></p><div class="activity-grid frequency-grid"><div><h3>Original image</h3><div id="frequency-original"></div></div><div><h3>Input &middot; 28 &times; 28</h3><div id="frequency-input"></div></div><div><h3>Hidden &middot; 16 &times; 16</h3><div id="frequency-hidden"></div></div><div class="output-grid"><h3>Output &middot; 0&ndash;9</h3><div id="frequency-output"></div></div></div><div class="frequency-legend-toolbar"><div id="frequency-legend"></div><button id="frequency-toggle" type="button" aria-label="Viridis frequency color mode" aria-pressed="true">Use grayscale</button></div><p class="caption"><span id="frequency-scale-note"></span> Counts cover the entire inference, independent of playback. Hover over a cell for its count. Hidden neuron IDs run row by row; output rows are classes 0&ndash;9.</p></section>
+<section class="panel comparison" id="neuron-panel"><div class="toolbar"><h2>Neuron state · bit-exact software inference</h2><button id="export-neuron" type="button" disabled>Export neuron PNG</button></div><p id="neuron-note" class="caption"></p><div id="neuron-controls" class="controls">
+<label>Layer<select id="neuron-layer"><option value="hidden">Hidden</option><option value="output">Output</option></select></label>
+<label>Neuron (zero-based)<input id="neuron-id" type="number" min="0" value="0" step="1"></label>
+<label>Exact state sample<input id="neuron-point" type="range" min="0" value="0"></label>
+</div><p id="neuron-value" aria-live="polite"></p><div id="neuron-charts"></div></section>
+<section class="comparison"><h2>Samples side by side</h2><div class="comparison-grid" id="comparison"></div></section>
+</main><script src="data.js"></script><script>
+const data=window.neuronExplorerData,family=document.getElementById('family'),variant=document.getElementById('variant'),sample=document.getElementById('sample'),time=document.getElementById('time');
+const modelSelect=document.getElementById('model');
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const families=[...new Set(data.series.map(s=>s.family))];families.forEach(name=>family.add(new Option(name,name)));data.samples.forEach(s=>sample.add(new Option(`digit ${s.label} · dataset #${s.index}`,s.index)));
+function variants(){const previous=variant.value,choices=data.series.filter(s=>s.family===family.value&&!s.model_kind);variant.replaceChildren();choices.forEach(s=>variant.add(new Option(s.variant,s.key)));if(choices.some(s=>s.key===previous))variant.value=previous}
+variants();
+function selectedModel(key){return data.series.find(s=>s.parameter_key===key&&s.model_type===modelSelect.value)}
+function trace(key,index){const model=selectedModel(key);return data.traces.find(t=>t.encoding===(model?.key||key)&&t.sample_index===Number(index))}
+function image(canvas,pixels,binary){const c=canvas.getContext('2d'),d=c.createImageData(28,28);for(let i=0;i<784;i++){const v=binary?(pixels.has(i)?255:0):pixels[i];d.data.set([v,v,v,255],i*4)}c.putImageData(d,0,0)}
+function raster(title,spikes,neurons,T){const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg');svg.setAttribute('class','raster');svg.setAttribute('viewBox',`0 0 900 ${Math.max(95,Math.min(260,neurons/2+70))}`);svg.setAttribute('role','img');svg.setAttribute('aria-label',`${title} spike raster`);const H=Number(svg.getAttribute('viewBox').split(' ')[3]),L=64,R=14,Y=24,B=28,W=900-L-R,PH=H-Y-B;let html=`<text x="0" y="13" fill="${css('--fg')}">${title} · ${spikes.reduce((a,b)=>a+b.length,0)} spikes</text><rect x="${L}" y="${Y}" width="${W}" height="${PH}" fill="none" stroke="${css('--grid')}"/>`;
+for(let t=0;t<T;t++){const x=L+(t+.5)*W/T;html+=`<text x="${x}" y="${H-7}" text-anchor="middle" fill="${css('--muted')}" font-size="11">${t}</text>`;for(const n of spikes[t]){const y=Y+(n+.5)*PH/neurons;html+=`<line x1="${x}" x2="${x}" y1="${Math.max(Y,y-2)}" y2="${Math.min(Y+PH,y+2)}" stroke="${css('--spike')}" stroke-width="2"/>`}}html+=`<text x="10" y="${Y+PH/2}" fill="${css('--muted')}" transform="rotate(-90 10 ${Y+PH/2})" text-anchor="middle">neuron</text>`;svg.innerHTML=html;return svg}
+function spark(spikes,T){const counts=spikes.map(x=>x.length),m=Math.max(1,...counts),p=counts.map((v,i)=>`${8+i*124/Math.max(1,T-1)},${49-v*40/m}`).join(' ');return `<svg viewBox="0 0 140 56" aria-label="Input event count by timestep"><polyline points="${p}" fill="none" stroke="${css('--spike')}" stroke-width="2"/><line x1="8" y1="49" x2="132" y2="49" stroke="${css('--grid')}"/></svg>`}
+const pct=v=>v==null?'—':`${(100*v).toFixed(2)}%`,num=v=>v==null?'—':Number(v).toFixed(2);
+function renderMetrics(key){const body=document.getElementById('metrics-body'),rows=data.metrics.filter(m=>m.key===key);body.replaceChildren();for(const m of rows){const tr=document.createElement('tr');tr.innerHTML=`<td>${m.dynamics}</td><td>${m.neurons}</td><td>${pct(m.test_accuracy)}</td><td>${pct(m.validation_accuracy)}</td><td>${num(m.input_events)}</td><td class="${m.hidden_spikes==null?'missing':''}">${num(m.hidden_spikes)}</td><td class="${m.output_spikes==null?'missing':''}">${num(m.output_spikes)}</td><td>${pct(m.tie_rate)}</td><td>${pct(m.no_prediction_rate)}</td>`;body.append(tr)}document.getElementById('metrics').hidden=rows.length===0;document.getElementById('metrics-note').textContent=data.metric_scope+(rows.some(m=>m.hidden_spikes==null||m.output_spikes==null)?' “—” means that activity metric was not retained in the archived campaign summary.':'')}
+function render(){const t=trace(variant.value,sample.value),setting=data.series.find(s=>s.key===variant.value);if(!t)return;time.max=t.timesteps-1;if(Number(time.value)>Number(time.max))time.value=0;const now=Number(time.value);const verdict=t.prediction==null?(selectedModel(variant.value)?`${modelSelect.value} · no prediction`:`${modelSelect.value} · no state trace available`):`prediction ${t.prediction} · ${t.prediction===t.label?'correct':'incorrect'}`,parameters=Object.entries(setting.parameters).map(([k,v])=>`${k}=${v}`).join(' · ')||'canonical default';document.getElementById('summary').textContent=`Digit ${t.label} · T=${t.timesteps} · ${parameters} · ${t.input_events_total} input events · ${verdict}`;renderMetrics(variant.value);renderLayerActivity(t,now);
+const grid=document.getElementById('comparison');grid.replaceChildren();for(const s of data.samples){const x=trace(variant.value,s.index),card=document.createElement('article');card.className='mini';const cv=document.createElement('canvas');cv.width=cv.height=28;image(cv,x.pixels,false);card.append(cv);const pred=x.prediction==null?'':`<div class="${x.prediction===x.label?'correct':'wrong'}">prediction ${x.prediction??'none'}</div>`;card.insertAdjacentHTML('beforeend',`<strong>Digit ${x.label}</strong><div>${x.input_events_total} events</div>${pred}${spark(x.input_spikes,x.timesteps)}`);grid.append(card)}}
+// Embedded by render_html: the delivered explorer needs no server or libraries.
+const neuronLayer=document.getElementById('neuron-layer');
+const neuronId=document.getElementById('neuron-id');
+const neuronPoint=document.getElementById('neuron-point');
+let neuronSelection='';
+function stateChart(title, points, column, scale, unit, start, end, threshold, selected, stepwise=false){
+  const ns='http://www.w3.org/2000/svg', svg=document.createElementNS(ns,'svg');
+  svg.setAttribute('class','raster');svg.setAttribute('viewBox','0 0 900 205');
+  svg.setAttribute('role','img');svg.setAttribute('aria-label',title+' · '+unit);
+  const values=points.map(p=>p[column]/scale);
+  let low=Math.min(...values,threshold??Infinity),high=Math.max(...values,threshold??-Infinity);
+  const pad=Math.max((high-low)*.08,1/scale);low-=pad;high+=pad;
+  const x=t=>78+(t-start)*800/(end-start),y=v=>158-(v-low)*126/(high-low);
+  let html=`<text x="0" y="17" fill="${css('--fg')}">${title} · ${unit}</text>`;
+  const now=Number(time.value),left=Math.max(start,now),right=Math.min(end,now+1);
+  if(right>left)html+=`<rect x="${x(left)}" y="32" width="${x(right)-x(left)}" height="126" fill="${css('--spike')}" opacity=".08"/>`;
+  for(let i=0;i<=4;i++){
+    const v=low+(high-low)*i/4,t=start+(end-start)*i/4;
+    html+=`<line x1="78" x2="878" y1="${y(v)}" y2="${y(v)}" stroke="${css('--grid')}"/><text x="70" y="${y(v)+4}" text-anchor="end" font-size="11" fill="${css('--muted')}">${v.toFixed(2)}</text><text x="${x(t)}" y="179" text-anchor="middle" font-size="11" fill="${css('--muted')}">${Number(t.toFixed(3))}</text>`;
+  }
+  if(threshold!=null)html+=`<line x1="78" x2="878" y1="${y(threshold)}" y2="${y(threshold)}" stroke="${css('--hot')}" stroke-dasharray="5 4"/><text x="875" y="${y(threshold)-4}" text-anchor="end" font-size="11" fill="${css('--hot')}">threshold ${threshold}</text>`;
+  let path='';points.forEach((p,i)=>{const px=x(p[0]),py=y(p[column]/scale);path+=i?(stepwise?` H${px} V${py}`:` L${px},${py}`):`M${px},${py}`});
+  html+=`<path d="${path}" fill="none" stroke="${css('--spike')}" stroke-width="1.8"/>`;
+  for(const p of points){
+    const v=p[column]/scale;
+    html+=`<circle cx="${x(p[0])}" cy="${y(v)}" r="${p[4]?4:2}" fill="${css(p[4]?'--hot':'--spike')}"><title>time ${p[0]} · ${p[3]} · ${v} ${unit} · raw ${p[column]}${p[4]?' · spike':''}</title></circle>`;
+  }
+  if(selected&&selected[0]>=start&&selected[0]<=end)html+=`<line x1="${x(selected[0])}" x2="${x(selected[0])}" y1="32" y2="158" stroke="${css('--ok')}" stroke-dasharray="3 3"/>`;
+  html+='<text x="478" y="199" text-anchor="middle" font-size="11" fill="'+css('--muted')+'">Model time</text>';
+  svg.innerHTML=html;return svg;
+}
+const stateLoads=new Map();
+window.neuronStateReceive=(id,encoded)=>{
+  const pending=stateLoads.get(id);
+  if(pending){stateLoads.delete(id);pending.script.remove();pending.resolve(encoded)}
+};
+function loadRecordedState(file){
+  if(!/^state-[0-9]+\.js$/.test(file))return Promise.reject(new Error('Invalid state file'));
+  const id=file.slice(0,-3);
+  if(stateLoads.has(id))return stateLoads.get(id).promise;
+  const script=document.createElement('script');
+  let resolve,reject;
+  const promise=new Promise((ok,fail)=>{resolve=ok;reject=fail});
+  stateLoads.set(id,{promise,resolve,reject,script});
+  const fail=()=>{if(stateLoads.has(id)){stateLoads.delete(id);script.remove();reject(new Error('State file missing or invalid'))}};
+  script.onerror=fail;script.onload=fail;script.src='states/'+file;
+  document.head.append(script);return promise;
+}
+let stateRequest=0,stateCacheTrace=null,stateCache=null,statePending=null;
+async function renderNeuron(){
+  document.getElementById('export-neuron').disabled=true;
+  const request=++stateRequest,t=trace(variant.value,sample.value);
+  let layers=t?.neuron_states;
+  const charts=document.getElementById('neuron-charts'),note=document.getElementById('neuron-note'),value=document.getElementById('neuron-value');
+  if(t?.neuron_states_file||t?.neuron_states_gzip){
+    if(stateCacheTrace!==t){
+      stateCacheTrace=t;stateCache=null;
+      statePending=(async()=>{
+        const encoded=t.neuron_states_gzip||await loadRecordedState(t.neuron_states_file);
+        const bytes=Uint8Array.from(atob(encoded),c=>c.charCodeAt(0));
+        const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
+        return JSON.parse(await new Response(stream).text());
+      })();
+    }
+    charts.replaceChildren();value.textContent='';note.textContent='Loading neuron states…';
+    try{layers=stateCache||await statePending}catch(error){
+      if(request===stateRequest)note.textContent='Cannot load neuron states. Keep the entire explorer folder together and use a current browser supporting gzip DecompressionStream.';
+      return;
+    }
+    if(request!==stateRequest)return;
+    stateCache=layers;
+  }
+  charts.replaceChildren();value.textContent='';document.getElementById('neuron-controls').hidden=!layers;
+  if(!layers){note.textContent=`No recorded ${modelSelect.value} states are available for this parameter variant. Input activity is shown; choose another parameter variant. The accuracy comparison remains visible.`;return}
+  const layer=layers[neuronLayer.value];neuronId.max=layer.neurons.length-1;
+  const id=Math.max(0,Math.min(layer.neurons.length-1,Math.trunc(Number(neuronId.value)||0)));neuronId.value=id;
+  const start=0,end=t.timesteps;
+  const points=layer.neurons[id];
+  const key=[variant.value,modelSelect.value,sample.value,neuronLayer.value,id].join(':');
+  if(key!==neuronSelection){neuronPoint.value=0;neuronSelection=key}
+  neuronPoint.max=points.length-1;
+  const selected=points[Math.min(Number(neuronPoint.value),points.length-1)];
+  note.textContent=`${layer.model} · time in ${layer.time_unit}. `+(layer.model==='HH'?'Voltage sampled every 0.01 ms, relative to rest. Red points mark upward threshold crossings; the network emits at most one spike per update.':layer.model==='IZH'?'Voltage steps at 0.5 ms; recovery update and reset are ordered at the same end time. Red points mark emitted spikes.':'Discrete network updates; red points mark emitted spikes. Pre-reset and reset share the same time.')+' Lines connect measured samples; no smoothed or invented spike peaks. The shaded interval follows the timestep slider.';
+  value.textContent=`t=${selected[0]} ${layer.time_unit} · ${selected[3]} · V=${selected[1]/layer.scale} ${layer.voltage_unit} (raw ${selected[1]})`+(selected[2]==null?'':` · u=${selected[2]/layer.scale} (raw ${selected[2]})`)+(selected[4]?' · spike':'');
+  charts.append(stateChart('Membrane potential V',points,1,layer.scale,layer.voltage_unit,start,end,layer.threshold,selected,layer.model==='LIF'));
+  if(selected[2]!=null)charts.append(stateChart('Recovery u',points,2,layer.scale,'model units',start,end,null,selected,true));
+  const currents=layer.currents[id],currentPoints=[];
+  for(let i=start;i<end;i++)currentPoints.push([i,currents[i],null,'applied current',false]);
+  currentPoints.push([end,currents[end-1],null,'end',false]);
+  charts.append(stateChart('Synaptic current',currentPoints,1,1,layer.current_unit,start,end,null,selected,true));
+  document.getElementById('export-neuron').disabled=false;
+}
+[neuronLayer,neuronId,neuronPoint].forEach(e=>e.addEventListener('input',renderNeuron));
+
+const xml=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
+function exportContext(){
+  const t=trace(variant.value,sample.value),setting=data.series.find(s=>s.key===variant.value);
+  return [`Encoding: ${family.value} · parameter variant: ${setting.variant}`,
+    `Neuron model: ${modelSelect.value} · digit: ${t.label} · dataset sample #${t.sample_index}`,
+    `T=${t.timesteps} · selected timestep: ${time.value} · bit-exact software inference`];
+}
+function cellGrid(title,count,columns,active,pixels=null,palette=null){
+  const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+  const rows=Math.ceil(count/columns),cell=columns===1?28:10,left=columns===1?25:0;
+  svg.setAttribute('viewBox',`0 0 ${columns*cell+left} ${rows*cell}`);
+  svg.setAttribute('role','img');svg.setAttribute('aria-label',title);
+  const set=new Set(active||[]);let body='';
+  for(let n=0;n<count;n++){
+    const x=left+(n%columns)*cell,y=Math.floor(n/columns)*cell;
+    const color=pixels?(palette?palette(pixels[n]):`rgb(${pixels[n]},${pixels[n]},${pixels[n]})`):set.has(n)?css('--spike'):css('--bg');
+    body+=`<rect x="${x+.5}" y="${y+.5}" width="${cell-1}" height="${cell-1}" fill="${color}" stroke="${css('--grid')}" stroke-width=".4"><title>${pixels?'pixel':'neuron'} ${n}${pixels?` · intensity ${pixels[n]}`:active===null?' · no data':set.has(n)?' · spike':' · silent'}</title></rect>`;
+    if(columns===1)body+=`<text x="18" y="${y+19}" text-anchor="end" fill="${css('--fg')}" font-size="13">${n}</text>`;
+  }
+  svg.innerHTML=body;return svg;
+}
+function renderLayerActivity(t,now){
+  renderFrequency(t);
+  document.getElementById('activity-original').replaceChildren(cellGrid('Original image',t.input_neurons,28,[],t.pixels));
+  document.getElementById('activity-input').replaceChildren(cellGrid('Input spikes',t.input_neurons,28,t.input_spikes[now]));
+  for(const layer of ['hidden','output']){
+    const spikes=t[`${layer}_spikes`]?.[now],count=t[`${layer}_neurons`]||(layer==='hidden'?256:10);
+    const host=document.getElementById(`activity-${layer}`);
+    host.replaceChildren();
+    if(spikes)host.append(cellGrid(`${layer} spikes`,count,layer==='hidden'?16:1,spikes));
+    else {const p=document.createElement('p');p.textContent='No model activity available';host.append(p)}
+    document.getElementById(`${layer}-count`).textContent=spikes?`${spikes.length} spikes`:'';
+  }
+  document.getElementById('input-count').textContent=`${t.input_spikes[now].length} spikes`;
+  document.getElementById('activity-context').textContent=exportContext().join(' · ');
+  resizeOutputGrids();
+}
+function spikeCounts(spikes,count,T){
+  const counts=Array(count).fill(0);
+  for(const step of spikes.slice(0,T))for(const n of new Set(step))counts[n]++;
+  return counts;
+}
+let frequencyTrace=null,frequencyModel=null,frequencyViridis=true;
+const viridisRgb=[[68,1,84],[68,2,86],[69,4,87],[69,5,89],[70,7,90],[70,8,92],[70,10,93],[70,11,94],[71,13,96],[71,14,97],[71,16,99],[71,17,100],[71,19,101],[72,20,103],[72,22,104],[72,23,105],[72,24,106],[72,26,108],[72,27,109],[72,28,110],[72,29,111],[72,31,112],[72,32,113],[72,33,115],[72,35,116],[72,36,117],[72,37,118],[72,38,119],[72,40,120],[72,41,121],[71,42,122],[71,44,122],[71,45,123],[71,46,124],[71,47,125],[70,48,126],[70,50,126],[70,51,127],[70,52,128],[69,53,129],[69,55,129],[69,56,130],[68,57,131],[68,58,131],[68,59,132],[67,61,132],[67,62,133],[66,63,133],[66,64,134],[66,65,134],[65,66,135],[65,68,135],[64,69,136],[64,70,136],[63,71,136],[63,72,137],[62,73,137],[62,74,137],[62,76,138],[61,77,138],[61,78,138],[60,79,138],[60,80,139],[59,81,139],[59,82,139],[58,83,139],[58,84,140],[57,85,140],[57,86,140],[56,88,140],[56,89,140],[55,90,140],[55,91,141],[54,92,141],[54,93,141],[53,94,141],[53,95,141],[52,96,141],[52,97,141],[51,98,141],[51,99,141],[50,100,142],[50,101,142],[49,102,142],[49,103,142],[49,104,142],[48,105,142],[48,106,142],[47,107,142],[47,108,142],[46,109,142],[46,110,142],[46,111,142],[45,112,142],[45,113,142],[44,113,142],[44,114,142],[44,115,142],[43,116,142],[43,117,142],[42,118,142],[42,119,142],[42,120,142],[41,121,142],[41,122,142],[41,123,142],[40,124,142],[40,125,142],[39,126,142],[39,127,142],[39,128,142],[38,129,142],[38,130,142],[38,130,142],[37,131,142],[37,132,142],[37,133,142],[36,134,142],[36,135,142],[35,136,142],[35,137,142],[35,138,141],[34,139,141],[34,140,141],[34,141,141],[33,142,141],[33,143,141],[33,144,141],[33,145,140],[32,146,140],[32,146,140],[32,147,140],[31,148,140],[31,149,139],[31,150,139],[31,151,139],[31,152,139],[31,153,138],[31,154,138],[30,155,138],[30,156,137],[30,157,137],[31,158,137],[31,159,136],[31,160,136],[31,161,136],[31,161,135],[31,162,135],[32,163,134],[32,164,134],[33,165,133],[33,166,133],[34,167,133],[34,168,132],[35,169,131],[36,170,131],[37,171,130],[37,172,130],[38,173,129],[39,173,129],[40,174,128],[41,175,127],[42,176,127],[44,177,126],[45,178,125],[46,179,124],[47,180,124],[49,181,123],[50,182,122],[52,182,121],[53,183,121],[55,184,120],[56,185,119],[58,186,118],[59,187,117],[61,188,116],[63,188,115],[64,189,114],[66,190,113],[68,191,112],[70,192,111],[72,193,110],[74,193,109],[76,194,108],[78,195,107],[80,196,106],[82,197,105],[84,197,104],[86,198,103],[88,199,101],[90,200,100],[92,200,99],[94,201,98],[96,202,96],[99,203,95],[101,203,94],[103,204,92],[105,205,91],[108,205,90],[110,206,88],[112,207,87],[115,208,86],[117,208,84],[119,209,83],[122,209,81],[124,210,80],[127,211,78],[129,211,77],[132,212,75],[134,213,73],[137,213,72],[139,214,70],[142,214,69],[144,215,67],[147,215,65],[149,216,64],[152,216,62],[155,217,60],[157,217,59],[160,218,57],[162,218,55],[165,219,54],[168,219,52],[170,220,50],[173,220,48],[176,221,47],[178,221,45],[181,222,43],[184,222,41],[186,222,40],[189,223,38],[192,223,37],[194,223,35],[197,224,33],[200,224,32],[202,225,31],[205,225,29],[208,225,28],[210,226,27],[213,226,26],[216,226,25],[218,227,25],[221,227,24],[223,227,24],[226,228,24],[229,228,25],[231,228,25],[234,229,26],[236,229,27],[239,229,28],[241,229,29],[244,230,30],[246,230,32],[248,230,33],[251,231,35],[253,231,37]];
+const frequencyColor=v=>{const i=Math.max(0,Math.min(255,Math.round(v)));return frequencyViridis?`rgb(${viridisRgb[i].join(",")})`:`rgb(${i},${i},${i})`};
+const frequencyScaleNote=()=>frequencyViridis?'Viridis: dark purple = no spikes; yellow = a spike at every timestep. Scale: spike count / timesteps.':'Black = no spikes; white = a spike at every timestep. Scale: spike count / timesteps.';
+function renderFrequency(t){
+  if(frequencyTrace===t&&frequencyModel===modelSelect.value)return;
+  frequencyTrace=t;frequencyModel=modelSelect.value;
+  document.getElementById('frequency-original').replaceChildren(cellGrid('Original input image',t.input_neurons,28,[],t.pixels));
+  document.getElementById('frequency-context').textContent=exportContext().slice(0,2).concat(`All ${t.timesteps} timesteps | frequency = spike count / ${t.timesteps}`).join(' | ');
+  for(const layer of ['input','hidden','output']){
+    const host=document.getElementById(`frequency-${layer}`),spikes=t[`${layer}_spikes`];
+    host.replaceChildren();
+    if(!spikes){host.textContent='No model activity available';continue}
+    const count=t[`${layer}_neurons`],counts=spikeCounts(spikes,count,t.timesteps);
+    const svg=cellGrid(`${layer} spike frequency across ${t.timesteps} timesteps`,count,layer==='input'?28:layer==='hidden'?16:1,[],counts.map(n=>Math.round(255*n/t.timesteps)),frequencyColor);
+    svg.querySelectorAll('rect title').forEach((title,n)=>{title.textContent=`${layer==='output'?'class':'neuron'} ${n}: ${counts[n]}/${t.timesteps} timesteps (${(100*counts[n]/t.timesteps).toFixed(1)}%)`});
+    host.append(svg);
+  }
+  document.getElementById('frequency-legend').replaceChildren(frequencyLegend(t.timesteps));
+  document.getElementById('frequency-scale-note').textContent=frequencyScaleNote();
+  resizeOutputGrids();
+}
+function frequencyLegend(T){
+  const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+  svg.setAttribute('viewBox',`0 0 ${(T+1)*65} 52`);
+  svg.setAttribute('role','img');svg.setAttribute('aria-label',`Linear ${frequencyViridis?'Viridis':'grayscale'} legend: ${frequencyScaleNote()}`);
+  let body='';
+  for(let n=0;n<=T;n++){
+    const x=n*65,v=Math.round(255*n/T);
+    body+=`<rect x="${x}" y="1" width="30" height="22" fill="${frequencyColor(v)}" stroke="${css('--grid')}"/><text x="${x}" y="44" fill="${css('--fg')}" font-size="13">${n}/${T}</text>`;
+  }
+  svg.innerHTML=body;return svg;
+}
+function frequencySnapshot(){
+  const t=trace(variant.value,sample.value),width=1100,height=560;
+  let body=`<rect width="100%" height="100%" fill="${css('--panel')}"/><g fill="${css('--fg')}"><text x="24" y="32" font-size="22">Spike frequency - Entire inference</text>`;
+  exportContext().slice(0,2).concat(`All ${t.timesteps} timesteps | frequency = spike count / ${t.timesteps}`).forEach((line,i)=>{body+=`<text x="24" y="${65+i*25}" font-size="14">${xml(line)}</text>`});
+  body+='</g>';
+  ['original','input','hidden','output'].forEach((layer,i)=>{
+    const svg=document.getElementById(`frequency-${layer}`).children[0],x=24+i*270;
+    body+=`<text x="${x}" y="150" font-size="16" fill="${css('--fg')}">${layer==='original'?'Original image':layer}${layer==='original'||layer==='input'?' (28 x 28)':layer==='hidden'?' (16 x 16)':' (classes 0-9)'}</text>`;
+    if(svg)body+=`<svg x="${x}" y="165" width="${layer==='output'?47:245}" height="245" viewBox="${svg.getAttribute('viewBox')}">${svg.innerHTML}</svg>`;
+    else body+=`<text x="${x}" y="190" font-size="14" fill="${css('--fg')}">No model activity available</text>`;
+  });
+  const legend=frequencyLegend(t.timesteps);
+  body+=`<svg x="24" y="465" width="585" height="52" viewBox="${legend.getAttribute('viewBox')}">${legend.innerHTML}</svg><text x="24" y="542" font-size="14" fill="${css('--fg')}">${frequencyScaleNote()} Hidden IDs run row by row.</text>`;
+  return {svg:`<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" font-family="Arial, sans-serif">${body}</svg>`,width,height,filename:['frequency',variant.value,modelSelect.value,`digit${t.label}`,`sample${t.sample_index}`,'entire-inference'].join('_').replace(/[^a-zA-Z0-9_.-]/g,'-')+'.png'};
+}
+const frequencyToggle=document.getElementById('frequency-toggle');
+frequencyToggle.addEventListener('click',()=>{
+  frequencyViridis=!frequencyViridis;frequencyTrace=null;
+  frequencyToggle.textContent=frequencyViridis?'Use grayscale':'Use Viridis';
+  frequencyToggle.setAttribute('aria-pressed',String(frequencyViridis));
+  frequencyToggle.setAttribute('aria-label',frequencyViridis?'Viridis frequency color mode':'Grayscale frequency color mode');
+  renderFrequency(trace(variant.value,sample.value));
+});
+// Match the rendered square grid, including its responsive width and height cap.
+function resizeOutputGrids(){
+  for(const kind of ['activity','frequency']){
+    const reference=document.querySelector(`#${kind}-input svg`),output=document.querySelector(`#${kind}-output svg`);
+    if(reference&&output){output.style.height=`${reference.getBoundingClientRect().height}px`;output.style.width='auto';output.style.maxWidth='100%'}
+  }
+}
+const outputGridObserver=new ResizeObserver(resizeOutputGrids);
+for(const id of ['activity-input','frequency-input'])outputGridObserver.observe(document.getElementById(id));
+let playing=false,playTimer=null;
+const playButton=document.getElementById('play'),speed=document.getElementById('speed');
+function stopPlayback(){playing=false;clearTimeout(playTimer);playTimer=null;playButton.textContent='Play';playButton.setAttribute('aria-pressed','false')}
+function schedulePlayback(){
+  clearTimeout(playTimer);
+  if(!playing)return;
+  playTimer=setTimeout(async()=>{
+    time.value=(Number(time.value)+1)%(Number(time.max)+1);
+    try{await render()}finally{schedulePlayback()}
+  },1000/Number(speed.value));
+}
+playButton.addEventListener('click',()=>{
+  if(playing){stopPlayback();return}
+  playing=true;playButton.textContent='Pause';playButton.setAttribute('aria-pressed','true');schedulePlayback();
+});
+speed.addEventListener('input',()=>{document.getElementById('speed-label').textContent=`${speed.value} steps/s`;schedulePlayback()});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)stopPlayback()});
+
+// Render a fixed-resolution, self-contained SVG snapshot to PNG. All chart
+// colors are already explicit; no DOM screenshots or remote assets are used.
+function pngSnapshot(kind){
+  if(kind==='frequency')return frequencySnapshot();
+  const heading=kind==='neuron'?'Neuron state':'Input image · Layer activity',lines=exportContext();
+  if(kind==='neuron'){
+    lines.push(`Layer: ${neuronLayer.value} · neuron: ${neuronId.value} · view: entire inference`);
+    lines.push(document.getElementById('neuron-value').textContent);
+  }
+  const wrapped=lines.flatMap(line=>{const result=[];let rest=line;while(rest.length>115){let cut=rest.lastIndexOf(' ',115);if(cut<1)cut=115;result.push(rest.slice(0,cut));rest=rest.slice(cut).trimStart()}result.push(rest);return result});
+  const top=60+wrapped.length*25,width=1100;
+  let body=`<rect width="100%" height="100%" fill="${css('--panel')}"/><text x="24" y="32" font-size="22" fill="${css('--fg')}">${heading}</text>`;
+  wrapped.forEach((line,i)=>body+=`<text x="24" y="${62+i*25}" font-size="14" fill="${css('--fg')}">${xml(line)}</text>`);
+  let height;
+  if(kind==='neuron'){
+    const charts=[...document.getElementById('neuron-charts').children];
+    if(!charts.length)throw new Error('No neuron charts available');
+    charts.forEach((svg,i)=>body+=`<svg x="24" y="${top+i*240}" width="1052" height="240" viewBox="${svg.getAttribute('viewBox')}">${svg.innerHTML}</svg>`);
+    height=top+charts.length*240+30;
+  }else{
+    ['original','input','hidden','output'].forEach((layer,i)=>{
+      const svg=document.getElementById(`activity-${layer}`).children[0],x=24+i*270;
+      body+=`<text x="${x}" y="${top+10}" font-size="16" fill="${css('--fg')}">${layer}</text>`;
+      if(svg?.getAttribute('viewBox'))body+=`<svg x="${x}" y="${top+25}" width="${layer==='output'?60:245}" height="280" viewBox="${svg.getAttribute('viewBox')}">${svg.innerHTML}</svg>`;
+      else body+=`<text x="${x}" y="${top+60}" fill="${css('--fg')}" font-size="14">No model activity available</text>`;
+    });
+    height=top+355;
+    body+=`<text x="24" y="${height-15}" fill="${css('--fg')}" font-size="14">Colored cell = spike at selected timestep · hidden IDs row-major · output rows = classes 0–9</text>`;
+  }
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" font-family="Arial, sans-serif">${body}</svg>`;
+  const t=trace(variant.value,sample.value);
+  const name=[kind,family.value,variant.value,modelSelect.value,`digit${t.label}`,`sample${t.sample_index}`,`t${time.value}`];
+  if(kind==='neuron')name.push(neuronLayer.value,`neuron${neuronId.value}`,'entire-inference');
+  return {svg,width,height,filename:name.join('_').replace(/[^a-zA-Z0-9_.-]/g,'-')+'.png'};
+}
+async function downloadPng(kind){
+  const button=document.getElementById(`export-${kind}`);button.disabled=true;document.getElementById('export-status').textContent='';
+  const urls=[];
+  try{
+    const snapshot=pngSnapshot(kind),url=URL.createObjectURL(new Blob([snapshot.svg],{type:'image/svg+xml;charset=utf-8'}));urls.push(url);
+    const img=new Image();await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=()=>reject(new Error('PNG rendering failed'));img.src=url});
+    const canvas=document.createElement('canvas');canvas.width=snapshot.width*2;canvas.height=snapshot.height*2;
+    const ctx=canvas.getContext('2d');ctx.scale(2,2);ctx.drawImage(img,0,0);
+    const png=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));if(!png)throw new Error('PNG encoding failed');
+    const downloadUrl=URL.createObjectURL(png);urls.push(downloadUrl);
+    const a=document.createElement('a');a.href=downloadUrl;a.download=snapshot.filename;a.click();
+  }catch(error){document.getElementById('export-status').textContent=error.message}
+  finally{setTimeout(()=>urls.forEach(url=>URL.revokeObjectURL(url)),10000);button.disabled=kind==='neuron'&&!document.getElementById('neuron-charts').children.length}
+}
+document.getElementById('export-neuron').addEventListener('click',()=>downloadPng('neuron'));
+document.getElementById('export-activity').addEventListener('click',()=>downloadPng('activity'));
+
+document.getElementById('export-frequency').addEventListener('click',()=>downloadPng('frequency'));
+// Small offline GIF89a writer. A fixed palette and frequent dictionary clears
+// keep LZW codes at nine bits; no worker, CDN or external encoder is needed.
+function gifPalette(){
+  const p=[];
+  for(let i=0;i<128;i++)p.push(i*2,i*2,i*2);
+  for(let r=0;r<4;r++)for(let g=0;g<4;g++)for(let b=0;b<8;b++)p.push(r*85,g*85,Math.round(b*255/7));
+  return p;
+}
+function gifIndices(rgba){
+  const out=new Uint8Array(rgba.length/4);
+  for(let i=0;i<out.length;i++){
+    const r=rgba[i*4],g=rgba[i*4+1],b=rgba[i*4+2];
+    out[i]=Math.max(r,g,b)-Math.min(r,g,b)<6?Math.round((r+g+b)/6):
+      128+Math.round(r*3/255)*32+Math.round(g*3/255)*8+Math.round(b*7/255);
+    if(out[i]>127&&Math.max(r,g,b)-Math.min(r,g,b)<6)out[i]=127;
+  }
+  return out;
+}
+function encodeGif(width,height,frames,delay){
+  const chunks=[],header=[...new TextEncoder().encode('GIF89a')];
+  const word=(arr,v)=>arr.push(v&255,(v>>8)&255);
+  word(header,width);word(header,height);header.push(0xf7,0,0,...gifPalette());
+  header.push(0x21,0xff,11,...new TextEncoder().encode('NETSCAPE2.0'),3,1,0,0,0);
+  chunks.push(Uint8Array.from(header));
+  for(const frame of frames){
+    if(frame.length!==width*height)throw new Error('GIF frame dimensions differ');
+    const block=[0x21,0xf9,4,4];word(block,delay);block.push(0,0,0x2c,0,0,0,0);word(block,width);word(block,height);block.push(0,8);
+    const compressed=[];let bits=0,count=0;
+    const code=v=>{bits|=v<<count;count+=9;while(count>=8){compressed.push(bits&255);bits>>>=8;count-=8}};
+    for(let start=0;start<frame.length;start+=200){code(256);for(let i=start;i<Math.min(start+200,frame.length);i++)code(frame[i])}
+    code(257);if(count)compressed.push(bits&255);
+    chunks.push(Uint8Array.from(block));
+    for(let i=0;i<compressed.length;i+=255){const part=compressed.slice(i,i+255);chunks.push(Uint8Array.from([part.length,...part]))}
+    chunks.push(Uint8Array.of(0));
+  }
+  chunks.push(Uint8Array.of(0x3b));return chunks;
+}
+async function downloadGif(){
+  const button=document.getElementById('export-gif'),status=document.getElementById('export-status');
+  button.disabled=true;const previousTime=time.value,wasPlaying=playing;stopPlayback();
+  const delay=Math.max(1,Math.round(100/Number(speed.value))),snapshots=[];
+  try{
+    // Capture every SVG before awaiting: later UI changes cannot mix samples.
+    const t=trace(variant.value,sample.value);
+    for(let step=0;step<t.timesteps;step++){time.value=step;renderLayerActivity(t,step);snapshots.push(pngSnapshot('activity'))}
+  }catch(error){status.textContent=error.message;button.disabled=false;return}
+  finally{time.value=previousTime;renderLayerActivity(trace(variant.value,sample.value),Number(previousTime));if(wasPlaying){playing=true;playButton.textContent='Pause';playButton.setAttribute('aria-pressed','true');schedulePlayback()}}
+  try{
+    const width=snapshots[0].width,height=Math.max(...snapshots.map(s=>s.height)),frames=[];
+    const canvas=document.createElement('canvas');canvas.width=width;canvas.height=height;
+    const ctx=canvas.getContext('2d');
+    for(let i=0;i<snapshots.length;i++){
+      status.textContent=`Creating GIF · frame ${i+1}/${snapshots.length}`;
+      const url=URL.createObjectURL(new Blob([snapshots[i].svg],{type:'image/svg+xml;charset=utf-8'}));
+      try{
+        const img=new Image();await new Promise((resolve,reject)=>{img.onload=resolve;img.onerror=()=>reject(new Error('GIF frame rendering failed'));img.src=url});
+        ctx.fillStyle=css('--panel');ctx.fillRect(0,0,width,height);ctx.drawImage(img,0,0);
+        frames.push(gifIndices(ctx.getImageData(0,0,width,height).data));
+      }finally{URL.revokeObjectURL(url)}
+    }
+    const url=URL.createObjectURL(new Blob(encodeGif(width,height,frames,delay),{type:'image/gif'}));
+    const a=document.createElement('a');a.href=url;a.download=snapshots[0].filename.replace(/_t0\.png$/,`_loop_${delay*10}ms.gif`);a.click();
+    setTimeout(()=>URL.revokeObjectURL(url),10000);status.textContent=`GIF exported · ${frames.length} frames · ${delay*10} ms/frame · repeating`;
+  }catch(error){status.textContent=error.message}
+  finally{button.disabled=false}
+}
+document.getElementById('export-gif').addEventListener('click',downloadGif);
+
+const renderActivity=render;render=function(){renderActivity();document.getElementById('metrics').hidden=false;document.getElementById('neuron-panel').hidden=false;if(!document.getElementById('metrics-body').children.length)document.getElementById('metrics-note').textContent='No archived accuracy results for this parameter variant.';return renderNeuron()};
+family.addEventListener('input',()=>{variants();time.value=0;render()});[variant,modelSelect,sample,time].forEach(e=>e.addEventListener('input',render));render();
+</script></body></html>

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data: blob:; connect-src 'none'">
+<title>SNN · Training explorer</title>
+<style>
+:root{--ink:#142837;--muted:#5c6e7a;--line:#dce4e7;--blue:#215acf;--pale:#eef3fd;--bg:#f3f6f7;--white:#fff;--green:#237d63;--amber:#995e19;font-family:Inter,Segoe UI,system-ui,sans-serif;color:var(--ink);background:var(--bg)}*{box-sizing:border-box}body{margin:0;font-size:14px}button,input,select{font:inherit;color:inherit}button,select,input{border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:8px 10px}button{cursor:pointer}button:hover{border-color:var(--blue);background:var(--pale)}button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--focus);outline-offset:2px}button.primary{background:var(--blue);color:var(--primary-ink);border-color:var(--blue)}header{height:66px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;background:var(--surface);border-bottom:1px solid var(--line);gap:20px}.brand{display:flex;align-items:center;gap:12px;font-weight:650;letter-spacing:.02em}.brand svg{color:var(--blue)}.meta{font-size:12px;color:var(--muted);text-align:right}.layout{display:grid;grid-template-columns:240px minmax(0,1fr);min-height:calc(100vh - 66px)}aside{border-right:1px solid var(--line);padding:25px 20px;background:var(--sidebar)}aside h2{font-size:11px;text-transform:uppercase;letter-spacing:.13em;margin:0 0 18px;color:var(--muted)}.filter{display:block;margin:0 0 17px}.filter span{display:block;font-size:12px;font-weight:600;margin-bottom:7px}.filter select,.filter input{width:100%;min-width:0}.aside-note{font-size:12px;line-height:1.6;color:var(--muted);border-top:1px solid var(--line);padding-top:18px;margin-top:24px}.tag{display:inline-block;padding:3px 7px;background:var(--tag-bg);color:var(--muted);font-size:11px;border-radius:4px;white-space:nowrap}.tag.running{background:var(--running-bg);color:var(--green)}.tag.pending{background:var(--pending-bg);color:var(--amber)}main{padding:26px 30px;max-width:1800px;width:100%;margin:auto}h1{font-size:28px;letter-spacing:-.04em;margin:0 0 7px;font-weight:650}h2{font-size:16px;margin:0}h3{font-size:14px;margin:0}.sub{color:var(--muted);line-height:1.5;margin:0}.headline{display:flex;justify-content:space-between;align-items:center;gap:20px}.summary{display:flex;gap:28px;flex-wrap:wrap;margin:22px 0 18px}.summary strong{font-size:24px;display:block;font-weight:600;font-variant-numeric:tabular-nums}.summary span{font-size:11px;color:var(--muted)}.snapshot{padding:10px 13px;border:1px solid var(--snapshot-border);background:var(--snapshot-bg);border-radius:6px;font-size:12px;color:var(--snapshot-ink);line-height:1.5;margin:14px 0 20px}.tabs{display:flex;gap:22px;border-bottom:1px solid var(--line);margin:0 0 18px;overflow:auto}.tabs button{border:0;border-radius:0;padding:11px 0;background:none;color:var(--muted);white-space:nowrap}.tabs button.active{color:var(--blue);border-bottom:2px solid var(--blue);font-weight:650}.panel{background:var(--surface);border:1px solid var(--line);border-radius:9px;overflow:hidden}.panel-head{display:flex;align-items:center;justify-content:space-between;padding:16px 18px 8px;gap:10px}.panel-head select{font-size:12px;max-width:60%}.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.chart{height:285px;padding:2px 10px;position:relative}.chart svg{display:block;width:100%;height:100%;overflow:visible}.chart-note{font-size:11px;line-height:1.5;color:var(--muted);padding:0 18px 14px;min-height:30px}.plot-empty{display:grid;place-items:center;height:100%;text-align:center;padding:35px;color:var(--muted);font-size:13px}.legend{display:flex;flex-wrap:wrap;gap:7px;margin:14px 0}.legend button{display:flex;align-items:center;gap:7px;font-size:11px;padding:7px 9px;max-width:100%}.swatch{width:9px;height:9px;display:inline-block;border-radius:50%;flex:none}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:16px 0 12px}.toolbar .controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.toolbar label{font-size:12px;color:var(--muted)}.toolbar input{width:67px;padding:6px}.toolbar select,.toolbar button{font-size:12px;padding:7px 9px}.table-wrap{overflow:auto;max-height:380px}table{border-collapse:collapse;width:100%;font-size:12px;font-variant-numeric:tabular-nums}th{text-align:left;background:var(--table-head);color:var(--muted);font-weight:500;position:sticky;top:0;z-index:1;white-space:nowrap}td,th{padding:11px 12px;border-bottom:1px solid var(--row-line)}td.number{text-align:right}th.number{text-align:right}tr.selected{background:var(--selected)}tr:hover{background:var(--hover)}td .name{font-weight:600;margin-bottom:4px}td .small{font-size:10px;color:var(--muted)}td input{accent-color:var(--blue)}.table-title{padding:16px 18px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line)}.table-title span{font-size:12px;color:var(--muted)}.detail-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:14px}.spec{padding:18px}.spec h3{margin:0 0 4px}.spec p{font-size:12px;color:var(--muted);line-height:1.5}.spec dl{display:grid;grid-template-columns:1fr 1fr;font-size:12px;gap:0;margin:15px 0}.spec dt,.spec dd{margin:0;padding:7px 0;border-bottom:1px solid var(--detail-line)}.spec dt{color:var(--muted)}.spec dd{text-align:right;overflow-wrap:anywhere}.spec details{font-size:12px;margin-top:14px}.spec pre{font-size:10px;background:var(--code-bg);padding:12px;overflow:auto;max-height:250px}.source{font:11px/1.6 Consolas,monospace;color:var(--muted);overflow-wrap:anywhere}.hint{border-left:3px solid var(--hint-border);background:var(--hint-bg);padding:10px 12px;font-size:12px;line-height:1.5;margin:12px 0}.footnote{color:var(--muted);font-size:11px;line-height:1.6;margin:18px 0 0}#tooltip{position:fixed;z-index:100;pointer-events:none;display:none;background:var(--surface);color:var(--ink);border:1px solid var(--line);padding:12px 14px;border-radius:7px;font-size:11px;line-height:1.6;box-shadow:0 4px 16px #0003;max-width:410px}.status-text{font-size:12px;color:var(--muted)}.empty{text-align:center;color:var(--muted);padding:30px}.toast{min-height:16px;font-size:12px;color:var(--amber);margin-bottom:8px}[hidden]{display:none!important}.metric-key{font-size:11px;color:var(--muted);margin:8px 0 0}.section-space{margin-top:18px}
+@media(max-width:1150px){main{padding:22px 20px}.layout{grid-template-columns:210px minmax(0,1fr)}.chart-grid{grid-template-columns:1fr}.chart{height:290px}}
+@media(max-width:740px){header{padding:0 16px}.brand{font-size:12px}.meta{font-size:10px}.layout{display:block}aside{padding:16px;border-right:0;border-bottom:1px solid var(--line)}aside h2,.aside-note{display:none}.filters{display:grid;grid-template-columns:1fr 1fr;gap:10px}.filter{margin:0}.filter span{font-size:11px}.filter select,.filter input{font-size:12px}.headline{align-items:flex-start}h1{font-size:24px}.headline button{font-size:11px}.summary{gap:18px}.summary strong{font-size:20px}main{padding:20px 14px}.chart{height:255px}.tabs{gap:18px}.detail-grid{grid-template-columns:1fr}.panel-head{padding:14px 12px 5px}.panel-head h2{font-size:14px}.chart-note{padding:0 12px 12px}.table-wrap{max-height:350px}}
+
+:root {
+  color-scheme: light dark;
+  --surface: #ffffff;
+  --sidebar: #f9fbfc;
+  --tag-bg: #edf1f4;
+  --running-bg: #e2f4ed;
+  --pending-bg: #f7efdf;
+  --snapshot-border: #cbd9ee;
+  --snapshot-bg: #f0f5ff;
+  --snapshot-ink: #385477;
+  --table-head: #f7f9fa;
+  --row-line: #e9eef0;
+  --selected: #f1f5fd;
+  --hover: #f8faff;
+  --detail-line: #edf1f3;
+  --code-bg: #f5f7f9;
+  --hint-border: #abc0e6;
+  --hint-bg: #f5f8fe;
+  --focus: #83a7f4;
+  --primary-ink: #ffffff;
+  --axis: #5c6e7a;
+  --grid: #e5ebee;
+  --guide: #9babb5;
+  --series-1: #225fc5;
+  --series-2: #ce7028;
+  --series-3: #248276;
+  --series-4: #a151a0;
+  --series-5: #526987;
+  --series-6: #b64a58;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #e5edf5;
+    --muted: #a8b8c8;
+    --line: #3a4a5b;
+    --blue: #8ab4ff;
+    --pale: #243a55;
+    --bg: #101820;
+    --white: #18232f;
+    --surface: #18232f;
+    --sidebar: #141e29;
+    --green: #83d6b5;
+    --amber: #f0c279;
+    --tag-bg: #293746;
+    --running-bg: #1c3b32;
+    --pending-bg: #403522;
+    --snapshot-border: #385779;
+    --snapshot-bg: #1c2f45;
+    --snapshot-ink: #bed5f4;
+    --table-head: #1e2b39;
+    --row-line: #2e3e4e;
+    --selected: #253c58;
+    --hover: #223244;
+    --detail-line: #2e3e4e;
+    --code-bg: #111b25;
+    --hint-border: #6489b6;
+    --hint-bg: #1c2b3d;
+    --focus: #a6c8ff;
+    --primary-ink: #101820;
+    --axis: #a8b8c8;
+    --grid: #344555;
+    --guide: #a8b8c8;
+    --series-1: #8ab4ff;
+    --series-2: #f5ad66;
+    --series-3: #6dd5bf;
+    --series-4: #dc9fda;
+    --series-5: #b0bfd8;
+    --series-6: #f38e9c;
+  }
+}
+input::placeholder { color: var(--muted); opacity: 1; }
+tr.selected:hover { background: var(--selected); }
+</style></head><body>
+<header><div class="brand"><svg width="34" height="27" viewBox="0 0 34 27" fill="none" aria-hidden="true"><path d="M1 20h8l3-16 5 21 4-13 3 8h9" stroke="currentColor" stroke-width="2.3" stroke-linejoin="round"/></svg>SNN <span style="color:var(--muted);font-weight:400">/</span> TRAINING EXPLORER</div><div id="datestamp" class="meta"></div></header>
+<div class="layout"><aside><h2>Filter experiments</h2><div class="filters">
+<label class="filter"><span>Neuron pair</span><select id="dynamics"><option value="">All neurons</option></select></label>
+<label class="filter"><span>Encoding</span><select id="family"><option value="">All encodings</option></select></label>
+<label class="filter" hidden><span>Campaign</span><select id="campaign"><option value="">All campaigns</option></select></label>
+<label class="filter" hidden><span>Time steps T</span><select id="timesteps"><option value="">All horizons</option></select></label>
+<label class="filter" hidden><span>Training seed</span><select id="seed"><option value="">All seeds</option></select></label>
+<label class="filter" hidden><span>Training stage</span><select id="stage"><option value="">All stages</option><option>Final</option><option>Base</option><option>Readout</option></select></label>
+<label class="filter" hidden><span>Data status</span><select id="status"><option value="data">With learning curves</option><option value="">All, including planned</option><option value="complete">Completed</option><option value="running">Running</option><option value="pending">Planned</option></select></label>
+<label class="filter"><span>Search variant / job</span><input id="search" placeholder="e.g. scale 0.25" type="search"></label>
+<button id="resetFilters">Reset filters</button></div><p class="aside-note">66 fits: 22 encodings each for LIF, IZH and HH. Compare up to six histories. All fits: T = 8, seed 14.</p></aside>
+<main><div class="headline"><div><h1>Explore the training results.</h1><p class="sub">50 epochs · 22 encodings · LIF, IZH and HH.</p></div><button id="exportJson">Export selection as JSON</button></div>
+<div class="summary" id="summary"></div><div id="snapshot" class="snapshot"></div>
+<nav class="tabs" aria-label="Dashboard views"><button class="active" data-tab="curves">Learning curves</button><button data-tab="diagnostics">Diagnostics & timing</button><button hidden data-tab="seeds">Seed comparison</button><button data-tab="specs">Specs & sources</button></nav>
+<div class="toolbar"><div class="controls"><label>X-axis <select id="xmode"><option value="epoch">Epoch</option><option value="time">Cumulative epoch time (min)</option></select></label><label>From epoch <input id="epochMin" type="number" min="0" value="0"></label><label>To <input id="epochMax" type="number" min="1" placeholder="all"></label><button id="resetRange">Reset range</button></div><button id="clearSelection">Clear selection</button></div>
+<div id="legend" class="legend"></div><div id="message" class="toast" role="status" aria-live="polite"></div>
+<section data-view="curves"><div class="chart-grid">
+<div class="panel"><div class="panel-head"><h2>Accuracy</h2><select id="accuracyMetric" aria-label="Accuracy metric"><option value="both">Train & Validation</option><option value="valAcc">Validation only</option><option value="trainAcc">Train · Checkpoint</option><option value="onlineAcc">Train · during optimization</option></select></div><div id="accuracyChart" class="chart"></div><p class="chart-note">Solid: validation · dashed: training split at the checkpoint. Missing historical values remain blank.</p></div>
+<div class="panel"><div class="panel-head"><h2>Loss</h2><select id="lossMetric" aria-label="Loss metric"><option value="trainLoss">Training objective</option><option value="ce">Train & Validation · CE</option><option value="trainCe">Online training CE</option><option value="trainReg">Weighted regularization</option></select></div><div id="lossChart" class="chart"></div><p class="chart-note" id="lossNote"></p></div></div>
+<p class="metric-key">Circles: recorded epochs · larger circle: best checkpoint · triangles: LR reduction. Baseline = epoch 0.</p>
+<div class="panel section-space"><div class="table-title"><h2>Selected checkpoints</h2><span>Test shown as an endpoint, not a curve</span></div><div class="table-wrap" id="endpoints"></div></div></section>
+<section data-view="diagnostics" hidden><div class="chart-grid"><div class="panel"><div class="panel-head"><h2>Training diagnostics</h2><select id="diagnosticMetric" aria-label="Diagnostic metric"><option value="lr">Learning rate</option><option value="ties">Validation · Ties</option><option value="silent">Validation · no prediction</option><option value="hiddenSpikes">Hidden spikes / image</option><option value="outputSpikes">Output spikes / image</option><option value="grad0">Gradient norm · Layer 0</option><option value="grad1">Gradient norm · Layer 1</option><option value="changed0">INT8 changes · Layer 0</option><option value="changed1">INT8 changes · Layer 1</option><option value="lutClamps">HH · LUT-Clamps (Validation)</option></select></div><div id="diagnosticChart" class="chart"></div><p class="chart-note">Gradients: mean L2 norm before clipping. Weight changes are measured relative to the start of each stage.</p></div>
+<div class="panel"><div class="panel-head"><h2>Time per epoch</h2><select id="timeMetric" aria-label="Timing component"><option value="epochSeconds">Whole epoch</option><option value="trainSeconds">Training</option><option value="valSeconds">Validation</option><option value="trainEvalSeconds">Training-split evaluation</option><option value="saveSeconds">Checkpoint saving</option></select></div><div id="timeChart" class="chart"></div><p class="chart-note">Measured times only. Epoch time includes evaluations and checkpoints; baseline and final test evaluation are separate.</p></div></div><div id="hints" class="section-space"></div></section>
+<section data-view="seeds" hidden><div class="panel"><div class="table-title"><h2>Completed fits with matching configurations</h2><span>Filtered runs · mean ± sample SD</span></div><div class="table-wrap" style="max-height:600px" id="seedTable"></div></div><p class="footnote">Groups account for campaign, neurons, encoding parameters, T, stage, batch, LR, epoch budget, BPTT and regularization. Different seeds are not combined into a “best” seed curve. This is a descriptive overview, not a significance test. Variability cannot be estimated for a group with only one seed.</p></section>
+<section data-view="specs" hidden><div id="specs" class="detail-grid"></div></section>
+<div class="toolbar section-space"><div><h2>Experiment inventory</h2><span id="resultCount" class="status-text"></span></div><div class="controls"><select id="sort" aria-label="Sort order"><option value="validation">Best validation first</option><option value="recent">By variant name</option><option value="name">Neurons & encoding</option></select><button id="exportCsv">Export filtered table as CSV</button></div></div>
+<div class="panel"><div id="experiments" class="table-wrap"></div></div>
+<p class="footnote">¹ Time / epoch: arithmetic mean of measured epochs, including the first epoch. The data is a locally embedded snapshot. Update it by importing and rebuilding. Missing does not mean zero. Curves from different recipes support descriptive comparison but do not isolate neuron-model effects. Sources and original parameters for each fit are listed under “Specs & sources”.</p>
+</main></div><div id="tooltip" role="tooltip"></div><script id="dataset" type="application/json">__DATA__</script><script>__SCRIPT__</script></body></html>

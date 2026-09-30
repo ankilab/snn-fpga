@@ -1,0 +1,61 @@
+"""Bit-accurate reference model for the two-layer RTL SNN."""
+
+from .model import (
+    InferenceResult,
+    IzhikevichConfig,
+    NeuronModel,
+    NumericConfig,
+    SNNConfig,
+    SpikeEvent,
+    TimestepTrace,
+    TwoLayerSNN,
+    signed_wrap,
+    unsigned_wrap,
+)
+from .hodgkin_huxley import (
+    HodgkinHuxleyConfig,
+    HodgkinHuxleyState,
+    HodgkinHuxleyTrace,
+    derivatives as hodgkin_huxley_derivatives,
+    rate_constants as hodgkin_huxley_rate_constants,
+    resting_state as hodgkin_huxley_resting_state,
+    rk4_step as hodgkin_huxley_rk4_step,
+    simulate as simulate_hodgkin_huxley,
+)
+from .hodgkin_huxley_fixed import (
+    HodgkinHuxleyFixedConfig,
+    HodgkinHuxleyFixedNeuron,
+    HodgkinHuxleyFixedResult,
+    HodgkinHuxleyFixedState,
+    build_rate_tables,
+    dequantize_state,
+    quantize_state,
+)
+
+__all__ = [
+    "InferenceResult",
+    "IzhikevichConfig",
+    "NeuronModel",
+    "NumericConfig",
+    "SNNConfig",
+    "SpikeEvent",
+    "TimestepTrace",
+    "TwoLayerSNN",
+    "signed_wrap",
+    "unsigned_wrap",
+    "HodgkinHuxleyConfig",
+    "HodgkinHuxleyFixedConfig",
+    "HodgkinHuxleyFixedNeuron",
+    "HodgkinHuxleyFixedResult",
+    "HodgkinHuxleyFixedState",
+    "HodgkinHuxleyState",
+    "HodgkinHuxleyTrace",
+    "hodgkin_huxley_derivatives",
+    "hodgkin_huxley_rate_constants",
+    "hodgkin_huxley_resting_state",
+    "hodgkin_huxley_rk4_step",
+    "simulate_hodgkin_huxley",
+    "build_rate_tables",
+    "dequantize_state",
+    "quantize_state",
+]

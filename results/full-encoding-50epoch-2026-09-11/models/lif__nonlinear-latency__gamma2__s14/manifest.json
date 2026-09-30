@@ -1,0 +1,4762 @@
+{
+  "encoding": {
+    "event_order": "timestamp-then-neuron-id",
+    "events_per_image": 784,
+    "latency_gamma": 2.0,
+    "lookup_table_policy": "canonical-u8-host-lut-v1",
+    "pixel_range": [
+      0,
+      255
+    ],
+    "timestamp_formula": "floor((1 - (pixel / 255) ** latency_gamma) * (timesteps - 1))",
+    "timesteps": 8,
+    "type": "nonlinear-latency-v1"
+  },
+  "format": "snn-int8-v2",
+  "metadata": {
+    "training": {
+      "batch_size": 128,
+      "best_epoch": 35,
+      "best_validation_accuracy": 0.9686,
+      "bptt_window": 0,
+      "changed_int8_weights": {
+        "layer0": 197694,
+        "layer1": 2530
+      },
+      "completed_training_epochs": 50,
+      "early_stopping_patience": 0,
+      "encoding_parameters": {
+        "burst_interval": 1,
+        "burst_max_spikes": 4,
+        "encoding_threshold": 0,
+        "latency_gamma": 2.0,
+        "rate_scale": 1.0,
+        "top_k": 128
+      },
+      "epoch_checkpoint": "/historical-workspace/snn_full_encoding_50epoch/runs/20260911-s14/models/lif__nonlinear-latency__gamma2__s14/checkpoint.pt",
+      "epochs": 50,
+      "epochs_completed": 51,
+      "final_test": {
+        "accuracy": 0.9599,
+        "cross_entropy": 0.156474572044611,
+        "hidden_spikes_per_image": 262.99,
+        "no_prediction_rate": 0.0,
+        "output_spikes_per_image": 7.4478,
+        "samples": 10000,
+        "tie_rate": 0.0186
+      },
+      "final_test_accuracy": 0.9599,
+      "final_test_no_prediction_rate": 0.0,
+      "freeze_readout_epochs": 0,
+      "gradient_clip_norm": 1.0,
+      "hh_backend": "eager",
+      "hh_checkpoint_interval": 10,
+      "hh_internal_steps": 100,
+      "hh_surrogate_width_mv": 5.0,
+      "history": [
+        {
+          "baseline_wall_seconds": 5.989826997043565,
+          "best_checkpoint": true,
+          "epoch": 0,
+          "phase": "baseline",
+          "train_evaluation": {
+            "accuracy": 0.08436363636363636,
+            "cross_entropy": 2.556867850008878,
+            "hidden_spikes_per_image": 181.17614545454546,
+            "no_prediction_rate": 0.004072727272727273,
+            "output_spikes_per_image": 4.002836363636364,
+            "samples": 55000,
+            "tie_rate": 0.5736545454545454
+          },
+          "validation": {
+            "accuracy": 0.0792,
+            "cross_entropy": 2.5710050422668456,
+            "hidden_spikes_per_image": 181.7022,
+            "no_prediction_rate": 0.0042,
+            "output_spikes_per_image": 4.0898,
+            "samples": 5000,
+            "tie_rate": 0.58
+          }
+        },
+        {
+          "best_checkpoint": true,
+          "checkpoint_seconds": 0.004246422089636326,
+          "cumulative_epoch_wall_seconds": 13.903941815020517,
+          "epoch": 1,
+          "epoch_finished_utc": "2026-09-13T19:40:43.119920+00:00",
+          "epoch_started_utc": "2026-09-13T19:40:29.215977+00:00",
+          "epoch_wall_seconds": 13.903941815020517,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.010455274449840903,
+              "mean_abs": 1.3063723166390554e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.006526019305402696,
+              "mean_abs": 8.99605743375845e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0013444767441860466
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.010455274449840903,
+              "mean_abs": 1.3063723166390554e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.006526019305402696,
+              "mean_abs": 8.99605743375845e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0013444767441860466
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 1.5982197523117065,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.7427090909090909,
+          "train_cross_entropy": 0.9560163955861872,
+          "train_evaluation": {
+            "accuracy": 0.8422727272727273,
+            "cross_entropy": 0.6658777399930087,
+            "hidden_spikes_per_image": 201.13596363636364,
+            "no_prediction_rate": 0.0001818181818181818,
+            "output_spikes_per_image": 5.586436363636364,
+            "samples": 55000,
+            "tie_rate": 0.13372727272727272
+          },
+          "train_evaluation_seconds": 5.082097549922764,
+          "train_loss": 0.9560163955861872,
+          "train_regularization": 0.8304628433400935,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 8.340737689984962,
+          "validation": {
+            "accuracy": 0.8766,
+            "cross_entropy": 0.5866982614040375,
+            "hidden_spikes_per_image": 203.103,
+            "no_prediction_rate": 0.0004,
+            "output_spikes_per_image": 5.6344,
+            "samples": 5000,
+            "tie_rate": 0.1088
+          },
+          "validation_accuracy": 0.8766,
+          "validation_seconds": 0.4762755730189383,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 0,
+              "at_int8_min": 0,
+              "changed_from_initial": 186419
+            },
+            "layer1": {
+              "at_int8_max": 0,
+              "at_int8_min": 0,
+              "changed_from_initial": 2354
+            }
+          }
+        },
+        {
+          "best_checkpoint": true,
+          "checkpoint_seconds": 0.004073892021551728,
+          "cumulative_epoch_wall_seconds": 27.38111666799523,
+          "epoch": 2,
+          "epoch_finished_utc": "2026-09-13T19:40:56.597380+00:00",
+          "epoch_started_utc": "2026-09-13T19:40:43.120203+00:00",
+          "epoch_wall_seconds": 13.477174852974713,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.007025660527301456,
+              "mean_abs": 8.30478481402489e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.004341049087663828,
+              "mean_abs": 5.582889477684444e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.007025660527301456,
+              "mean_abs": 8.30478481402489e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.004341049087663828,
+              "mean_abs": 5.582889477684444e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 3.2596962451934814,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.854909090909091,
+          "train_cross_entropy": 0.6017158566908403,
+          "train_evaluation": {
+            "accuracy": 0.8716727272727273,
+            "cross_entropy": 0.5410998705777255,
+            "hidden_spikes_per_image": 209.99674545454545,
+            "no_prediction_rate": 0.00016363636363636363,
+            "output_spikes_per_image": 5.727709090909091,
+            "samples": 55000,
+            "tie_rate": 0.09898181818181818
+          },
+          "train_evaluation_seconds": 5.084753960836679,
+          "train_loss": 0.6017158566908403,
+          "train_regularization": 2.408104718017578,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 7.918519039871171,
+          "validation": {
+            "accuracy": 0.8966,
+            "cross_entropy": 0.46771160860061645,
+            "hidden_spikes_per_image": 212.9064,
+            "no_prediction_rate": 0.0004,
+            "output_spikes_per_image": 5.766,
+            "samples": 5000,
+            "tie_rate": 0.085
+          },
+          "validation_accuracy": 0.8966,
+          "validation_seconds": 0.4693696601316333,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 0,
+              "at_int8_min": 0,
+              "changed_from_initial": 190662
+            },
+            "layer1": {
+              "at_int8_max": 0,
+              "at_int8_min": 0,
+              "changed_from_initial": 2453
+            }
+          }
+        },
+        {
+          "best_checkpoint": true,
+          "checkpoint_seconds": 0.004661372164264321,
+          "cumulative_epoch_wall_seconds": 41.18042648117989,
+          "epoch": 3,
+          "epoch_finished_utc": "2026-09-13T19:41:10.396952+00:00",
+          "epoch_started_utc": "2026-09-13T19:40:56.597641+00:00",
+          "epoch_wall_seconds": 13.799309813184664,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.006126231721860675,
+              "mean_abs": 7.069454791444682e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.003772732831104746,
+              "mean_abs": 4.6026571904211627e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 9.084302325581395e-06
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.006126231721860675,
+              "mean_abs": 7.069454791444682e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.003772732831104746,
+              "mean_abs": 4.6026571904211627e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 9.084302325581395e-06
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 5.090701103210449,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.8761454545454546,
+          "train_cross_entropy": 0.5068908386403864,
+          "train_evaluation": {
+            "accuracy": 0.8880545454545454,
+            "cross_entropy": 0.46852150566794654,
+            "hidden_spikes_per_image": 213.38690909090909,
+            "no_prediction_rate": 0.00010909090909090909,
+            "output_spikes_per_image": 6.152854545454545,
+            "samples": 55000,
+            "tie_rate": 0.08247272727272727
+          },
+          "train_evaluation_seconds": 5.285534073133022,
+          "train_loss": 0.5068908386403864,
+          "train_regularization": 4.144853243741122,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 8.04155582911335,
+          "validation": {
+            "accuracy": 0.9068,
+            "cross_entropy": 0.40433393507003784,
+            "hidden_spikes_per_image": 216.8354,
+            "no_prediction_rate": 0.0002,
+            "output_spikes_per_image": 6.134,
+            "samples": 5000,
+            "tie_rate": 0.065
+          },
+          "validation_accuracy": 0.9068,
+          "validation_seconds": 0.46686954889446497,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 0,
+              "at_int8_min": 0,
+              "changed_from_initial": 192309
+            },
+            "layer1": {
+              "at_int8_max": 0,
+              "at_int8_min": 0,
+              "changed_from_initial": 2457
+            }
+          }
+        },
+        {
+          "best_checkpoint": true,
+          "checkpoint_seconds": 0.005101251881569624,
+          "cumulative_epoch_wall_seconds": 54.89169796812348,
+          "epoch": 4,
+          "epoch_finished_utc": "2026-09-13T19:41:24.108505+00:00",
+          "epoch_started_utc": "2026-09-13T19:41:10.397233+00:00",
+          "epoch_wall_seconds": 13.711271486943588,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.00561877850099622,
+              "mean_abs": 6.314091869990382e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 1.1587120313241575e-08
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0034563136732176426,
+              "mean_abs": 4.0472763229085694e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.00561877850099622,
+              "mean_abs": 6.314091869990382e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 1.1587120313241575e-08
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0034563136732176426,
+              "mean_abs": 4.0472763229085694e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 6.972899436950684,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.8916545454545455,
+          "train_cross_entropy": 0.4427839787006378,
+          "train_evaluation": {
+            "accuracy": 0.8987090909090909,
+            "cross_entropy": 0.41209431024031207,
+            "hidden_spikes_per_image": 218.55872727272728,
+            "no_prediction_rate": 1.8181818181818182e-05,
+            "output_spikes_per_image": 6.356127272727273,
+            "samples": 55000,
+            "tie_rate": 0.0696909090909091
+          },
+          "train_evaluation_seconds": 5.090059612877667,
+          "train_loss": 0.4427839787006378,
+          "train_regularization": 5.9808183265686035,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 8.146335871890187,
+          "validation": {
+            "accuracy": 0.916,
+            "cross_entropy": 0.36003393235206604,
+            "hidden_spikes_per_image": 222.3048,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 6.2986,
+            "samples": 5000,
+            "tie_rate": 0.0584
+          },
+          "validation_accuracy": 0.916,
+          "validation_seconds": 0.4693087302148342,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 0,
+              "at_int8_min": 0,
+              "changed_from_initial": 193215
+            },
+            "layer1": {
+              "at_int8_max": 0,
+              "at_int8_min": 0,
+              "changed_from_initial": 2480
+            }
+          }
+        },
+        {
+          "best_checkpoint": true,
+          "checkpoint_seconds": 0.004165651043877006,
+          "cumulative_epoch_wall_seconds": 68.45213560410775,
+          "epoch": 5,
+          "epoch_finished_utc": "2026-09-13T19:41:37.669238+00:00",
+          "epoch_started_utc": "2026-09-13T19:41:24.108799+00:00",
+          "epoch_wall_seconds": 13.560437635984272,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0052094995156327355,
+              "mean_abs": 5.747358329942442e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 2.317424062648315e-08
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0032472944265869203,
+              "mean_abs": 3.662706661744715e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 9.084302325581395e-06
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0052094995156327355,
+              "mean_abs": 5.747358329942442e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 2.317424062648315e-08
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0032472944265869203,
+              "mean_abs": 3.662706661744715e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 9.084302325581395e-06
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 8.849955558776855,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9026909090909091,
+          "train_cross_entropy": 0.39495036418221213,
+          "train_evaluation": {
+            "accuracy": 0.9073636363636364,
+            "cross_entropy": 0.37240739794644445,
+            "hidden_spikes_per_image": 221.70756363636363,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 6.451018181818182,
+            "samples": 55000,
+            "tie_rate": 0.05956363636363636
+          },
+          "train_evaluation_seconds": 5.146524565992877,
+          "train_loss": 0.39495036418221213,
+          "train_regularization": 7.832899407681552,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 7.919788769911975,
+          "validation": {
+            "accuracy": 0.923,
+            "cross_entropy": 0.32201253629922866,
+            "hidden_spikes_per_image": 225.733,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 6.3756,
+            "samples": 5000,
+            "tie_rate": 0.0516
+          },
+          "validation_accuracy": 0.923,
+          "validation_seconds": 0.489472019020468,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 0,
+              "at_int8_min": 0,
+              "changed_from_initial": 193926
+            },
+            "layer1": {
+              "at_int8_max": 0,
+              "at_int8_min": 0,
+              "changed_from_initial": 2494
+            }
+          }
+        },
+        {
+          "best_checkpoint": true,
+          "checkpoint_seconds": 0.0042541720904409885,
+          "cumulative_epoch_wall_seconds": 81.91355205024593,
+          "epoch": 6,
+          "epoch_finished_utc": "2026-09-13T19:41:51.130911+00:00",
+          "epoch_started_utc": "2026-09-13T19:41:37.669493+00:00",
+          "epoch_wall_seconds": 13.461416446138173,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.004895880909423179,
+              "mean_abs": 5.2966674369652445e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0030645960844762946,
+              "mean_abs": 3.372081543919955e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.004895880909423179,
+              "mean_abs": 5.2966674369652445e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0030645960844762946,
+              "mean_abs": 3.372081543919955e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 10.722505569458008,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9112363636363636,
+          "train_cross_entropy": 0.357243762254715,
+          "train_evaluation": {
+            "accuracy": 0.9157636363636363,
+            "cross_entropy": 0.3382924384030429,
+            "hidden_spikes_per_image": 224.7845090909091,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 6.5467818181818185,
+            "samples": 55000,
+            "tie_rate": 0.05261818181818182
+          },
+          "train_evaluation_seconds": 5.078531959094107,
+          "train_loss": 0.357243762254715,
+          "train_regularization": 9.757659674904563,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 7.911729836137965,
+          "validation": {
+            "accuracy": 0.9308,
+            "cross_entropy": 0.2976009195804596,
+            "hidden_spikes_per_image": 228.863,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 6.4494,
+            "samples": 5000,
+            "tie_rate": 0.0424
+          },
+          "validation_accuracy": 0.9308,
+          "validation_seconds": 0.46644403878599405,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 0,
+              "at_int8_min": 0,
+              "changed_from_initial": 194253
+            },
+            "layer1": {
+              "at_int8_max": 0,
+              "at_int8_min": 0,
+              "changed_from_initial": 2485
+            }
+          }
+        },
+        {
+          "best_checkpoint": true,
+          "checkpoint_seconds": 0.00440473179332912,
+          "cumulative_epoch_wall_seconds": 95.70829257112928,
+          "epoch": 7,
+          "epoch_finished_utc": "2026-09-13T19:42:04.925905+00:00",
+          "epoch_started_utc": "2026-09-13T19:41:51.131163+00:00",
+          "epoch_wall_seconds": 13.794740520883352,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.004672873973378129,
+              "mean_abs": 4.959951904680806e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 1.1587120313241575e-08
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0028896284043220754,
+              "mean_abs": 3.119248736089334e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 9.084302325581395e-06
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.004672873973378129,
+              "mean_abs": 4.959951904680806e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 1.1587120313241575e-08
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0028896284043220754,
+              "mean_abs": 3.119248736089334e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 9.084302325581395e-06
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 12.635117530822754,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9188363636363637,
+          "train_cross_entropy": 0.3277374405774203,
+          "train_evaluation": {
+            "accuracy": 0.9236181818181818,
+            "cross_entropy": 0.3095588504097678,
+            "hidden_spikes_per_image": 227.49412727272727,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 6.6787636363636365,
+            "samples": 55000,
+            "tie_rate": 0.04816363636363637
+          },
+          "train_evaluation_seconds": 5.252565158996731,
+          "train_loss": 0.3277374405774203,
+          "train_regularization": 11.663968767478249,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 8.069827270926908,
+          "validation": {
+            "accuracy": 0.9368,
+            "cross_entropy": 0.2720664139032364,
+            "hidden_spikes_per_image": 231.586,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 6.5794,
+            "samples": 5000,
+            "tie_rate": 0.0412
+          },
+          "validation_accuracy": 0.9368,
+          "validation_seconds": 0.4673652390483767,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 0,
+              "at_int8_min": 0,
+              "changed_from_initial": 194627
+            },
+            "layer1": {
+              "at_int8_max": 0,
+              "at_int8_min": 0,
+              "changed_from_initial": 2501
+            }
+          }
+        },
+        {
+          "best_checkpoint": true,
+          "checkpoint_seconds": 0.004398031858727336,
+          "cumulative_epoch_wall_seconds": 109.55630244407803,
+          "epoch": 8,
+          "epoch_finished_utc": "2026-09-13T19:42:18.774172+00:00",
+          "epoch_started_utc": "2026-09-13T19:42:04.926161+00:00",
+          "epoch_wall_seconds": 13.84800987294875,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.004440214411113743,
+              "mean_abs": 4.646824159529935e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0027669659189970834,
+              "mean_abs": 2.9285252767717898e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0003379360465116279
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.004440214411113743,
+              "mean_abs": 4.646824159529935e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0027669659189970834,
+              "mean_abs": 2.9285252767717898e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0003379360465116279
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 14.388814926147461,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9245454545454546,
+          "train_cross_entropy": 0.30324624322544447,
+          "train_evaluation": {
+            "accuracy": 0.9303636363636364,
+            "cross_entropy": 0.28486058481389825,
+            "hidden_spikes_per_image": 231.6016909090909,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 6.606709090909091,
+            "samples": 55000,
+            "tie_rate": 0.04216363636363636
+          },
+          "train_evaluation_seconds": 5.330028321128339,
+          "train_loss": 0.30324624322544447,
+          "train_regularization": 13.544019267689098,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 8.045067210914567,
+          "validation": {
+            "accuracy": 0.9388,
+            "cross_entropy": 0.2552588608264923,
+            "hidden_spikes_per_image": 235.6688,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 6.494,
+            "samples": 5000,
+            "tie_rate": 0.0356
+          },
+          "validation_accuracy": 0.9388,
+          "validation_seconds": 0.4679269790649414,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 0,
+              "at_int8_min": 0,
+              "changed_from_initial": 194909
+            },
+            "layer1": {
+              "at_int8_max": 0,
+              "at_int8_min": 1,
+              "changed_from_initial": 2499
+            }
+          }
+        },
+        {
+          "best_checkpoint": true,
+          "checkpoint_seconds": 0.004389271838590503,
+          "cumulative_epoch_wall_seconds": 123.15869663702324,
+          "epoch": 9,
+          "epoch_finished_utc": "2026-09-13T19:42:32.376832+00:00",
+          "epoch_started_utc": "2026-09-13T19:42:18.774436+00:00",
+          "epoch_wall_seconds": 13.602394192945212,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0042518986683745905,
+              "mean_abs": 4.37963080178784e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 1.1587120313241575e-08
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.002676503404617921,
+              "mean_abs": 2.7812820294774463e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0004087936046511628
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0042518986683745905,
+              "mean_abs": 4.37963080178784e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 1.1587120313241575e-08
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.002676503404617921,
+              "mean_abs": 2.7812820294774463e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0004087936046511628
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 16.488494873046875,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9301818181818182,
+          "train_cross_entropy": 0.28140165729956196,
+          "train_evaluation": {
+            "accuracy": 0.9340727272727273,
+            "cross_entropy": 0.26721157150268554,
+            "hidden_spikes_per_image": 232.62723636363637,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 6.766854545454545,
+            "samples": 55000,
+            "tie_rate": 0.04012727272727273
+          },
+          "train_evaluation_seconds": 5.088091612095013,
+          "train_loss": 0.28140165729956196,
+          "train_regularization": 15.484350827858664,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 8.041894688969478,
+          "validation": {
+            "accuracy": 0.939,
+            "cross_entropy": 0.24697234424352646,
+            "hidden_spikes_per_image": 236.5968,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 6.6308,
+            "samples": 5000,
+            "tie_rate": 0.0318
+          },
+          "validation_accuracy": 0.939,
+          "validation_seconds": 0.46756690996699035,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 0,
+              "at_int8_min": 0,
+              "changed_from_initial": 195216
+            },
+            "layer1": {
+              "at_int8_max": 0,
+              "at_int8_min": 1,
+              "changed_from_initial": 2500
+            }
+          }
+        },
+        {
+          "best_checkpoint": true,
+          "checkpoint_seconds": 0.004366521956399083,
+          "cumulative_epoch_wall_seconds": 136.62423397484235,
+          "epoch": 10,
+          "epoch_finished_utc": "2026-09-13T19:42:45.842633+00:00",
+          "epoch_started_utc": "2026-09-13T19:42:32.377095+00:00",
+          "epoch_wall_seconds": 13.465537337819114,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.004068803460065221,
+              "mean_abs": 4.127686690919475e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 2.317424062648315e-08
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.002533943547848305,
+              "mean_abs": 2.610360426208286e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0007676235465116279
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.004068803460065221,
+              "mean_abs": 4.127686690919475e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 2.317424062648315e-08
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.002533943547848305,
+              "mean_abs": 2.610360426208286e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0007676235465116279
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 18.469287872314453,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.934509090909091,
+          "train_cross_entropy": 0.26289707916216415,
+          "train_evaluation": {
+            "accuracy": 0.9371454545454545,
+            "cross_entropy": 0.24759973662983287,
+            "hidden_spikes_per_image": 235.28294545454546,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.001363636363636,
+            "samples": 55000,
+            "tie_rate": 0.03710909090909091
+          },
+          "train_evaluation_seconds": 5.078471508109942,
+          "train_loss": 0.26289707916216415,
+          "train_regularization": 17.437384378884055,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 7.9155500079505146,
+          "validation": {
+            "accuracy": 0.9418,
+            "cross_entropy": 0.2303550797700882,
+            "hidden_spikes_per_image": 239.2594,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 6.8616,
+            "samples": 5000,
+            "tie_rate": 0.0316
+          },
+          "validation_accuracy": 0.9418,
+          "validation_seconds": 0.4667035099118948,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 0,
+              "at_int8_min": 0,
+              "changed_from_initial": 195396
+            },
+            "layer1": {
+              "at_int8_max": 0,
+              "at_int8_min": 2,
+              "changed_from_initial": 2502
+            }
+          }
+        },
+        {
+          "best_checkpoint": true,
+          "checkpoint_seconds": 0.00446450081653893,
+          "cumulative_epoch_wall_seconds": 150.3281474087853,
+          "epoch": 11,
+          "epoch_finished_utc": "2026-09-13T19:42:59.546811+00:00",
+          "epoch_started_utc": "2026-09-13T19:42:45.842896+00:00",
+          "epoch_wall_seconds": 13.703913433942944,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.003914770313483373,
+              "mean_abs": 3.918534513136043e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0024193704793737734,
+              "mean_abs": 2.456672505210262e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0008484738372093023
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.003914770313483373,
+              "mean_abs": 3.918534513136043e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0024193704793737734,
+              "mean_abs": 2.456672505210262e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0008484738372093023
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 20.072574615478516,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9379090909090909,
+          "train_cross_entropy": 0.2456607333508405,
+          "train_evaluation": {
+            "accuracy": 0.9422181818181818,
+            "cross_entropy": 0.23154013942371715,
+            "hidden_spikes_per_image": 236.97570909090908,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 6.910509090909091,
+            "samples": 55000,
+            "tie_rate": 0.03494545454545454
+          },
+          "train_evaluation_seconds": 5.079190988093615,
+          "train_loss": 0.2456607333508405,
+          "train_regularization": 19.298048249400747,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 8.153115984983742,
+          "validation": {
+            "accuracy": 0.9434,
+            "cross_entropy": 0.22656147408485414,
+            "hidden_spikes_per_image": 240.9422,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 6.7638,
+            "samples": 5000,
+            "tie_rate": 0.0296
+          },
+          "validation_accuracy": 0.9434,
+          "validation_seconds": 0.46669173892587423,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 0,
+              "at_int8_min": 0,
+              "changed_from_initial": 195541
+            },
+            "layer1": {
+              "at_int8_max": 0,
+              "at_int8_min": 3,
+              "changed_from_initial": 2514
+            }
+          }
+        },
+        {
+          "best_checkpoint": true,
+          "checkpoint_seconds": 0.008809074060991406,
+          "cumulative_epoch_wall_seconds": 164.05367088294588,
+          "epoch": 12,
+          "epoch_finished_utc": "2026-09-13T19:43:13.272592+00:00",
+          "epoch_started_utc": "2026-09-13T19:42:59.547067+00:00",
+          "epoch_wall_seconds": 13.725523474160582,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0037818124473546514,
+              "mean_abs": 3.7427208259752337e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.002333086345954426,
+              "mean_abs": 2.3369136937152118e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0015052688953488373
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0037818124473546514,
+              "mean_abs": 3.7427208259752337e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.002333086345954426,
+              "mean_abs": 2.3369136937152118e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0015052688953488373
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 22.053815841674805,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9425818181818182,
+          "train_cross_entropy": 0.23128465968695555,
+          "train_evaluation": {
+            "accuracy": 0.9458545454545455,
+            "cross_entropy": 0.22223741834813898,
+            "hidden_spikes_per_image": 236.68,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.0124,
+            "samples": 55000,
+            "tie_rate": 0.03314545454545455
+          },
+          "train_evaluation_seconds": 5.076190497959033,
+          "train_loss": 0.23128465968695555,
+          "train_regularization": 21.0395802845348,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 8.13206497603096,
+          "validation": {
+            "accuracy": 0.948,
+            "cross_entropy": 0.21533467119932176,
+            "hidden_spikes_per_image": 240.6632,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 6.8528,
+            "samples": 5000,
+            "tie_rate": 0.0288
+          },
+          "validation_accuracy": 0.948,
+          "validation_seconds": 0.5080050360411406,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 0,
+              "at_int8_min": 0,
+              "changed_from_initial": 195676
+            },
+            "layer1": {
+              "at_int8_max": 0,
+              "at_int8_min": 4,
+              "changed_from_initial": 2510
+            }
+          }
+        },
+        {
+          "best_checkpoint": true,
+          "checkpoint_seconds": 0.004967211978510022,
+          "cumulative_epoch_wall_seconds": 177.68652775790542,
+          "epoch": 13,
+          "epoch_finished_utc": "2026-09-13T19:43:26.905787+00:00",
+          "epoch_started_utc": "2026-09-13T19:43:13.272929+00:00",
+          "epoch_wall_seconds": 13.632856874959543,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.003650092714026209,
+              "mean_abs": 3.5651065019520923e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 4.692783726862838e-06
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0022283908311691654,
+              "mean_abs": 2.2146266610645905e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0018504723837209302
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.003650092714026209,
+              "mean_abs": 3.5651065019520923e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 4.692783726862838e-06
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0022283908311691654,
+              "mean_abs": 2.2146266610645905e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0018504723837209302
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 23.82275390625,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9460181818181819,
+          "train_cross_entropy": 0.21629610260399906,
+          "train_evaluation": {
+            "accuracy": 0.9488363636363636,
+            "cross_entropy": 0.20525071471821177,
+            "hidden_spikes_per_image": 240.19965454545454,
+            "no_prediction_rate": 1.8181818181818182e-05,
+            "output_spikes_per_image": 7.043818181818182,
+            "samples": 55000,
+            "tie_rate": 0.029945454545454546
+          },
+          "train_evaluation_seconds": 5.250743138138205,
+          "train_loss": 0.21629610260399906,
+          "train_regularization": 22.888176016235352,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 7.9103691461496055,
+          "validation": {
+            "accuracy": 0.9502,
+            "cross_entropy": 0.20261699416041373,
+            "hidden_spikes_per_image": 244.1494,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 6.8912,
+            "samples": 5000,
+            "tie_rate": 0.0246
+          },
+          "validation_accuracy": 0.9502,
+          "validation_seconds": 0.4661021688953042,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 0,
+              "at_int8_min": 2,
+              "changed_from_initial": 195934
+            },
+            "layer1": {
+              "at_int8_max": 0,
+              "at_int8_min": 6,
+              "changed_from_initial": 2519
+            }
+          }
+        },
+        {
+          "best_checkpoint": true,
+          "checkpoint_seconds": 0.005004711914807558,
+          "cumulative_epoch_wall_seconds": 191.1524636358954,
+          "epoch": 14,
+          "epoch_finished_utc": "2026-09-13T19:43:40.371994+00:00",
+          "epoch_started_utc": "2026-09-13T19:43:26.906056+00:00",
+          "epoch_wall_seconds": 13.465935877989978,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.00355389249596772,
+              "mean_abs": 3.4335429621847676e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 1.2015843764831514e-05
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0021626046588574172,
+              "mean_abs": 2.1296179112924132e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.002973292151162791
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.00355389249596772,
+              "mean_abs": 3.4335429621847676e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 1.2015843764831514e-05
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0021626046588574172,
+              "mean_abs": 2.1296179112924132e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.002973292151162791
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 25.814115524291992,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9486545454545454,
+          "train_cross_entropy": 0.2043190549330278,
+          "train_evaluation": {
+            "accuracy": 0.9524545454545454,
+            "cross_entropy": 0.194038495202498,
+            "hidden_spikes_per_image": 240.6005090909091,
+            "no_prediction_rate": 1.8181818181818182e-05,
+            "output_spikes_per_image": 7.125163636363636,
+            "samples": 55000,
+            "tie_rate": 0.02918181818181818
+          },
+          "train_evaluation_seconds": 5.073611696017906,
+          "train_loss": 0.2043190549330278,
+          "train_regularization": 24.741433586814185,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 7.9201971110887825,
+          "validation": {
+            "accuracy": 0.9532,
+            "cross_entropy": 0.19464717198014259,
+            "hidden_spikes_per_image": 244.5282,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 6.9772,
+            "samples": 5000,
+            "tie_rate": 0.0238
+          },
+          "validation_accuracy": 0.9532,
+          "validation_seconds": 0.46642809896729887,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 0,
+              "at_int8_min": 3,
+              "changed_from_initial": 196087
+            },
+            "layer1": {
+              "at_int8_max": 0,
+              "at_int8_min": 9,
+              "changed_from_initial": 2532
+            }
+          }
+        },
+        {
+          "best_checkpoint": false,
+          "checkpoint_seconds": 0.005389582132920623,
+          "cumulative_epoch_wall_seconds": 204.84691383689642,
+          "epoch": 15,
+          "epoch_finished_utc": "2026-09-13T19:43:54.066706+00:00",
+          "epoch_started_utc": "2026-09-13T19:43:40.372255+00:00",
+          "epoch_wall_seconds": 13.694450201001018,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0034396167321833543,
+              "mean_abs": 3.284160326307155e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 2.265282021238728e-05
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0020615308987869062,
+              "mean_abs": 2.0111796607230898e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0037926962209302324
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0034396167321833543,
+              "mean_abs": 3.284160326307155e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 2.265282021238728e-05
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0020615308987869062,
+              "mean_abs": 2.0111796607230898e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0037926962209302324
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 27.24687957763672,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9519818181818182,
+          "train_cross_entropy": 0.19350679859681563,
+          "train_evaluation": {
+            "accuracy": 0.9560909090909091,
+            "cross_entropy": 0.1827442116130482,
+            "hidden_spikes_per_image": 242.02385454545455,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.078454545454545,
+            "samples": 55000,
+            "tie_rate": 0.026563636363636362
+          },
+          "train_evaluation_seconds": 5.080090468982235,
+          "train_loss": 0.19350679859681563,
+          "train_regularization": 26.596663506802646,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 8.131769395899028,
+          "validation": {
+            "accuracy": 0.9524,
+            "cross_entropy": 0.18882251207232476,
+            "hidden_spikes_per_image": 246.1012,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 6.9422,
+            "samples": 5000,
+            "tie_rate": 0.0256
+          },
+          "validation_accuracy": 0.9524,
+          "validation_seconds": 0.4771773340180516,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 0,
+              "at_int8_min": 6,
+              "changed_from_initial": 196096
+            },
+            "layer1": {
+              "at_int8_max": 0,
+              "at_int8_min": 11,
+              "changed_from_initial": 2525
+            }
+          }
+        },
+        {
+          "best_checkpoint": true,
+          "checkpoint_seconds": 0.0060843718238174915,
+          "cumulative_epoch_wall_seconds": 218.63690770580433,
+          "epoch": 16,
+          "epoch_finished_utc": "2026-09-13T19:44:07.856971+00:00",
+          "epoch_started_utc": "2026-09-13T19:43:54.066976+00:00",
+          "epoch_wall_seconds": 13.789993868907914,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.003346062769535591,
+              "mean_abs": 3.1647564427030733e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 4.5456272988846704e-05
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0019842350088982072,
+              "mean_abs": 1.9248323296778836e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.004644803779069767
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.003346062769535591,
+              "mean_abs": 3.1647564427030733e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 4.5456272988846704e-05
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0019842350088982072,
+              "mean_abs": 1.9248323296778836e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.004644803779069767
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 29.130786895751953,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9545272727272728,
+          "train_cross_entropy": 0.18361468736691908,
+          "train_evaluation": {
+            "accuracy": 0.9584545454545454,
+            "cross_entropy": 0.1715649052359841,
+            "hidden_spikes_per_image": 244.93654545454547,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.205072727272727,
+            "samples": 55000,
+            "tie_rate": 0.026654545454545455
+          },
+          "train_evaluation_seconds": 5.267240774817765,
+          "train_loss": 0.18361468736691908,
+          "train_regularization": 28.350493009810013,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 8.049718962982297,
+          "validation": {
+            "accuracy": 0.9548,
+            "cross_entropy": 0.18063429183959961,
+            "hidden_spikes_per_image": 248.923,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.0574,
+            "samples": 5000,
+            "tie_rate": 0.0244
+          },
+          "validation_accuracy": 0.9548,
+          "validation_seconds": 0.46661220910027623,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 0,
+              "at_int8_min": 12,
+              "changed_from_initial": 196351
+            },
+            "layer1": {
+              "at_int8_max": 0,
+              "at_int8_min": 14,
+              "changed_from_initial": 2519
+            }
+          }
+        },
+        {
+          "best_checkpoint": true,
+          "checkpoint_seconds": 0.005163832101970911,
+          "cumulative_epoch_wall_seconds": 232.256251685787,
+          "epoch": 17,
+          "epoch_finished_utc": "2026-09-13T19:44:21.476626+00:00",
+          "epoch_started_utc": "2026-09-13T19:44:07.857281+00:00",
+          "epoch_wall_seconds": 13.61934397998266,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0032257837298352585,
+              "mean_abs": 3.027555592328608e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 7.364773671096346e-05
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0018861893439424031,
+              "mean_abs": 1.823600990424301e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.005935683139534883
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0032257837298352585,
+              "mean_abs": 3.027555592328608e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 7.364773671096346e-05
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0018861893439424031,
+              "mean_abs": 1.823600990424301e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.005935683139534883
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 30.984695434570312,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9567818181818182,
+          "train_cross_entropy": 0.17342209168997677,
+          "train_evaluation": {
+            "accuracy": 0.9604363636363636,
+            "cross_entropy": 0.16400005564256148,
+            "hidden_spikes_per_image": 245.90810909090908,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.1685454545454546,
+            "samples": 55000,
+            "tie_rate": 0.024963636363636365
+          },
+          "train_evaluation_seconds": 5.07400993607007,
+          "train_loss": 0.17342209168997677,
+          "train_regularization": 30.134135176225143,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 8.074121902929619,
+          "validation": {
+            "accuracy": 0.955,
+            "cross_entropy": 0.17770349807143213,
+            "hidden_spikes_per_image": 249.9454,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.0386,
+            "samples": 5000,
+            "tie_rate": 0.0228
+          },
+          "validation_accuracy": 0.955,
+          "validation_seconds": 0.46557772904634476,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 0,
+              "at_int8_min": 17,
+              "changed_from_initial": 196511
+            },
+            "layer1": {
+              "at_int8_max": 0,
+              "at_int8_min": 18,
+              "changed_from_initial": 2525
+            }
+          }
+        },
+        {
+          "best_checkpoint": true,
+          "checkpoint_seconds": 0.004791052080690861,
+          "cumulative_epoch_wall_seconds": 245.8547588167712,
+          "epoch": 18,
+          "epoch_finished_utc": "2026-09-13T19:44:35.075406+00:00",
+          "epoch_started_utc": "2026-09-13T19:44:21.476898+00:00",
+          "epoch_wall_seconds": 13.598507130984217,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.003137688794829278,
+              "mean_abs": 2.921106689731141e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.00010401757905196963
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0018288181869894275,
+              "mean_abs": 1.7573962392160928e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.007274709302325581
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.003137688794829278,
+              "mean_abs": 2.921106689731141e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.00010401757905196963
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0018288181869894275,
+              "mean_abs": 1.7573962392160928e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.007274709302325581
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 32.999847412109375,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9591090909090909,
+          "train_cross_entropy": 0.16498511253270237,
+          "train_evaluation": {
+            "accuracy": 0.9632181818181819,
+            "cross_entropy": 0.15732796216444536,
+            "hidden_spikes_per_image": 246.31056363636364,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.230163636363637,
+            "samples": 55000,
+            "tie_rate": 0.024654545454545453
+          },
+          "train_evaluation_seconds": 5.080512549029663,
+          "train_loss": 0.16498511253270237,
+          "train_regularization": 31.90967298861417,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 8.045178789878264,
+          "validation": {
+            "accuracy": 0.9562,
+            "cross_entropy": 0.1754210846990347,
+            "hidden_spikes_per_image": 250.3624,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.072,
+            "samples": 5000,
+            "tie_rate": 0.026
+          },
+          "validation_accuracy": 0.9562,
+          "validation_seconds": 0.46743612992577255,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 0,
+              "at_int8_min": 26,
+              "changed_from_initial": 196589
+            },
+            "layer1": {
+              "at_int8_max": 0,
+              "at_int8_min": 20,
+              "changed_from_initial": 2524
+            }
+          }
+        },
+        {
+          "best_checkpoint": false,
+          "checkpoint_seconds": 0.005288121988996863,
+          "cumulative_epoch_wall_seconds": 259.5548360799439,
+          "epoch": 19,
+          "epoch_finished_utc": "2026-09-13T19:44:48.775748+00:00",
+          "epoch_started_utc": "2026-09-13T19:44:35.075670+00:00",
+          "epoch_wall_seconds": 13.700077263172716,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.003062331226306181,
+              "mean_abs": 2.825824139888589e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.00014611358714997628
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0017839602444289667,
+              "mean_abs": 1.703159366517739e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.008474745639534884
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.003062331226306181,
+              "mean_abs": 2.825824139888589e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.00014611358714997628
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0017839602444289667,
+              "mean_abs": 1.703159366517739e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.008474745639534884
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 34.80583953857422,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9618181818181818,
+          "train_cross_entropy": 0.1574743178844452,
+          "train_evaluation": {
+            "accuracy": 0.965,
+            "cross_entropy": 0.14970449085235596,
+            "hidden_spikes_per_image": 247.15221818181817,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.288036363636364,
+            "samples": 55000,
+            "tie_rate": 0.023072727272727273
+          },
+          "train_evaluation_seconds": 5.081982239848003,
+          "train_loss": 0.1574743178844452,
+          "train_regularization": 33.85859656649503,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 8.146064892178401,
+          "validation": {
+            "accuracy": 0.9542,
+            "cross_entropy": 0.17189093323349952,
+            "hidden_spikes_per_image": 251.1732,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.1348,
+            "samples": 5000,
+            "tie_rate": 0.0208
+          },
+          "validation_accuracy": 0.9542,
+          "validation_seconds": 0.46671960898675025,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 0,
+              "at_int8_min": 40,
+              "changed_from_initial": 196784
+            },
+            "layer1": {
+              "at_int8_max": 0,
+              "at_int8_min": 23,
+              "changed_from_initial": 2529
+            }
+          }
+        },
+        {
+          "best_checkpoint": false,
+          "checkpoint_seconds": 0.005843522027134895,
+          "cumulative_epoch_wall_seconds": 272.83042810088955,
+          "epoch": 20,
+          "epoch_finished_utc": "2026-09-13T19:45:02.051613+00:00",
+          "epoch_started_utc": "2026-09-13T19:44:48.776019+00:00",
+          "epoch_wall_seconds": 13.275592020945624,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0029544950347147347,
+              "mean_abs": 2.706848921036696e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0002277216755161367
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0017094594736273255,
+              "mean_abs": 1.609893766811204e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.00993640988372093
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0029544950347147347,
+              "mean_abs": 2.706848921036696e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0002277216755161367
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0017094594736273255,
+              "mean_abs": 1.609893766811204e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.00993640988372093
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 36.5213508605957,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9649090909090909,
+          "train_cross_entropy": 0.1498467285372994,
+          "train_evaluation": {
+            "accuracy": 0.9672363636363637,
+            "cross_entropy": 0.14056611968820745,
+            "hidden_spikes_per_image": 248.88216363636363,
+            "no_prediction_rate": 1.8181818181818182e-05,
+            "output_spikes_per_image": 7.317618181818182,
+            "samples": 55000,
+            "tie_rate": 0.022109090909090908
+          },
+          "train_evaluation_seconds": 5.079866859130561,
+          "train_loss": 0.1498467285372994,
+          "train_regularization": 35.64780279041637,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 7.7236330709420145,
+          "validation": {
+            "accuracy": 0.9556,
+            "cross_entropy": 0.1702633360862732,
+            "hidden_spikes_per_image": 252.925,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.1622,
+            "samples": 5000,
+            "tie_rate": 0.0202
+          },
+          "validation_accuracy": 0.9556,
+          "validation_seconds": 0.4662250590045005,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 0,
+              "at_int8_min": 54,
+              "changed_from_initial": 196754
+            },
+            "layer1": {
+              "at_int8_max": 0,
+              "at_int8_min": 32,
+              "changed_from_initial": 2518
+            }
+          }
+        },
+        {
+          "best_checkpoint": true,
+          "checkpoint_seconds": 0.0048700920306146145,
+          "cumulative_epoch_wall_seconds": 285.991109685041,
+          "epoch": 21,
+          "epoch_finished_utc": "2026-09-13T19:45:15.212574+00:00",
+          "epoch_started_utc": "2026-09-13T19:45:02.051892+00:00",
+          "epoch_wall_seconds": 13.160681584151462,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0028687859646381276,
+              "mean_abs": 2.6111286537970164e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.00030910960859634553
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.001647037628163077,
+              "mean_abs": 1.5539683335254966e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.014547601744186046
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0028687859646381276,
+              "mean_abs": 2.6111286537970164e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.00030910960859634553
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.001647037628163077,
+              "mean_abs": 1.5539683335254966e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.014547601744186046
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 38.25244903564453,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9663090909090909,
+          "train_cross_entropy": 0.1421750995354219,
+          "train_evaluation": {
+            "accuracy": 0.9692181818181819,
+            "cross_entropy": 0.13386630272431807,
+            "hidden_spikes_per_image": 249.7049090909091,
+            "no_prediction_rate": 3.6363636363636364e-05,
+            "output_spikes_per_image": 7.307545454545455,
+            "samples": 55000,
+            "tie_rate": 0.020654545454545453
+          },
+          "train_evaluation_seconds": 5.079924799036235,
+          "train_loss": 0.1421750995354219,
+          "train_regularization": 37.289120243696736,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 7.6090696239843965,
+          "validation": {
+            "accuracy": 0.9588,
+            "cross_entropy": 0.16273411376178265,
+            "hidden_spikes_per_image": 253.8148,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.1698,
+            "samples": 5000,
+            "tie_rate": 0.019
+          },
+          "validation_accuracy": 0.9588,
+          "validation_seconds": 0.4662332891020924,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 0,
+              "at_int8_min": 77,
+              "changed_from_initial": 196883
+            },
+            "layer1": {
+              "at_int8_max": 0,
+              "at_int8_min": 42,
+              "changed_from_initial": 2518
+            }
+          }
+        },
+        {
+          "best_checkpoint": false,
+          "checkpoint_seconds": 0.0055862420704215765,
+          "cumulative_epoch_wall_seconds": 299.5180033980869,
+          "epoch": 22,
+          "epoch_finished_utc": "2026-09-13T19:45:28.739749+00:00",
+          "epoch_started_utc": "2026-09-13T19:45:15.212854+00:00",
+          "epoch_wall_seconds": 13.526893713045865,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.002796265721152424,
+              "mean_abs": 2.5236166179386013e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.00042006787271594686
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0015884547451816902,
+              "mean_abs": 1.4851902463327184e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.017385537790697674
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.002796265721152424,
+              "mean_abs": 2.5236166179386013e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.00042006787271594686
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0015884547451816902,
+              "mean_abs": 1.4851902463327184e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.017385537790697674
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 39.90520477294922,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9681636363636363,
+          "train_cross_entropy": 0.13672243299050765,
+          "train_evaluation": {
+            "accuracy": 0.9703454545454545,
+            "cross_entropy": 0.13023556335622613,
+            "hidden_spikes_per_image": 249.3226,
+            "no_prediction_rate": 3.6363636363636364e-05,
+            "output_spikes_per_image": 7.3724181818181815,
+            "samples": 55000,
+            "tie_rate": 0.020072727272727273
+          },
+          "train_evaluation_seconds": 5.320343587081879,
+          "train_loss": 0.13672243299050765,
+          "train_regularization": 39.04858452092951,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 7.733874335186556,
+          "validation": {
+            "accuracy": 0.9576,
+            "cross_entropy": 0.16389591965675354,
+            "hidden_spikes_per_image": 253.4012,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.2216,
+            "samples": 5000,
+            "tie_rate": 0.0194
+          },
+          "validation_accuracy": 0.9576,
+          "validation_seconds": 0.4670651888009161,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 0,
+              "at_int8_min": 102,
+              "changed_from_initial": 196683
+            },
+            "layer1": {
+              "at_int8_max": 0,
+              "at_int8_min": 50,
+              "changed_from_initial": 2525
+            }
+          }
+        },
+        {
+          "best_checkpoint": true,
+          "checkpoint_seconds": 0.00966011406853795,
+          "cumulative_epoch_wall_seconds": 313.0938308511395,
+          "epoch": 23,
+          "epoch_finished_utc": "2026-09-13T19:45:42.315870+00:00",
+          "epoch_started_utc": "2026-09-13T19:45:28.740041+00:00",
+          "epoch_wall_seconds": 13.575827453052625,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.002723608661095804,
+              "mean_abs": 2.439666382785156e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.000549484419494542
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0015471350116639671,
+              "mean_abs": 1.4301634936452691e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.021398982558139535
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.002723608661095804,
+              "mean_abs": 2.439666382785156e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.000549484419494542
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0015471350116639671,
+              "mean_abs": 1.4301634936452691e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.021398982558139535
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 41.66497802734375,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9693454545454545,
+          "train_cross_entropy": 0.13010042576681483,
+          "train_evaluation": {
+            "accuracy": 0.9727454545454546,
+            "cross_entropy": 0.12242266865643588,
+            "hidden_spikes_per_image": 252.70336363636363,
+            "no_prediction_rate": 1.8181818181818182e-05,
+            "output_spikes_per_image": 7.3263454545454545,
+            "samples": 55000,
+            "tie_rate": 0.018963636363636363
+          },
+          "train_evaluation_seconds": 5.076086126966402,
+          "train_loss": 0.13010042576681483,
+          "train_regularization": 40.766871310702236,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 8.02070573088713,
+          "validation": {
+            "accuracy": 0.9616,
+            "cross_entropy": 0.1539507895052433,
+            "hidden_spikes_per_image": 256.7404,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.182,
+            "samples": 5000,
+            "tie_rate": 0.0194
+          },
+          "validation_accuracy": 0.9616,
+          "validation_seconds": 0.46872982010245323,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 0,
+              "at_int8_min": 127,
+              "changed_from_initial": 196884
+            },
+            "layer1": {
+              "at_int8_max": 0,
+              "at_int8_min": 63,
+              "changed_from_initial": 2527
+            }
+          }
+        },
+        {
+          "best_checkpoint": false,
+          "checkpoint_seconds": 0.0056720220018178225,
+          "cumulative_epoch_wall_seconds": 326.88014443800785,
+          "epoch": 24,
+          "epoch_finished_utc": "2026-09-13T19:45:56.102491+00:00",
+          "epoch_started_utc": "2026-09-13T19:45:42.316177+00:00",
+          "epoch_wall_seconds": 13.786313586868346,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.002633366333228374,
+              "mean_abs": 2.3503690209997994e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0006872436928986711
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.001489233850519006,
+              "mean_abs": 1.3783690704067974e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.026243640988372095
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.002633366333228374,
+              "mean_abs": 2.3503690209997994e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0006872436928986711
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.001489233850519006,
+              "mean_abs": 1.3783690704067974e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.026243640988372095
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 43.299346923828125,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9719454545454546,
+          "train_cross_entropy": 0.12378066053823991,
+          "train_evaluation": {
+            "accuracy": 0.9748727272727272,
+            "cross_entropy": 0.11592255594947122,
+            "hidden_spikes_per_image": 254.1133090909091,
+            "no_prediction_rate": 3.6363636363636364e-05,
+            "output_spikes_per_image": 7.3386,
+            "samples": 55000,
+            "tie_rate": 0.017436363636363635
+          },
+          "train_evaluation_seconds": 5.0706464948598295,
+          "train_loss": 0.12378066053823991,
+          "train_regularization": 42.54071699995561,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 8.244188020937145,
+          "validation": {
+            "accuracy": 0.9616,
+            "cross_entropy": 0.15586764833927155,
+            "hidden_spikes_per_image": 258.1732,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.1904,
+            "samples": 5000,
+            "tie_rate": 0.0176
+          },
+          "validation_accuracy": 0.9616,
+          "validation_seconds": 0.46578362910076976,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 0,
+              "at_int8_min": 159,
+              "changed_from_initial": 197127
+            },
+            "layer1": {
+              "at_int8_max": 0,
+              "at_int8_min": 74,
+              "changed_from_initial": 2522
+            }
+          }
+        },
+        {
+          "best_checkpoint": false,
+          "checkpoint_seconds": 0.009041032986715436,
+          "cumulative_epoch_wall_seconds": 340.33589897095226,
+          "epoch": 25,
+          "epoch_finished_utc": "2026-09-13T19:46:09.558510+00:00",
+          "epoch_started_utc": "2026-09-13T19:45:56.102754+00:00",
+          "epoch_wall_seconds": 13.455754532944411,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.002581602171572032,
+              "mean_abs": 2.280764320798861e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0008562997782688657
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0014380915578636447,
+              "mean_abs": 1.3148635938028578e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.030346111918604653
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.002581602171572032,
+              "mean_abs": 2.280764320798861e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0008562997782688657
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0014380915578636447,
+              "mean_abs": 1.3148635938028578e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.030346111918604653
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 44.88854217529297,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9731090909090909,
+          "train_cross_entropy": 0.1187083502552726,
+          "train_evaluation": {
+            "accuracy": 0.9759636363636364,
+            "cross_entropy": 0.11211582722230391,
+            "hidden_spikes_per_image": 254.45110909090909,
+            "no_prediction_rate": 1.8181818181818182e-05,
+            "output_spikes_per_image": 7.366218181818182,
+            "samples": 55000,
+            "tie_rate": 0.017072727272727274
+          },
+          "train_evaluation_seconds": 5.071983095956966,
+          "train_loss": 0.1187083502552726,
+          "train_regularization": 44.17850309281783,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 7.9086808348074555,
+          "validation": {
+            "accuracy": 0.9612,
+            "cross_entropy": 0.15059512377977372,
+            "hidden_spikes_per_image": 258.483,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.2074,
+            "samples": 5000,
+            "tie_rate": 0.0186
+          },
+          "validation_accuracy": 0.9612,
+          "validation_seconds": 0.46602719905786216,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 0,
+              "at_int8_min": 193,
+              "changed_from_initial": 197020
+            },
+            "layer1": {
+              "at_int8_max": 1,
+              "at_int8_min": 80,
+              "changed_from_initial": 2532
+            }
+          }
+        },
+        {
+          "best_checkpoint": true,
+          "checkpoint_seconds": 0.005103682866320014,
+          "cumulative_epoch_wall_seconds": 353.91838285676204,
+          "epoch": 26,
+          "epoch_finished_utc": "2026-09-13T19:46:23.141272+00:00",
+          "epoch_started_utc": "2026-09-13T19:46:09.558787+00:00",
+          "epoch_wall_seconds": 13.58248388580978,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0025062679266387704,
+              "mean_abs": 2.2061309105215292e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0010224359093201235
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0014021585582748427,
+              "mean_abs": 1.278412748476068e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.032591751453488374
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0025062679266387704,
+              "mean_abs": 2.2061309105215292e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0010224359093201235
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0014021585582748427,
+              "mean_abs": 1.278412748476068e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.032591751453488374
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 46.76804733276367,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9745818181818182,
+          "train_cross_entropy": 0.11369507692076943,
+          "train_evaluation": {
+            "accuracy": 0.9773090909090909,
+            "cross_entropy": 0.10864765590320934,
+            "hidden_spikes_per_image": 254.10994545454545,
+            "no_prediction_rate": 5.4545454545454546e-05,
+            "output_spikes_per_image": 7.396236363636364,
+            "samples": 55000,
+            "tie_rate": 0.016254545454545456
+          },
+          "train_evaluation_seconds": 5.084829521132633,
+          "train_loss": 0.11369507692076943,
+          "train_regularization": 45.70921513006037,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 8.025386412860826,
+          "validation": {
+            "accuracy": 0.962,
+            "cross_entropy": 0.14815294038653373,
+            "hidden_spikes_per_image": 258.1756,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.2796,
+            "samples": 5000,
+            "tie_rate": 0.0184
+          },
+          "validation_accuracy": 0.962,
+          "validation_seconds": 0.466496858978644,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 0,
+              "at_int8_min": 230,
+              "changed_from_initial": 197214
+            },
+            "layer1": {
+              "at_int8_max": 1,
+              "at_int8_min": 91,
+              "changed_from_initial": 2530
+            }
+          }
+        },
+        {
+          "best_checkpoint": true,
+          "checkpoint_seconds": 0.00514551205560565,
+          "cumulative_epoch_wall_seconds": 367.3833163839299,
+          "epoch": 27,
+          "epoch_finished_utc": "2026-09-13T19:46:36.606477+00:00",
+          "epoch_started_utc": "2026-09-13T19:46:23.141542+00:00",
+          "epoch_wall_seconds": 13.464933527167886,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0024079501768644075,
+              "mean_abs": 2.1188987498806468e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0012048171830505458
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0013393103336828565,
+              "mean_abs": 1.2180091299490224e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.03723382994186047
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0024079501768644075,
+              "mean_abs": 2.1188987498806468e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0012048171830505458
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0013393103336828565,
+              "mean_abs": 1.2180091299490224e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.03723382994186047
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 48.04138946533203,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9762545454545455,
+          "train_cross_entropy": 0.10905610323819247,
+          "train_evaluation": {
+            "accuracy": 0.978909090909091,
+            "cross_entropy": 0.10389223745519464,
+            "hidden_spikes_per_image": 255.8069090909091,
+            "no_prediction_rate": 7.272727272727273e-05,
+            "output_spikes_per_image": 7.354618181818182,
+            "samples": 55000,
+            "tie_rate": 0.015654545454545456
+          },
+          "train_evaluation_seconds": 5.073018646100536,
+          "train_loss": 0.10905610323819247,
+          "train_regularization": 47.435636368075286,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 7.91943306918256,
+          "validation": {
+            "accuracy": 0.9622,
+            "cross_entropy": 0.1469171324118972,
+            "hidden_spikes_per_image": 259.8514,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.2214,
+            "samples": 5000,
+            "tie_rate": 0.0168
+          },
+          "validation_accuracy": 0.9622,
+          "validation_seconds": 0.4666577798780054,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 0,
+              "at_int8_min": 268,
+              "changed_from_initial": 197295
+            },
+            "layer1": {
+              "at_int8_max": 1,
+              "at_int8_min": 101,
+              "changed_from_initial": 2525
+            }
+          }
+        },
+        {
+          "best_checkpoint": true,
+          "checkpoint_seconds": 0.005195382051169872,
+          "cumulative_epoch_wall_seconds": 381.1584410769865,
+          "epoch": 28,
+          "epoch_finished_utc": "2026-09-13T19:46:50.381872+00:00",
+          "epoch_started_utc": "2026-09-13T19:46:36.606746+00:00",
+          "epoch_wall_seconds": 13.775124693056569,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.002344302826318754,
+              "mean_abs": 2.0528865896653133e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0014118326745669197
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0012795754984760777,
+              "mean_abs": 1.1644027777778278e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.04056322674418605
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.002344302826318754,
+              "mean_abs": 2.0528865896653133e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0014118326745669197
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0012795754984760777,
+              "mean_abs": 1.1644027777778278e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.04056322674418605
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 49.94660186767578,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9773636363636363,
+          "train_cross_entropy": 0.10516591036861593,
+          "train_evaluation": {
+            "accuracy": 0.9794,
+            "cross_entropy": 0.10015080164996061,
+            "hidden_spikes_per_image": 255.82281818181818,
+            "no_prediction_rate": 3.6363636363636364e-05,
+            "output_spikes_per_image": 7.4085090909090905,
+            "samples": 55000,
+            "tie_rate": 0.014436363636363636
+          },
+          "train_evaluation_seconds": 5.250244467984885,
+          "train_loss": 0.10516591036861593,
+          "train_regularization": 49.145142456054685,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 8.052793993847445,
+          "validation": {
+            "accuracy": 0.9634,
+            "cross_entropy": 0.14397774975001812,
+            "hidden_spikes_per_image": 259.8862,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.2748,
+            "samples": 5000,
+            "tie_rate": 0.0182
+          },
+          "validation_accuracy": 0.9634,
+          "validation_seconds": 0.4662963291630149,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 0,
+              "at_int8_min": 308,
+              "changed_from_initial": 197275
+            },
+            "layer1": {
+              "at_int8_max": 1,
+              "at_int8_min": 108,
+              "changed_from_initial": 2531
+            }
+          }
+        },
+        {
+          "best_checkpoint": false,
+          "checkpoint_seconds": 0.005718891974538565,
+          "cumulative_epoch_wall_seconds": 394.89513548393734,
+          "epoch": 29,
+          "epoch_finished_utc": "2026-09-13T19:47:04.118835+00:00",
+          "epoch_started_utc": "2026-09-13T19:46:50.382139+00:00",
+          "epoch_wall_seconds": 13.736694406950846,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.002314630239457616,
+              "mean_abs": 2.011609348481135e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0016065542314309446
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0012686477969491778,
+              "mean_abs": 1.1418479312682351e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.04462481831395349
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.002314630239457616,
+              "mean_abs": 2.011609348481135e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0016065542314309446
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0012686477969491778,
+              "mean_abs": 1.1418479312682351e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.04462481831395349
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 51.68952941894531,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9787454545454546,
+          "train_cross_entropy": 0.10124458492235704,
+          "train_evaluation": {
+            "accuracy": 0.9809272727272728,
+            "cross_entropy": 0.09608750710053877,
+            "hidden_spikes_per_image": 257.8739090909091,
+            "no_prediction_rate": 9.09090909090909e-05,
+            "output_spikes_per_image": 7.4834,
+            "samples": 55000,
+            "tie_rate": 0.014072727272727273
+          },
+          "train_evaluation_seconds": 5.17196661606431,
+          "train_loss": 0.10124458492235704,
+          "train_regularization": 50.6203093639027,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 8.040021457942203,
+          "validation": {
+            "accuracy": 0.9602,
+            "cross_entropy": 0.14612164562642574,
+            "hidden_spikes_per_image": 261.8354,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.346,
+            "samples": 5000,
+            "tie_rate": 0.0174
+          },
+          "validation_accuracy": 0.9602,
+          "validation_seconds": 0.518965331139043,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 0,
+              "at_int8_min": 355,
+              "changed_from_initial": 197301
+            },
+            "layer1": {
+              "at_int8_max": 1,
+              "at_int8_min": 119,
+              "changed_from_initial": 2530
+            }
+          }
+        },
+        {
+          "best_checkpoint": false,
+          "checkpoint_seconds": 0.0059529629070311785,
+          "cumulative_epoch_wall_seconds": 408.49036480486393,
+          "epoch": 30,
+          "epoch_finished_utc": "2026-09-13T19:47:17.714338+00:00",
+          "epoch_started_utc": "2026-09-13T19:47:04.119108+00:00",
+          "epoch_wall_seconds": 13.595229320926592,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0022426978106872644,
+              "mean_abs": 1.9485313678712827e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.001855561446962506
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0012121579514782716,
+              "mean_abs": 1.0951265913866146e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.04707576308139535
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0022426978106872644,
+              "mean_abs": 1.9485313678712827e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.001855561446962506
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0012121579514782716,
+              "mean_abs": 1.0951265913866146e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.04707576308139535
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 52.97984313964844,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9800363636363636,
+          "train_cross_entropy": 0.0974499379884113,
+          "train_evaluation": {
+            "accuracy": 0.9814545454545455,
+            "cross_entropy": 0.09296608403812755,
+            "hidden_spikes_per_image": 257.7885090909091,
+            "no_prediction_rate": 9.09090909090909e-05,
+            "output_spikes_per_image": 7.4582,
+            "samples": 55000,
+            "tie_rate": 0.013745454545454545
+          },
+          "train_evaluation_seconds": 5.084934751037508,
+          "train_loss": 0.0974499379884113,
+          "train_regularization": 52.003318241188744,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 8.037376527907327,
+          "validation": {
+            "accuracy": 0.9634,
+            "cross_entropy": 0.14183524281084536,
+            "hidden_spikes_per_image": 261.8414,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.342,
+            "samples": 5000,
+            "tie_rate": 0.015
+          },
+          "validation_accuracy": 0.9634,
+          "validation_seconds": 0.4669433389790356,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 0,
+              "at_int8_min": 410,
+              "changed_from_initial": 197192
+            },
+            "layer1": {
+              "at_int8_max": 1,
+              "at_int8_min": 124,
+              "changed_from_initial": 2529
+            }
+          }
+        },
+        {
+          "best_checkpoint": true,
+          "checkpoint_seconds": 0.005308222025632858,
+          "cumulative_epoch_wall_seconds": 422.1006603008136,
+          "epoch": 31,
+          "epoch_finished_utc": "2026-09-13T19:47:31.324906+00:00",
+          "epoch_started_utc": "2026-09-13T19:47:17.714609+00:00",
+          "epoch_wall_seconds": 13.610295495949686,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0021892439129442393,
+              "mean_abs": 1.8918449838246728e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0021155184911900806
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.001172064947758438,
+              "mean_abs": 1.0593448564048781e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.05049963662790698
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0021892439129442393,
+              "mean_abs": 1.8918449838246728e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0021155184911900806
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.001172064947758438,
+              "mean_abs": 1.0593448564048781e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.05049963662790698
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 54.142913818359375,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9811454545454545,
+          "train_cross_entropy": 0.09427248788963664,
+          "train_evaluation": {
+            "accuracy": 0.9822909090909091,
+            "cross_entropy": 0.08965680931264704,
+            "hidden_spikes_per_image": 259.9121272727273,
+            "no_prediction_rate": 9.09090909090909e-05,
+            "output_spikes_per_image": 7.434254545454546,
+            "samples": 55000,
+            "tie_rate": 0.012763636363636364
+          },
+          "train_evaluation_seconds": 5.078052017837763,
+          "train_loss": 0.09427248788963664,
+          "train_regularization": 53.494950491055576,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 8.059095985954627,
+          "validation": {
+            "accuracy": 0.9646,
+            "cross_entropy": 0.13872543340325355,
+            "hidden_spikes_per_image": 263.8934,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.3098,
+            "samples": 5000,
+            "tie_rate": 0.0158
+          },
+          "validation_accuracy": 0.9646,
+          "validation_seconds": 0.4671960601117462,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 1,
+              "at_int8_min": 451,
+              "changed_from_initial": 197140
+            },
+            "layer1": {
+              "at_int8_max": 1,
+              "at_int8_min": 137,
+              "changed_from_initial": 2528
+            }
+          }
+        },
+        {
+          "best_checkpoint": true,
+          "checkpoint_seconds": 0.005347511963918805,
+          "cumulative_epoch_wall_seconds": 435.5813334847335,
+          "epoch": 32,
+          "epoch_finished_utc": "2026-09-13T19:47:44.805849+00:00",
+          "epoch_started_utc": "2026-09-13T19:47:31.325174+00:00",
+          "epoch_wall_seconds": 13.480673183919862,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0021388642718253447,
+              "mean_abs": 1.8404616535139899e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0023589407147306595
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0011504346485251796,
+              "mean_abs": 1.0271810481986736e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0557703488372093
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0021388642718253447,
+              "mean_abs": 1.8404616535139899e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0023589407147306595
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0011504346485251796,
+              "mean_abs": 1.0271810481986736e-05,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0557703488372093
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 55.73185348510742,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9821636363636363,
+          "train_cross_entropy": 0.09031523427204652,
+          "train_evaluation": {
+            "accuracy": 0.9837272727272727,
+            "cross_entropy": 0.08496768779754639,
+            "hidden_spikes_per_image": 260.03907272727275,
+            "no_prediction_rate": 9.09090909090909e-05,
+            "output_spikes_per_image": 7.470163636363637,
+            "samples": 55000,
+            "tie_rate": 0.012254545454545454
+          },
+          "train_evaluation_seconds": 5.082042919937521,
+          "train_loss": 0.09031523427204652,
+          "train_regularization": 54.81605830854936,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 7.9259010730311275,
+          "validation": {
+            "accuracy": 0.965,
+            "cross_entropy": 0.13642891964316367,
+            "hidden_spikes_per_image": 264.0144,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.3624,
+            "samples": 5000,
+            "tie_rate": 0.0158
+          },
+          "validation_accuracy": 0.965,
+          "validation_seconds": 0.466739519033581,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 1,
+              "at_int8_min": 511,
+              "changed_from_initial": 197206
+            },
+            "layer1": {
+              "at_int8_max": 1,
+              "at_int8_min": 151,
+              "changed_from_initial": 2528
+            }
+          }
+        },
+        {
+          "best_checkpoint": true,
+          "checkpoint_seconds": 0.005361082032322884,
+          "cumulative_epoch_wall_seconds": 449.0599523575511,
+          "epoch": 33,
+          "epoch_finished_utc": "2026-09-13T19:47:58.284738+00:00",
+          "epoch_started_utc": "2026-09-13T19:47:44.806118+00:00",
+          "epoch_wall_seconds": 13.478618872817606,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.002094947165887269,
+              "mean_abs": 1.7918653017603698e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.002665338937173707
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0011234906217142213,
+              "mean_abs": 9.934539459293795e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.060684047965116276
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.002094947165887269,
+              "mean_abs": 1.7918653017603698e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.002665338937173707
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0011234906217142213,
+              "mean_abs": 9.934539459293795e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.060684047965116276
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 57.15318298339844,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9823636363636363,
+          "train_cross_entropy": 0.08740065820758992,
+          "train_evaluation": {
+            "accuracy": 0.9852545454545455,
+            "cross_entropy": 0.0829910038948059,
+            "hidden_spikes_per_image": 260.7959272727273,
+            "no_prediction_rate": 9.09090909090909e-05,
+            "output_spikes_per_image": 7.431381818181818,
+            "samples": 55000,
+            "tie_rate": 0.011836363636363636
+          },
+          "train_evaluation_seconds": 5.076471398118883,
+          "train_loss": 0.08740065820758992,
+          "train_regularization": 56.382140951815515,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 7.9284416239243,
+          "validation": {
+            "accuracy": 0.9666,
+            "cross_entropy": 0.1332145536750555,
+            "hidden_spikes_per_image": 264.8186,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.3212,
+            "samples": 5000,
+            "tie_rate": 0.0152
+          },
+          "validation_accuracy": 0.9666,
+          "validation_seconds": 0.4675780888646841,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 1,
+              "at_int8_min": 577,
+              "changed_from_initial": 197430
+            },
+            "layer1": {
+              "at_int8_max": 1,
+              "at_int8_min": 160,
+              "changed_from_initial": 2534
+            }
+          }
+        },
+        {
+          "best_checkpoint": false,
+          "checkpoint_seconds": 0.006740503013134003,
+          "cumulative_epoch_wall_seconds": 462.64858155557886,
+          "epoch": 34,
+          "epoch_finished_utc": "2026-09-13T19:48:11.873643+00:00",
+          "epoch_started_utc": "2026-09-13T19:47:58.285012+00:00",
+          "epoch_wall_seconds": 13.588629198027775,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0020180974680860924,
+              "mean_abs": 1.7254321313109043e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.002981632560364262
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0010739776260710568,
+              "mean_abs": 9.527403705951022e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.06374818313953488
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0020180974680860924,
+              "mean_abs": 1.7254321313109043e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.002981632560364262
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0010739776260710568,
+              "mean_abs": 9.527403705951022e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.06374818313953488
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 58.65277099609375,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9841272727272727,
+          "train_cross_entropy": 0.0838705450090495,
+          "train_evaluation": {
+            "accuracy": 0.9851090909090909,
+            "cross_entropy": 0.07961508772156456,
+            "hidden_spikes_per_image": 262.05414545454545,
+            "no_prediction_rate": 7.272727272727273e-05,
+            "output_spikes_per_image": 7.433618181818182,
+            "samples": 55000,
+            "tie_rate": 0.010690909090909091
+          },
+          "train_evaluation_seconds": 5.081731548998505,
+          "train_loss": 0.0838705450090495,
+          "train_regularization": 57.96276206665039,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 8.034504037117586,
+          "validation": {
+            "accuracy": 0.9658,
+            "cross_entropy": 0.13163415473401546,
+            "hidden_spikes_per_image": 266.0926,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.3254,
+            "samples": 5000,
+            "tie_rate": 0.016
+          },
+          "validation_accuracy": 0.9658,
+          "validation_seconds": 0.46562747890129685,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 1,
+              "at_int8_min": 644,
+              "changed_from_initial": 197566
+            },
+            "layer1": {
+              "at_int8_max": 1,
+              "at_int8_min": 171,
+              "changed_from_initial": 2536
+            }
+          }
+        },
+        {
+          "best_checkpoint": true,
+          "checkpoint_seconds": 0.005458321887999773,
+          "cumulative_epoch_wall_seconds": 476.11295128264464,
+          "epoch": 35,
+          "epoch_finished_utc": "2026-09-13T19:48:25.338320+00:00",
+          "epoch_started_utc": "2026-09-13T19:48:11.873948+00:00",
+          "epoch_wall_seconds": 13.464369727065787,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0019857262667833525,
+              "mean_abs": 1.696437037398993e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.003323348325522069
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0010524100293044711,
+              "mean_abs": 9.373077532790228e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.06971747819767442
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0019857262667833525,
+              "mean_abs": 1.696437037398993e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.003323348325522069
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0010524100293044711,
+              "mean_abs": 9.373077532790228e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.06971747819767442
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 60.26457595825195,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9844545454545455,
+          "train_cross_entropy": 0.08216362056732178,
+          "train_evaluation": {
+            "accuracy": 0.9868181818181818,
+            "cross_entropy": 0.07686390197927302,
+            "hidden_spikes_per_image": 262.48678181818184,
+            "no_prediction_rate": 9.09090909090909e-05,
+            "output_spikes_per_image": 7.473363636363636,
+            "samples": 55000,
+            "tie_rate": 0.010072727272727273
+          },
+          "train_evaluation_seconds": 5.070159855065867,
+          "train_loss": 0.08216362056732178,
+          "train_regularization": 59.39947758234197,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 7.922676921123639,
+          "validation": {
+            "accuracy": 0.9686,
+            "cross_entropy": 0.1291010367900133,
+            "hidden_spikes_per_image": 266.5882,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.373,
+            "samples": 5000,
+            "tie_rate": 0.0128
+          },
+          "validation_accuracy": 0.9686,
+          "validation_seconds": 0.46559952897951007,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 1,
+              "at_int8_min": 706,
+              "changed_from_initial": 197694
+            },
+            "layer1": {
+              "at_int8_max": 1,
+              "at_int8_min": 187,
+              "changed_from_initial": 2530
+            }
+          }
+        },
+        {
+          "best_checkpoint": false,
+          "checkpoint_seconds": 0.006192602915689349,
+          "cumulative_epoch_wall_seconds": 490.01134799653664,
+          "epoch": 36,
+          "epoch_finished_utc": "2026-09-13T19:48:39.236992+00:00",
+          "epoch_started_utc": "2026-09-13T19:48:25.338594+00:00",
+          "epoch_wall_seconds": 13.898396713891998,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0019514241608379218,
+              "mean_abs": 1.653374316705427e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0036482280048647365
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.00102845963920243,
+              "mean_abs": 9.032441192302517e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.07486101017441861
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0019514241608379218,
+              "mean_abs": 1.653374316705427e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0036482280048647365
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.00102845963920243,
+              "mean_abs": 9.032441192302517e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.07486101017441861
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 61.38774490356445,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9855818181818182,
+          "train_cross_entropy": 0.07908754646778107,
+          "train_evaluation": {
+            "accuracy": 0.9875636363636363,
+            "cross_entropy": 0.07375904743888162,
+            "hidden_spikes_per_image": 264.6544,
+            "no_prediction_rate": 0.00014545454545454546,
+            "output_spikes_per_image": 7.428909090909091,
+            "samples": 55000,
+            "tie_rate": 0.009763636363636363
+          },
+          "train_evaluation_seconds": 5.2868747329339385,
+          "train_loss": 0.07908754646778107,
+          "train_regularization": 60.86081605668502,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 8.08575171791017,
+          "validation": {
+            "accuracy": 0.9672,
+            "cross_entropy": 0.13094264035522937,
+            "hidden_spikes_per_image": 268.73,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.3076,
+            "samples": 5000,
+            "tie_rate": 0.0144
+          },
+          "validation_accuracy": 0.9672,
+          "validation_seconds": 0.5195456300862134,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 1,
+              "at_int8_min": 777,
+              "changed_from_initial": 197597
+            },
+            "layer1": {
+              "at_int8_max": 1,
+              "at_int8_min": 199,
+              "changed_from_initial": 2537
+            }
+          }
+        },
+        {
+          "best_checkpoint": false,
+          "checkpoint_seconds": 0.005706472089514136,
+          "cumulative_epoch_wall_seconds": 503.51798514067195,
+          "epoch": 37,
+          "epoch_finished_utc": "2026-09-13T19:48:52.743923+00:00",
+          "epoch_started_utc": "2026-09-13T19:48:39.237284+00:00",
+          "epoch_wall_seconds": 13.506637144135311,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0018818383593171748,
+              "mean_abs": 1.5878817322089345e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.003948496640662079
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0009834130162629194,
+              "mean_abs": 8.669762001075067e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0795203488372093
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0018818383593171748,
+              "mean_abs": 1.5878817322089345e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.003948496640662079
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0009834130162629194,
+              "mean_abs": 8.669762001075067e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0795203488372093
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 62.92538833618164,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.05,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9870181818181818,
+          "train_cross_entropy": 0.07592355971227993,
+          "train_evaluation": {
+            "accuracy": 0.9878,
+            "cross_entropy": 0.07160896007364446,
+            "hidden_spikes_per_image": 265.1947818181818,
+            "no_prediction_rate": 0.00010909090909090909,
+            "output_spikes_per_image": 7.4136,
+            "samples": 55000,
+            "tie_rate": 0.009672727272727272
+          },
+          "train_evaluation_seconds": 5.080449139000848,
+          "train_loss": 0.07592355971227993,
+          "train_regularization": 62.110075557084514,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 7.953265452990308,
+          "validation": {
+            "accuracy": 0.9672,
+            "cross_entropy": 0.12942384610474109,
+            "hidden_spikes_per_image": 269.2862,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.3096,
+            "samples": 5000,
+            "tie_rate": 0.0136
+          },
+          "validation_accuracy": 0.9672,
+          "validation_seconds": 0.4671930600889027,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 1,
+              "at_int8_min": 830,
+              "changed_from_initial": 197753
+            },
+            "layer1": {
+              "at_int8_max": 1,
+              "at_int8_min": 210,
+              "changed_from_initial": 2533
+            }
+          }
+        },
+        {
+          "best_checkpoint": false,
+          "checkpoint_seconds": 0.005766731919720769,
+          "cumulative_epoch_wall_seconds": 517.1191313336603,
+          "epoch": 38,
+          "epoch_finished_utc": "2026-09-13T19:49:06.345340+00:00",
+          "epoch_started_utc": "2026-09-13T19:48:52.744192+00:00",
+          "epoch_wall_seconds": 13.60114619298838,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0018055957989002215,
+              "mean_abs": 1.5250136255086954e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.004274395986592312
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0009352043793267304,
+              "mean_abs": 8.259302944785558e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.08353197674418604
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0018055957989002215,
+              "mean_abs": 1.5250136255086954e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.004274395986592312
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0009352043793267304,
+              "mean_abs": 8.259302944785558e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.08353197674418604
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 64.88584899902344,
+          "learning_rate": 0.05,
+          "learning_rate_reduced": true,
+          "next_learning_rate": 0.025,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9870909090909091,
+          "train_cross_entropy": 0.07364690354195508,
+          "train_evaluation": {
+            "accuracy": 0.9881818181818182,
+            "cross_entropy": 0.07046922793388366,
+            "hidden_spikes_per_image": 264.0086,
+            "no_prediction_rate": 9.09090909090909e-05,
+            "output_spikes_per_image": 7.5084,
+            "samples": 55000,
+            "tie_rate": 0.009563636363636364
+          },
+          "train_evaluation_seconds": 5.085411551874131,
+          "train_loss": 0.07364690354195508,
+          "train_regularization": 63.72040133500533,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 8.043430970050395,
+          "validation": {
+            "accuracy": 0.9662,
+            "cross_entropy": 0.13001535243093967,
+            "hidden_spikes_per_image": 268.0682,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.395,
+            "samples": 5000,
+            "tie_rate": 0.013
+          },
+          "validation_accuracy": 0.9662,
+          "validation_seconds": 0.4665072690695524,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 1,
+              "at_int8_min": 921,
+              "changed_from_initial": 197735
+            },
+            "layer1": {
+              "at_int8_max": 1,
+              "at_int8_min": 221,
+              "changed_from_initial": 2527
+            }
+          }
+        },
+        {
+          "best_checkpoint": false,
+          "checkpoint_seconds": 0.0059937420301139355,
+          "cumulative_epoch_wall_seconds": 530.9352918935474,
+          "epoch": 39,
+          "epoch_finished_utc": "2026-09-13T19:49:20.161781+00:00",
+          "epoch_started_utc": "2026-09-13T19:49:06.345619+00:00",
+          "epoch_wall_seconds": 13.816160559887066,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.001698991840634763,
+              "mean_abs": 1.4375963798902523e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0046107353279247745
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0008748119105042292,
+              "mean_abs": 7.788141249262099e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.08690952034883721
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.001698991840634763,
+              "mean_abs": 1.4375963798902523e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0046107353279247745
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0008748119105042292,
+              "mean_abs": 7.788141249262099e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.08690952034883721
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 65.15542602539062,
+          "learning_rate": 0.025,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.025,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9886727272727273,
+          "train_cross_entropy": 0.06965068249160593,
+          "train_evaluation": {
+            "accuracy": 0.99,
+            "cross_entropy": 0.06631975509903648,
+            "hidden_spikes_per_image": 266.0676363636364,
+            "no_prediction_rate": 0.00010909090909090909,
+            "output_spikes_per_image": 7.458872727272727,
+            "samples": 55000,
+            "tie_rate": 0.007763636363636364
+          },
+          "train_evaluation_seconds": 5.081897029886022,
+          "train_loss": 0.06965068249160593,
+          "train_regularization": 64.97942759232954,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 8.261700278846547,
+          "validation": {
+            "accuracy": 0.9666,
+            "cross_entropy": 0.1277655245035887,
+            "hidden_spikes_per_image": 270.1878,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.3532,
+            "samples": 5000,
+            "tie_rate": 0.0144
+          },
+          "validation_accuracy": 0.9666,
+          "validation_seconds": 0.46654071914963424,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 1,
+              "at_int8_min": 951,
+              "changed_from_initial": 197813
+            },
+            "layer1": {
+              "at_int8_max": 1,
+              "at_int8_min": 222,
+              "changed_from_initial": 2527
+            }
+          }
+        },
+        {
+          "best_checkpoint": false,
+          "checkpoint_seconds": 0.006315483013167977,
+          "cumulative_epoch_wall_seconds": 544.595565400552,
+          "epoch": 40,
+          "epoch_finished_utc": "2026-09-13T19:49:33.822344+00:00",
+          "epoch_started_utc": "2026-09-13T19:49:20.162069+00:00",
+          "epoch_wall_seconds": 13.660273507004604,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0016566010752285718,
+              "mean_abs": 1.3895884787194566e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.004766477812055055
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0008462445728773302,
+              "mean_abs": 7.477161157429543e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0872374636627907
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0016566010752285718,
+              "mean_abs": 1.3895884787194566e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.004766477812055055
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0008462445728773302,
+              "mean_abs": 7.477161157429543e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0872374636627907
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 65.77853393554688,
+          "learning_rate": 0.025,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.025,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9894363636363637,
+          "train_cross_entropy": 0.06796958069367842,
+          "train_evaluation": {
+            "accuracy": 0.9893272727272727,
+            "cross_entropy": 0.0658795181837949,
+            "hidden_spikes_per_image": 266.5486,
+            "no_prediction_rate": 0.00010909090909090909,
+            "output_spikes_per_image": 7.453236363636363,
+            "samples": 55000,
+            "tie_rate": 0.008254545454545455
+          },
+          "train_evaluation_seconds": 5.087245642207563,
+          "train_loss": 0.06796958069367842,
+          "train_regularization": 65.39113367365057,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 8.099627422867343,
+          "validation": {
+            "accuracy": 0.9658,
+            "cross_entropy": 0.12914019926190376,
+            "hidden_spikes_per_image": 270.6282,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.3492,
+            "samples": 5000,
+            "tie_rate": 0.016
+          },
+          "validation_accuracy": 0.9658,
+          "validation_seconds": 0.46706078900024295,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 1,
+              "at_int8_min": 985,
+              "changed_from_initial": 197851
+            },
+            "layer1": {
+              "at_int8_max": 1,
+              "at_int8_min": 224,
+              "changed_from_initial": 2531
+            }
+          }
+        },
+        {
+          "best_checkpoint": false,
+          "checkpoint_seconds": 0.005880212876945734,
+          "cumulative_epoch_wall_seconds": 558.1921951314434,
+          "epoch": 41,
+          "epoch_finished_utc": "2026-09-13T19:49:47.419244+00:00",
+          "epoch_started_utc": "2026-09-13T19:49:33.822614+00:00",
+          "epoch_wall_seconds": 13.596629730891436,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0016437724937043655,
+              "mean_abs": 1.383055174334931e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.00493171014772188
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0008497397832510749,
+              "mean_abs": 7.509756284656929e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.08828488372093023
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0016437724937043655,
+              "mean_abs": 1.383055174334931e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.00493171014772188
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0008497397832510749,
+              "mean_abs": 7.509756284656929e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.08828488372093023
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 66.40065002441406,
+          "learning_rate": 0.025,
+          "learning_rate_reduced": true,
+          "next_learning_rate": 0.0125,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9893818181818181,
+          "train_cross_entropy": 0.06724834952300245,
+          "train_evaluation": {
+            "accuracy": 0.9909818181818182,
+            "cross_entropy": 0.06395628622661938,
+            "hidden_spikes_per_image": 266.30074545454545,
+            "no_prediction_rate": 0.00010909090909090909,
+            "output_spikes_per_image": 7.460854545454546,
+            "samples": 55000,
+            "tie_rate": 0.007654545454545455
+          },
+          "train_evaluation_seconds": 5.075165257090703,
+          "train_loss": 0.06724834952300245,
+          "train_regularization": 66.02956800648083,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 8.049619551980868,
+          "validation": {
+            "accuracy": 0.9662,
+            "cross_entropy": 0.12796953134834765,
+            "hidden_spikes_per_image": 270.3732,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.3564,
+            "samples": 5000,
+            "tie_rate": 0.0144
+          },
+          "validation_accuracy": 0.9662,
+          "validation_seconds": 0.46593448892235756,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 2,
+              "at_int8_min": 1022,
+              "changed_from_initial": 197797
+            },
+            "layer1": {
+              "at_int8_max": 1,
+              "at_int8_min": 230,
+              "changed_from_initial": 2529
+            }
+          }
+        },
+        {
+          "best_checkpoint": false,
+          "checkpoint_seconds": 0.005959192058071494,
+          "cumulative_epoch_wall_seconds": 571.9926716643386,
+          "epoch": 42,
+          "epoch_finished_utc": "2026-09-13T19:50:01.219992+00:00",
+          "epoch_started_utc": "2026-09-13T19:49:47.419515+00:00",
+          "epoch_wall_seconds": 13.800476532895118,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0015668459814922148,
+              "mean_abs": 1.320531736342547e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.005077116920532748
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0008033298342806579,
+              "mean_abs": 7.114541774996702e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.08992550872093023
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0015668459814922148,
+              "mean_abs": 1.320531736342547e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.005077116920532748
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0008033298342806579,
+              "mean_abs": 7.114541774996702e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.08992550872093023
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 66.81739807128906,
+          "learning_rate": 0.0125,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.0125,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9905272727272727,
+          "train_cross_entropy": 0.06480116448402405,
+          "train_evaluation": {
+            "accuracy": 0.9908727272727272,
+            "cross_entropy": 0.06362318210601807,
+            "hidden_spikes_per_image": 266.5504181818182,
+            "no_prediction_rate": 9.09090909090909e-05,
+            "output_spikes_per_image": 7.4618,
+            "samples": 55000,
+            "tie_rate": 0.007527272727272727
+          },
+          "train_evaluation_seconds": 5.247686387039721,
+          "train_loss": 0.06480116448402405,
+          "train_regularization": 66.5794182450728,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 8.080321434885263,
+          "validation": {
+            "accuracy": 0.9664,
+            "cross_entropy": 0.12771847030818462,
+            "hidden_spikes_per_image": 270.6742,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.3646,
+            "samples": 5000,
+            "tie_rate": 0.0156
+          },
+          "validation_accuracy": 0.9664,
+          "validation_seconds": 0.46648276899941266,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 2,
+              "at_int8_min": 1038,
+              "changed_from_initial": 197798
+            },
+            "layer1": {
+              "at_int8_max": 2,
+              "at_int8_min": 232,
+              "changed_from_initial": 2531
+            }
+          }
+        },
+        {
+          "best_checkpoint": false,
+          "checkpoint_seconds": 0.005957321962341666,
+          "cumulative_epoch_wall_seconds": 585.7940375683829,
+          "epoch": 43,
+          "epoch_finished_utc": "2026-09-13T19:50:15.021630+00:00",
+          "epoch_started_utc": "2026-09-13T19:50:01.220263+00:00",
+          "epoch_wall_seconds": 13.80136590404436,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0015519488152399108,
+              "mean_abs": 1.3076763848474284e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.005165990133335311
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0007915987483855591,
+              "mean_abs": 7.02326839737632e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.09086210029069768
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0015519488152399108,
+              "mean_abs": 1.3076763848474284e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.005165990133335311
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0007915987483855591,
+              "mean_abs": 7.02326839737632e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.09086210029069768
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 67.1017074584961,
+          "learning_rate": 0.0125,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.0125,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9902181818181818,
+          "train_cross_entropy": 0.06427750600738959,
+          "train_evaluation": {
+            "accuracy": 0.990909090909091,
+            "cross_entropy": 0.06291315675215288,
+            "hidden_spikes_per_image": 267.06383636363637,
+            "no_prediction_rate": 9.09090909090909e-05,
+            "output_spikes_per_image": 7.435727272727273,
+            "samples": 55000,
+            "tie_rate": 0.0072545454545454545
+          },
+          "train_evaluation_seconds": 5.257978801149875,
+          "train_loss": 0.06427750600738959,
+          "train_regularization": 66.8914139260032,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 8.070208971155807,
+          "validation": {
+            "accuracy": 0.9652,
+            "cross_entropy": 0.12923245717287063,
+            "hidden_spikes_per_image": 271.1752,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.3348,
+            "samples": 5000,
+            "tie_rate": 0.015
+          },
+          "validation_accuracy": 0.9652,
+          "validation_seconds": 0.4671974398661405,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 3,
+              "at_int8_min": 1057,
+              "changed_from_initial": 197812
+            },
+            "layer1": {
+              "at_int8_max": 2,
+              "at_int8_min": 236,
+              "changed_from_initial": 2534
+            }
+          }
+        },
+        {
+          "best_checkpoint": false,
+          "checkpoint_seconds": 0.01075027510523796,
+          "cumulative_epoch_wall_seconds": 599.7665589223616,
+          "epoch": 44,
+          "epoch_finished_utc": "2026-09-13T19:50:28.994434+00:00",
+          "epoch_started_utc": "2026-09-13T19:50:15.021911+00:00",
+          "epoch_wall_seconds": 13.972521353978664,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0015309035019329053,
+              "mean_abs": 1.2892091639062174e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.005249289941267205
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.000774021078167032,
+              "mean_abs": 6.871987091916137e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0925281613372093
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0015309035019329053,
+              "mean_abs": 1.2892091639062174e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.005249289941267205
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.000774021078167032,
+              "mean_abs": 6.871987091916137e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0925281613372093
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 67.49192810058594,
+          "learning_rate": 0.0125,
+          "learning_rate_reduced": true,
+          "next_learning_rate": 0.00625,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9906,
+          "train_cross_entropy": 0.06362275805690072,
+          "train_evaluation": {
+            "accuracy": 0.9915272727272727,
+            "cross_entropy": 0.062048111373727975,
+            "hidden_spikes_per_image": 267.0424,
+            "no_prediction_rate": 0.00010909090909090909,
+            "output_spikes_per_image": 7.450418181818182,
+            "samples": 55000,
+            "tie_rate": 0.007090909090909091
+          },
+          "train_evaluation_seconds": 5.313299153000116,
+          "train_loss": 0.06362275805690072,
+          "train_regularization": 67.28519760298296,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 8.129554884973913,
+          "validation": {
+            "accuracy": 0.9642,
+            "cross_entropy": 0.13001499305963515,
+            "hidden_spikes_per_image": 271.153,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.3424,
+            "samples": 5000,
+            "tie_rate": 0.0178
+          },
+          "validation_accuracy": 0.9642,
+          "validation_seconds": 0.5188894208986312,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 4,
+              "at_int8_min": 1083,
+              "changed_from_initial": 197839
+            },
+            "layer1": {
+              "at_int8_max": 2,
+              "at_int8_min": 239,
+              "changed_from_initial": 2536
+            }
+          }
+        },
+        {
+          "best_checkpoint": false,
+          "checkpoint_seconds": 0.006079583195969462,
+          "cumulative_epoch_wall_seconds": 613.4303778605536,
+          "epoch": 45,
+          "epoch_finished_utc": "2026-09-13T19:50:42.658575+00:00",
+          "epoch_started_utc": "2026-09-13T19:50:28.994755+00:00",
+          "epoch_wall_seconds": 13.66381893819198,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0015196831674112628,
+              "mean_abs": 1.2782435800995283e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.005325938742139298
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0007682392281183365,
+              "mean_abs": 6.802588475185858e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.09324763808139534
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0015196831674112628,
+              "mean_abs": 1.2782435800995283e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.005325938742139298
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0007682392281183365,
+              "mean_abs": 6.802588475185858e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.09324763808139534
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 67.74337005615234,
+          "learning_rate": 0.00625,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.00625,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9909272727272728,
+          "train_cross_entropy": 0.06285301675796509,
+          "train_evaluation": {
+            "accuracy": 0.9916363636363636,
+            "cross_entropy": 0.061683847739479755,
+            "hidden_spikes_per_image": 267.0680545454546,
+            "no_prediction_rate": 9.09090909090909e-05,
+            "output_spikes_per_image": 7.464927272727273,
+            "samples": 55000,
+            "tie_rate": 0.006981818181818182
+          },
+          "train_evaluation_seconds": 5.081228449009359,
+          "train_loss": 0.06285301675796509,
+          "train_regularization": 67.56429914772727,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 8.110231057042256,
+          "validation": {
+            "accuracy": 0.9644,
+            "cross_entropy": 0.12947678009569644,
+            "hidden_spikes_per_image": 271.1744,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.3656,
+            "samples": 5000,
+            "tie_rate": 0.017
+          },
+          "validation_accuracy": 0.9644,
+          "validation_seconds": 0.46625766903162,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 4,
+              "at_int8_min": 1090,
+              "changed_from_initial": 197853
+            },
+            "layer1": {
+              "at_int8_max": 2,
+              "at_int8_min": 239,
+              "changed_from_initial": 2537
+            }
+          }
+        },
+        {
+          "best_checkpoint": false,
+          "checkpoint_seconds": 0.0063615229446440935,
+          "cumulative_epoch_wall_seconds": 627.0290136325639,
+          "epoch": 46,
+          "epoch_finished_utc": "2026-09-13T19:50:56.257499+00:00",
+          "epoch_started_utc": "2026-09-13T19:50:42.658863+00:00",
+          "epoch_wall_seconds": 13.598635772010311,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0015020589308074902,
+              "mean_abs": 1.2645365971900937e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.005385033055736829
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0007602032602294584,
+              "mean_abs": 6.7650362849912364e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.09382721656976745
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0015020589308074902,
+              "mean_abs": 1.2645365971900937e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.005385033055736829
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0007602032602294584,
+              "mean_abs": 6.7650362849912364e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.09382721656976745
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 67.84688568115234,
+          "learning_rate": 0.00625,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.00625,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9909636363636364,
+          "train_cross_entropy": 0.06236977745430036,
+          "train_evaluation": {
+            "accuracy": 0.9914727272727273,
+            "cross_entropy": 0.06198551151969216,
+            "hidden_spikes_per_image": 267.3093272727273,
+            "no_prediction_rate": 0.00010909090909090909,
+            "output_spikes_per_image": 7.437872727272727,
+            "samples": 55000,
+            "tie_rate": 0.007018181818181818
+          },
+          "train_evaluation_seconds": 5.095824835123494,
+          "train_loss": 0.06236977745430036,
+          "train_regularization": 67.78265835959695,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 8.029111623996869,
+          "validation": {
+            "accuracy": 0.9662,
+            "cross_entropy": 0.1281844794690609,
+            "hidden_spikes_per_image": 271.4234,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.3434,
+            "samples": 5000,
+            "tie_rate": 0.0168
+          },
+          "validation_accuracy": 0.9662,
+          "validation_seconds": 0.46731561003252864,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 4,
+              "at_int8_min": 1105,
+              "changed_from_initial": 197855
+            },
+            "layer1": {
+              "at_int8_max": 2,
+              "at_int8_min": 240,
+              "changed_from_initial": 2539
+            }
+          }
+        },
+        {
+          "best_checkpoint": false,
+          "checkpoint_seconds": 0.006211563013494015,
+          "cumulative_epoch_wall_seconds": 641.1342902795877,
+          "epoch": 47,
+          "epoch_finished_utc": "2026-09-13T19:51:10.363069+00:00",
+          "epoch_started_utc": "2026-09-13T19:50:56.257791+00:00",
+          "epoch_wall_seconds": 14.105276647023857,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0014930705256346686,
+              "mean_abs": 1.2595720127491567e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.005446943039570479
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0007494688081891075,
+              "mean_abs": 6.690049395665694e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.094140625
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0014930705256346686,
+              "mean_abs": 1.2595720127491567e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.005446943039570479
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0007494688081891075,
+              "mean_abs": 6.690049395665694e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.094140625
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 68.14619445800781,
+          "learning_rate": 0.00625,
+          "learning_rate_reduced": true,
+          "next_learning_rate": 0.003125,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9909272727272728,
+          "train_cross_entropy": 0.062252257910641755,
+          "train_evaluation": {
+            "accuracy": 0.9915272727272727,
+            "cross_entropy": 0.06148581068299033,
+            "hidden_spikes_per_image": 267.1266909090909,
+            "no_prediction_rate": 9.09090909090909e-05,
+            "output_spikes_per_image": 7.457381818181818,
+            "samples": 55000,
+            "tie_rate": 0.007181818181818182
+          },
+          "train_evaluation_seconds": 5.333589291200042,
+          "train_loss": 0.062252257910641755,
+          "train_regularization": 67.9273411077326,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 8.251395744038746,
+          "validation": {
+            "accuracy": 0.9652,
+            "cross_entropy": 0.12896639904081822,
+            "hidden_spikes_per_image": 271.239,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.356,
+            "samples": 5000,
+            "tie_rate": 0.0164
+          },
+          "validation_accuracy": 0.9652,
+          "validation_seconds": 0.5140529088675976,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 4,
+              "at_int8_min": 1116,
+              "changed_from_initial": 197874
+            },
+            "layer1": {
+              "at_int8_max": 2,
+              "at_int8_min": 242,
+              "changed_from_initial": 2537
+            }
+          }
+        },
+        {
+          "best_checkpoint": false,
+          "checkpoint_seconds": 0.0062074929010123014,
+          "cumulative_epoch_wall_seconds": 654.6104629016481,
+          "epoch": 48,
+          "epoch_finished_utc": "2026-09-13T19:51:23.839517+00:00",
+          "epoch_started_utc": "2026-09-13T19:51:10.363343+00:00",
+          "epoch_wall_seconds": 13.476172622060403,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0014711686633395642,
+              "mean_abs": 1.2438135559789253e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0054892707900747505
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0007453144219181805,
+              "mean_abs": 6.650932132182534e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.094140625
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0014711686633395642,
+              "mean_abs": 1.2438135559789253e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.0054892707900747505
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0007453144219181805,
+              "mean_abs": 6.650932132182534e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.094140625
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 68.21106719970703,
+          "learning_rate": 0.003125,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.003125,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9915090909090909,
+          "train_cross_entropy": 0.06151395905993202,
+          "train_evaluation": {
+            "accuracy": 0.9915818181818182,
+            "cross_entropy": 0.06092470848343589,
+            "hidden_spikes_per_image": 267.4028727272727,
+            "no_prediction_rate": 0.00010909090909090909,
+            "output_spikes_per_image": 7.442054545454545,
+            "samples": 55000,
+            "tie_rate": 0.007163636363636363
+          },
+          "train_evaluation_seconds": 5.084844430908561,
+          "train_loss": 0.06151395905993202,
+          "train_regularization": 68.15760068470348,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 7.919158529955894,
+          "validation": {
+            "accuracy": 0.966,
+            "cross_entropy": 0.1282897786527872,
+            "hidden_spikes_per_image": 271.4866,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.3424,
+            "samples": 5000,
+            "tie_rate": 0.0166
+          },
+          "validation_accuracy": 0.966,
+          "validation_seconds": 0.4659390081651509,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 4,
+              "at_int8_min": 1122,
+              "changed_from_initial": 197848
+            },
+            "layer1": {
+              "at_int8_max": 2,
+              "at_int8_min": 243,
+              "changed_from_initial": 2539
+            }
+          }
+        },
+        {
+          "best_checkpoint": false,
+          "checkpoint_seconds": 0.00759108318015933,
+          "cumulative_epoch_wall_seconds": 668.3912408477627,
+          "epoch": 49,
+          "epoch_finished_utc": "2026-09-13T19:51:37.620578+00:00",
+          "epoch_started_utc": "2026-09-13T19:51:23.839799+00:00",
+          "epoch_wall_seconds": 13.78077794611454,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0014721309418681864,
+              "mean_abs": 1.2442691698317882e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.005530775855036782
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.000746523524354588,
+              "mean_abs": 6.657564580839176e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.09447765261627906
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0014721309418681864,
+              "mean_abs": 1.2442691698317882e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.005530775855036782
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.000746523524354588,
+              "mean_abs": 6.657564580839176e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.09447765261627906
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 68.28953552246094,
+          "learning_rate": 0.003125,
+          "learning_rate_reduced": false,
+          "next_learning_rate": 0.003125,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9912545454545455,
+          "train_cross_entropy": 0.06152058904116804,
+          "train_evaluation": {
+            "accuracy": 0.9914909090909091,
+            "cross_entropy": 0.06079934127114036,
+            "hidden_spikes_per_image": 267.44905454545454,
+            "no_prediction_rate": 9.09090909090909e-05,
+            "output_spikes_per_image": 7.434581818181818,
+            "samples": 55000,
+            "tie_rate": 0.007127272727272727
+          },
+          "train_evaluation_seconds": 5.275940537918359,
+          "train_loss": 0.06152058904116804,
+          "train_regularization": 68.2468930020419,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 8.02958987513557,
+          "validation": {
+            "accuracy": 0.9656,
+            "cross_entropy": 0.12742001504004002,
+            "hidden_spikes_per_image": 271.5364,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.3386,
+            "samples": 5000,
+            "tie_rate": 0.016
+          },
+          "validation_accuracy": 0.9656,
+          "validation_seconds": 0.4676343989558518,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 6,
+              "at_int8_min": 1130,
+              "changed_from_initial": 197848
+            },
+            "layer1": {
+              "at_int8_max": 2,
+              "at_int8_min": 243,
+              "changed_from_initial": 2539
+            }
+          }
+        },
+        {
+          "best_checkpoint": false,
+          "checkpoint_seconds": 0.007018162868916988,
+          "cumulative_epoch_wall_seconds": 682.0744674936868,
+          "epoch": 50,
+          "epoch_finished_utc": "2026-09-13T19:51:51.304114+00:00",
+          "epoch_started_utc": "2026-09-13T19:51:37.620886+00:00",
+          "epoch_wall_seconds": 13.683226645924151,
+          "evaluation_rate_seed": 1,
+          "gradients": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0014707639784784093,
+              "mean_abs": 1.2366621927504075e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.005561597595070005
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0007403561070883842,
+              "mean_abs": 6.582211189261004e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.09525254360465116
+            }
+          },
+          "gradients_after_clip": {
+            "weight_l0": {
+              "batches": 430,
+              "l2_norm_mean": 0.0014707639784784093,
+              "mean_abs": 1.2366621927504075e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.005561597595070005
+            },
+            "weight_l1": {
+              "batches": 430,
+              "l2_norm_mean": 0.0007403561070883842,
+              "mean_abs": 6.582211189261004e-06,
+              "nonfinite_elements": 0,
+              "zero_fraction": 0.09525254360465116
+            }
+          },
+          "input_encoding": "nonlinear-latency",
+          "layer0_column_mean_penalty": 68.42053985595703,
+          "learning_rate": 0.003125,
+          "learning_rate_reduced": true,
+          "next_learning_rate": 0.0015625,
+          "optimizer_steps": 430,
+          "phase": "joint",
+          "rate_seed": null,
+          "readout_frozen": false,
+          "timing_scope": "CUDA-synchronized; includes epoch weights and recovery checkpoint; excludes metrics JSON/log write; first epoch may include compilation",
+          "train_accuracy_online": 0.9914727272727273,
+          "train_cross_entropy": 0.061239898012984885,
+          "train_evaluation": {
+            "accuracy": 0.991909090909091,
+            "cross_entropy": 0.060488570564443414,
+            "hidden_spikes_per_image": 267.47583636363635,
+            "no_prediction_rate": 9.09090909090909e-05,
+            "output_spikes_per_image": 7.445909090909091,
+            "samples": 55000,
+            "tie_rate": 0.006690909090909091
+          },
+          "train_evaluation_seconds": 5.153951199026778,
+          "train_loss": 0.061239898012984885,
+          "train_regularization": 68.33428111683239,
+          "train_regularization_weighted": 0.0,
+          "train_samples_online": 55000,
+          "train_seconds": 8.055450554937124,
+          "validation": {
+            "accuracy": 0.9652,
+            "cross_entropy": 0.12903825944960118,
+            "hidden_spikes_per_image": 271.564,
+            "no_prediction_rate": 0.0,
+            "output_spikes_per_image": 7.3474,
+            "samples": 5000,
+            "tie_rate": 0.0162
+          },
+          "validation_accuracy": 0.9652,
+          "validation_seconds": 0.4667760990560055,
+          "weights": {
+            "layer0": {
+              "at_int8_max": 6,
+              "at_int8_min": 1135,
+              "changed_from_initial": 197873
+            },
+            "layer1": {
+              "at_int8_max": 2,
+              "at_int8_min": 244,
+              "changed_from_initial": 2539
+            }
+          }
+        }
+      ],
+      "initial_model_dir": null,
+      "initial_state": null,
+      "input_encoding": "nonlinear-latency",
+      "layer0_column_mean_penalty": 0.0,
+      "learning_rate": 0.05,
+      "lr_reduce_factor": 0.5,
+      "lr_reduce_patience": 2,
+      "minimum_finetune_epochs": 4,
+      "minimum_improvement": 0.0,
+      "rate_scale": null,
+      "rate_seed": null,
+      "rate_seed_policy": null,
+      "resume_checkpoint": null,
+      "seed": 14,
+      "test_samples": 10000,
+      "torch_version": "2.13.0+cu130",
+      "train_samples": 55000,
+      "training_observability": true,
+      "validation_samples": 5000
+    }
+  },
+  "neurons": {
+    "hidden": {
+      "model": "lif",
+      "model_id": 0
+    },
+    "output": {
+      "model": "lif",
+      "model_id": 0
+    }
+  },
+  "numeric": {
+    "count_width": 16,
+    "current_width": 24,
+    "leak_shift": 3,
+    "mem_width": 24,
+    "reset_potential": 0,
+    "threshold": 100,
+    "time_width": 32,
+    "weight_width": 8
+  },
+  "topology": {
+    "hidden_neurons": 256,
+    "input_neurons": 784,
+    "output_neurons": 10
+  },
+  "upload": {
+    "weight_crc32": "9f1e50a1",
+    "weight_stream_order": [
+      "weights_l0.bin",
+      "weights_l1.bin"
+    ],
+    "weight_write_count": 203264
+  },
+  "weights": [
+    {
+      "crc32": "1ae31a25",
+      "dtype": "int8-twos-complement",
+      "file": "weights_l0.bin",
+      "layer": 0,
+      "layout": "pre-major-post-minor",
+      "sha256": "b42c46d04ad1d93e7fc3e2068b7a555cc1e1b92875820868cb792d0d11bf1cf0",
+      "shape": [
+        784,
+        256
+      ]
+    },
+    {
+      "crc32": "602479e1",
+      "dtype": "int8-twos-complement",
+      "file": "weights_l1.bin",
+      "layer": 1,
+      "layout": "pre-major-post-minor",
+      "sha256": "2c4a5a5d130dfd2165f69ebb4bad22eb15cbc45b48a1e706456ff7f559de4fef",
+      "shape": [
+        256,
+        10
+      ]
+    }
+  ]
+}

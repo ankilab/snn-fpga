@@ -1,0 +1,39 @@
+flowchart TB
+    PS["Processor / host"] <-->|AXI4-Lite| AXI
+    subgraph WRAP["snn_axi_lite_wrapper"]
+        AXI["Registers, config<br/>Status and interrupt"]
+        subgraph TOP["snn_top"]
+            subgraph READER["spike_reader"]
+                MEM[("spike_memory")]
+                READ["Read event"]
+                MEM --> READ
+            end
+            ROUTER["spike_router"]
+            L0["snn_layer · layer0<br/>784 → 256"]
+            ENC["spike_event_encoder"]
+            L1["snn_layer · layer1<br/>256 → 10"]
+            DEC["output_decoder<br/>Count spikes per class"]
+            SEL["prediction_selector<br/>Argmax"]
+            OUT["output_interface"]
+            CTRL["snn_controller<br/>Time steps and control"]
+            READ -->|Neuron ID| ROUTER
+            ROUTER -->|Input event| L0
+            L0 -->|Spike vector| ENC
+            ENC -->|Hidden events| L1
+            L1 -->|Output spikes| DEC
+            DEC -->|Class counts| SEL
+            SEL -->|Prediction| OUT
+            CTRL -.->|Read| READ
+            CTRL -.->|Enable| ROUTER
+            CTRL -.->|Update| L0
+            CTRL -.->|Start| ENC
+            CTRL -.->|Update| L1
+            CTRL -.->|Count| DEC
+            CTRL -.->|Inference complete| SEL
+        end
+        AXI -->|Load input events| MEM
+        AXI -->|Load weights| L0
+        AXI -->|Load weights| L1
+        AXI -.->|Start and time horizon| CTRL
+        OUT -->|Result| AXI
+    end
