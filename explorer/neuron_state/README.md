@@ -1,11 +1,14 @@
 # Neuron state explorer
 
-Open [index.html](index.html) directly in a browser after downloading.
+Open the [hosted neuron state explorer](https://ankilab.github.io/snn-fpga/explorer/neuron_state/)
+in your browser.
+
+For offline use, download or clone the repository and open
+`explorer/neuron_state/index.html` in a browser.
 **Keep the entire folder together:** `data.js` and `states/` are required.
-Viewing requires no server, Python installation or internet connection.
+Offline viewing requires no server, Python installation or internet connection.
 A modern browser supporting `DecompressionStream('gzip')` is required for
-the state display. GitHub's source view does not execute HTML; download or
-clone the repository first.
+the state display.
 
 The explorer shows the 50-epoch campaign: 22 encoding variants, LIF/IZH/HH and
 ten digits. The data contains 880 traces, including 660 with neuron states

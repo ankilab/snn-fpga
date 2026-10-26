@@ -1,9 +1,11 @@
 # Exploring training data and creating new models
 
-## Offline explorer
+## Training explorer
 
-Open [explorer/training/index.html](../explorer/training/index.html) directly in a browser.
-The HTML file contains all data and requires neither a server nor internet.
+Open the [hosted training explorer](https://ankilab.github.io/snn-fpga/explorer/training/)
+in your browser. For offline use, download or clone the repository and open
+`explorer/training/index.html`. The HTML file contains all data and requires
+neither a server nor internet for offline viewing.
 Its colors automatically follow the system light/dark setting, including
 changes made while the page is open.
 It shows **66 fits and 3,366 epoch records including baselines**: LIF, IZH and
@@ -27,10 +29,10 @@ baseline plus 50 epochs. It performs no training and changes no original data.
 
 ## Neuron states and spike frequencies
 
-The [neuron state explorer](../explorer/neuron_state/index.html) displays
+The [neuron state explorer](https://ankilab.github.io/snn-fpga/explorer/neuron_state/) displays
 recorded states from bit-accurate software inference and spike frequencies
 using Viridis. Its [guide](../explorer/neuron_state/README.md) explains the
-data scope, offline use and customization.
+data scope, online and offline use, and customization.
 
 ## Data scope and selection
 

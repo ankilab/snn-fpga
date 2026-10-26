@@ -11,9 +11,9 @@ target the AMD Xilinx Alveo U50.
 ## Start here
 
 1. **Understand:** [Architecture and parameters](docs/architecture.md).
-2. **Explore:** [Open the training explorer](explorer/training/index.html):
+2. **Explore:** [Open the training explorer](https://ankilab.github.io/snn-fpga/explorer/training/):
    66 fits from the 50-epoch campaign, filters, curves and data export.
-   Also available: the [neuron state explorer](explorer/neuron_state/index.html)
+   Also available: the [neuron state explorer](https://ankilab.github.io/snn-fpga/explorer/neuron_state/)
    for spike frequencies and membrane potentials.
 3. **Try it:** `python tools/check_reference.py` checks the three included reference
    model packages and two synthetic images in `examples/` without an FPGA or PyTorch.
@@ -21,10 +21,9 @@ target the AMD Xilinx Alveo U50.
    [unattended run for all three models (LIF, IZH and HH)](docs/unattended_u50.md).
 5. **Train new models:** [Training, data and export](docs/training.md).
 
-To run the explorers locally, download or clone the repository and open their
-`index.html` files in a browser. Keep the complete `explorer/neuron_state/`
-folder together. GitHub's repository file view displays HTML source rather
-than running the explorers.
+The links above open the hosted explorers. For offline use, download or clone
+the repository and open the explorers' `index.html` files in a browser. Keep
+the complete `explorer/neuron_state/` folder together.
 
 ## Contents
 
